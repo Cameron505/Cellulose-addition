@@ -8,6 +8,7 @@ library(ggbiplot) #for PCA biplots
 
 
 # custom ggplot theme
+cbPalette <- c("#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
 theme_kp <- function() {  # this for all the elements common across plots
   theme_bw() %+replace%
     theme(legend.position = "top",
