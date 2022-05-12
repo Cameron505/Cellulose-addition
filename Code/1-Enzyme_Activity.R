@@ -36,7 +36,7 @@ ggplot(EZCARBON,aes(x = Temp, y = mean_value, fill=Temp))+
   facet_wrap(~ variable, ncol = 2,scales = "free")+
   scale_fill_manual(values=cbPalette)+
   ylab("Enzyme activity")+
-  theme_kp()+
+  theme_kp()
 ggsave("Graphs/Carbon_Enzymes.png")
 
 EZNUT = EZERROR %>%
