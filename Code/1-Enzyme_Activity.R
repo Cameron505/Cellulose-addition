@@ -11,7 +11,7 @@ EZ2$Temp[EZ2$Temp=="4"]<-"Pre"
 EZ2$Temp<- factor(EZ2$Temp, levels= c("-6","-2","2","6","10","Pre"))
 
 EZERROR = EZ2 %>%
-  group_by(Temp, variable) %>%
+  group_by(Temp, variable, Add) %>%
   summarize(mean_value = mean(value, na.rm = TRUE),
             se = sqrt(var(value, na.rm = TRUE) / sum(!is.na(value)))) %>%
   ungroup()
@@ -41,17 +41,28 @@ ggsave("Graphs/Carbon_Enzymes.png")
 EZNUT = EZERROR %>%
   filter(variable== "LAP" | variable== "NAG" |variable== "PHOS" |variable== "AFS")
 
-ggplot(EZNUT,aes(x = Temp, y = value, fill=Temp))+
-  geom_bar(stat = "identity")+
-  geom_errorbar(aes(ymin = mean_value - se, ymax = mean_value + se), lwd = 1, width = 1, color="black")+
+ggplot(EZNUT,aes(x = Temp, y = mean_value, fill=Add))+
+  geom_bar(stat = "identity", position = "dodge" )+
+  geom_errorbar(aes(ymin = mean_value - se, ymax = mean_value + se), lwd = 1, width = 1, color="black", position= "dodge")+
   facet_wrap(~ variable, ncol = 3,scales = "free")+
   scale_fill_manual(values=cbPalette)+
   theme_kp()
 
 ggsave("Graphs/NUT_MISC_Enzymes.png")
 
-
+EZOXY = EZERROR %>%
+  filter(variable== "per" | variable== "pox" |variable== "NETPEROX" )
  
+ggplot(EZOXY,aes(x = Temp, y = mean_value, fill=Temp))+
+  geom_bar(stat = "identity")+
+  geom_errorbar(aes(ymin = mean_value - se, ymax = mean_value + se), lwd = 1, width = 1, color="black")+
+  facet_wrap(~ variable, ncol = 3,scales = "free")+
+  scale_fill_manual(values=cbPalette)+
+  theme_kp()
+
+
+
+
 EZ[EZ < 0] <- 0.1
 ## Stats
 ANOVBG = 
@@ -73,6 +84,19 @@ ANOVPHOS =
 ANOVAFS = 
   adonis(EZ %>% dplyr::select(AFS)~ Add * Temp , data = EZ) 
 
+ANOVper = 
+  adonis(EZ %>% dplyr::select(per)~ Add * Temp , data = EZ) 
+
+ANOVpox = 
+  adonis(EZ %>% dplyr::select(pox)~ Add * Temp , data = EZ) 
+
+ANOVNETOXY = 
+  adonis(EZ %>% dplyr::select(NETPEROX)~ Add * Temp , data = EZ) 
+
+
+sink("output.txt")
+print(c(ANOVBG,ANOVBX,ANOVENDC,ANOVENDX,ANOVCBH,ANOVAFS,ANOVLAP,ANOVNAG,ANOVPHOS))
+sink()
 ANOVBG
 ANOVBX
 ANOVENDC
