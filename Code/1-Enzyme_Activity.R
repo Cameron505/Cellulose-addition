@@ -50,7 +50,17 @@ ggplot(EZNUT,aes(x = Temp, y = value, fill=Temp))+
 
 ggsave("Graphs/NUT_MISC_Enzymes.png")
 
+EZCBH = EZERROR %>%
+  filter(variable== "CBH")
 
+ggplot(EZCBH,aes(x = Temp, y = mean_value, fill=Temp))+
+  geom_bar(stat = "identity")+
+  geom_errorbar(aes(ymin = mean_value - se, ymax = mean_value + se), lwd = 0.8, width = 0.7, color="black")+
+  facet_wrap(~ variable, ncol = 2,scales = "free")+
+  scale_fill_manual(values=cbPalette)+
+  ylab("Enzyme activity per g dry soil")+
+  theme_kp()
+ggsave("Graphs/CBH_Enzymes.png")
  
 EZ[EZ < 0] <- 0.1
 ## Stats
