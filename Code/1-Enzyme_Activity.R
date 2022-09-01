@@ -5,18 +5,22 @@ source("code/0-packages.R")
 
 
 EZ = read.csv("Data/Enzyme.csv")
-
+EZ$CN<-EZ$BG/(EZ$LAP+EZ$NAG)
 EZ2<- melt(EZ, id.vars=c("ID","Date","Add","Temp"))
 EZ2$Temp[EZ2$Temp=="4"]<-"Pre"
 EZ2$Temp<- factor(EZ2$Temp, levels= c("-6","-2","2","6","10","Pre"))
 
-EZERROR = EZ2 %>%
+
+
+
+##### Without additions
+EZERROR2 = EZ2 %>%
   group_by(Temp, variable) %>%
   summarize(mean_value = mean(value, na.rm = TRUE),
             se = sqrt(var(value, na.rm = TRUE) / sum(!is.na(value)))) %>%
   ungroup()
 
-ggplot(EZERROR,aes(x = Temp, y = mean_value, fill=Temp))+
+ggplot(EZERROR2,aes(x = Temp, y = mean_value, fill=Temp))+
   geom_bar(stat = "identity")+
   geom_errorbar(aes(ymin = mean_value - se, ymax = mean_value + se), lwd = 1, width = 1, color="black")+
   facet_wrap(~ variable, ncol = 3,scales = "free")+
@@ -26,7 +30,7 @@ ggplot(EZERROR,aes(x = Temp, y = mean_value, fill=Temp))+
 ggsave("Graphs/Cellulose_Enzymes.png", device= "png")
 
 
-EZCARBON = EZERROR %>%
+EZCARBON = EZERROR2 %>%
   filter(variable== "BG" | variable== "BX" |variable== "EndoC" |variable== "EndoX")
 
 ggplot(EZCARBON,aes(x = Temp, y = mean_value, fill=Temp))+
@@ -38,7 +42,7 @@ ggplot(EZCARBON,aes(x = Temp, y = mean_value, fill=Temp))+
   theme_CKM()
 ggsave("Graphs/Carbon_Enzymes.png")
 
-EZNUT = EZERROR %>%
+EZNUT = EZERROR2 %>%
   filter(variable== "LAP" | variable== "NAG" |variable== "PHOS" |variable== "AFS")
 
 ggplot(EZNUT,aes(x = Temp, y = value, fill=Temp))+
@@ -50,7 +54,7 @@ ggplot(EZNUT,aes(x = Temp, y = value, fill=Temp))+
 
 ggsave("Graphs/NUT_MISC_Enzymes.png")
 
-EZCBH = EZERROR %>%
+EZCBH = EZERROR2 %>%
   filter(variable== "CBH")
 
 ggplot(EZCBH,aes(x = Temp, y = mean_value, fill=Temp))+
@@ -105,3 +109,133 @@ ggplot(EZ3,aes(x = Temp, y = value, fill=Temp))+
   scale_fill_manual(values=cbPalette)+
   #stat_compare_means(method = "anova",label = "p.signif",  label.y = c(140,1000,200,1200))+
   theme_CKM()
+
+
+
+
+EZCN = EZERROR2 %>%
+  filter(variable== "CN")
+
+ggplot(EZCN,aes(x = Temp, y = mean_value, fill=Temp))+
+  geom_bar(stat = "identity")+
+  geom_errorbar(aes(ymin = mean_value - se, ymax = mean_value + se), lwd = 0.8, width = 0.7, color="black")+
+  facet_wrap(~ variable, ncol = 2,scales = "free")+
+  scale_fill_manual(values=cbPalette)+
+  ylab("BG/(LAP+NAG)")+
+  theme_CKM()
+ggsave("Graphs/Carbon_Enzymes.png")
+
+
+
+
+##### With additions
+EZERROR2 = EZ2 %>%
+  group_by(Temp, variable, Add) %>%
+  summarize(mean_value = mean(value, na.rm = TRUE),
+            se = sqrt(var(value, na.rm = TRUE) / sum(!is.na(value)))) %>%
+  ungroup()
+
+ggplot(EZERROR2,aes(x = Temp, y = mean_value, fill=Add))+
+  geom_bar(stat = "identity", position="dodge")+
+  geom_errorbar(aes(ymin = mean_value - se, ymax = mean_value + se), lwd = 1, width = 1, color="black", position="dodge")+
+  facet_wrap(~ variable, ncol = 3,scales = "free")+
+  scale_fill_manual(values=cbPalette)+
+  theme_CKM()
+
+ggsave("Graphs/Cellulose_Enzymes_ADD.png", device= "png")
+
+
+EZCARBON = EZERROR2 %>%
+  filter(variable== "BG" | variable== "BX" |variable== "EndoC" |variable== "EndoX")
+
+ggplot(EZCARBON,aes(x = Temp, y = mean_value, fill=Add))+
+  geom_bar(stat = "identity", position="dodge")+
+  geom_errorbar(aes(ymin = mean_value - se, ymax = mean_value + se), lwd = 0.8, width = 0.7, color="black", position="dodge")+
+  facet_wrap(~ variable, ncol = 2,scales = "free")+
+  scale_fill_manual(values=cbPalette)+
+  ylab("Enzyme activity per g dry soil")+
+  theme_CKM()
+ggsave("Graphs/Carbon_Enzymes_ADD.png")
+
+EZNUT = EZERROR2 %>%
+  filter(variable== "LAP" | variable== "NAG" |variable== "PHOS" |variable== "AFS")
+
+ggplot(EZNUT,aes(x = Temp, y = value, fill=Add))+
+  geom_bar(stat = "identity", position="dodge")+
+  geom_errorbar(aes(ymin = mean_value - se, ymax = mean_value + se), lwd = 1, width = 1, color="black", position="dodge")+
+  facet_wrap(~ variable, ncol = 3,scales = "free")+
+  scale_fill_manual(values=cbPalette)+
+  theme_CKM()
+
+ggsave("Graphs/NUT_MISC_Enzymes_ADD.png")
+
+EZCBH = EZERROR2 %>%
+  filter(variable== "CBH")
+
+ggplot(EZCBH,aes(x = Temp, y = mean_value, fill=Add))+
+  geom_bar(stat = "identity", position="dodge")+
+  geom_errorbar(aes(ymin = mean_value - se, ymax = mean_value + se), lwd = 0.8, width = 0.7, color="black", position="dodge")+
+  facet_wrap(~ variable, ncol = 2,scales = "free")+
+  scale_fill_manual(values=cbPalette)+
+  ylab("Enzyme activity per g dry soil")+
+  theme_CKM()
+ggsave("Graphs/CBH_Enzymes_ADD.png")
+
+EZ[EZ < 0] <- 0.1
+## Stats
+ANOVBG = 
+  adonis(EZ %>% dplyr::select(BG)~ Add * Temp , data = EZ) 
+ANOVBX = 
+  adonis(EZ %>% dplyr::select(BX)~ Add * Temp , data = EZ) 
+ANOVENDC = 
+  adonis(EZ %>% dplyr::select(EndoC)~ Add * Temp , data = EZ) 
+ANOVENDX = 
+  adonis(EZ %>% dplyr::select(EndoX)~ Add * Temp , data = EZ) 
+ANOVLAP = 
+  adonis(EZ %>% dplyr::select(LAP)~ Add * Temp , data = EZ) 
+ANOVCBH = 
+  adonis(EZ %>% dplyr::select(CBH)~ Add * Temp , data = EZ) 
+ANOVNAG = 
+  adonis(EZ %>% dplyr::select(NAG)~ Add * Temp , data = EZ) 
+ANOVPHOS = 
+  adonis(EZ %>% dplyr::select(PHOS)~ Add * Temp , data = EZ) 
+ANOVAFS = 
+  adonis(EZ %>% dplyr::select(AFS)~ Add * Temp , data = EZ) 
+
+ANOVBG
+ANOVBX
+ANOVENDC
+ANOVENDX
+ANOVCBH
+ANOVAFS
+ANOVLAP
+ANOVNAG
+ANOVPHOS
+
+
+##Attempting to add stats to graphs in ggplot without calculating outside. 
+EZ3 <- EZ2 %>%
+  filter(variable== "LAP" | variable== "NAG" |variable== "PHOS" |variable== "AFS")
+
+ggplot(EZ3,aes(x = Temp, y = value, fill=Add))+
+  stat_summary(geom = "bar")+
+  stat_summary(geom="errorbar")+
+  facet_wrap(~ variable, ncol = 2,scales = "free")+
+  scale_fill_manual(values=cbPalette)+
+  #stat_compare_means(method = "anova",label = "p.signif",  label.y = c(140,1000,200,1200))+
+  theme_CKM()
+
+
+
+
+EZCN = EZERROR2 %>%
+  filter(variable== "CN")
+
+ggplot(EZCN,aes(x = Temp, y = mean_value, fill=Add))+
+  geom_bar(stat = "identity", position="dodge")+
+  geom_errorbar(aes(ymin = mean_value - se, ymax = mean_value + se), lwd = 0.8, width = 0.7, color="black", position="dodge")+
+  facet_wrap(~ variable, ncol = 2,scales = "free")+
+  scale_fill_manual(values=cbPalette)+
+  ylab("BG/(LAP+NAG)")+
+  theme_CKM()
+ggsave("Graphs/CNratio_Enzymes.png")

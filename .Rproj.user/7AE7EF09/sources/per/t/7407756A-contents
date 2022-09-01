@@ -1,0 +1,128 @@
+---
+title: "Graphing weintraub data"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+rm(list=ls())
+packages<-function(x, repos="http://cran.r-project.org", ...){
+  x<-as.character(match.call()[[2]])
+  if (!require(x,character.only=TRUE)){
+    install.packages(pkgs=x, repos=repos, ...)
+    require(x,character.only=TRUE)
+  }
+}
+
+base <- getwd()
+dataDIR <- paste(base, "Data", sep="/")
+## put your data set in the Data subdirectory
+plotDIR <- paste(base, "Figs", sep="/")
+## put created figures in the Figures subdirectory
+##setwd(base)
+load("galaxy.RData")
+packages(UsingR)
+packages(rpart)
+packages(lattice)
+packages(arm)
+packages(maptools)
+packages(maps)
+packages(mapproj)
+packages(GGally)
+packages(cowplot)
+packages(plotly)
+packages(scales)
+## packages(tikzDevice)
+wt.bisquare <- function(u, c=6) {
+  ifelse( abs(u/c) < 1, (1-(u/c)^2)^2, 0)
+}
+
+cbPalette <- c("#000000", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+```
+Res, NH4, NO3, PO4
+```{r,}
+setwd("C:/Users/Cameron M/Desktop/R working folder/Projects/Composite_EMSL")
+A<-read.csv("CompositeRespiration.csv")
+B<-read.csv("CompositeNut.csv")
+A$Date<-as.Date(A$Date,"%m/%d/%Y")
+B$Date<-as.Date(B$Date,"%m/%d/%Y")
+
+Res<-ggplot(A,aes(x=Date,y=Res, color= Inc))+
+  stat_summary(fun = mean,geom = "point",lwd=4) +
+  stat_summary(fun.data = mean_se, geom = "errorbar", lwd=2, width = 1)+
+  geom_vline(xintercept=as.numeric(A$Date[20]))+
+  ylab(expression(paste( " ",mu,"ppm-C",g^-1," Dry Soil ",Hr^-1)))+
+  xlab("Date")+
+  labs(color = expression(paste("Temperature")))+
+  scale_colour_manual(values=cbPalette)+
+  scale_fill_manual(values=cbPalette)+
+  theme_light()+
+  theme(legend.direction = 'vertical', 
+        legend.key = element_rect(size=2),
+        legend.key.size = unit(3, 'lines'),
+        panel.grid.major = element_blank(), 
+        legend.title=element_text(size=40,colour='black'),
+        panel.grid.minor = element_blank(),
+        legend.text=element_text(size=35),
+        axis.title.y= element_text(size=40, colour='black'),
+        axis.text.y = element_text(size=40, colour='black'),
+        axis.ticks = element_line(colour = "black", size=2),
+        axis.ticks.length = unit(0.3, "cm"),
+        axis.title.x=element_text(size=40, colour='black'),
+        axis.text.x = element_text(size=40, colour='black'),
+        panel.border = element_rect(colour = "black", fill=NA, size=2),
+        plot.title = element_text( size=40, face="bold.italic"),
+        plot.margin=unit(c(1,1,1,1), "cm"))+
+ ggtitle("Soil Respiration")
+
+
+
+
+MBC<-ggplot(B,aes(x=Inc,y=MBC))+
+  stat_summary(fun.y = mean,geom = "bar",lwd=2) +
+  stat_summary(fun.data = mean_se, geom = "errorbar", lwd=1, width = 0.5)+
+  ylab(expression(paste( " ",mu,"g-microbial C",g^-1," Dry Soil ")))+
+  xlab("Incubation temperature")+
+  scale_colour_manual(values=cbPalette)+
+  scale_fill_manual(values=cbPalette)+
+ ggtitle("Microbial biomass before and after incubation")
+
+MBN<-ggplot(B,aes(x=Inc,y=MBN))+
+  stat_summary(fun.y = mean,geom = "bar",lwd=2) +
+  stat_summary(fun.data = mean_se, geom = "errorbar", lwd=1, width = 0.5)+
+  ylab(expression(paste( " ",mu,"g-microbial C",g^-1," Dry Soil ")))+
+  xlab("Incubation temperature")+
+  scale_colour_manual(values=cbPalette)+
+  scale_fill_manual(values=cbPalette)+
+ ggtitle("Microbial biomass before and after incubation")
+
+NH4<-ggplot(B,aes(x=Inc,y=NH4))+
+  stat_summary(fun.y = mean,geom = "bar",lwd=2) +
+  stat_summary(fun.data = mean_se, geom = "errorbar", lwd=1, width = 0.5)+
+  ylab(expression(paste( " ",mu,"g-NH4-N",g^-1," Dry Soil ")))+
+  xlab("Incubation temperature")+
+  scale_colour_manual(values=cbPalette)+
+  scale_fill_manual(values=cbPalette)+
+ ggtitle("Ammonium before and after incubation")
+
+NO3<-ggplot(B,aes(x=Inc,y=NO3))+
+  stat_summary(fun.y = mean,geom = "bar",lwd=2) +
+  stat_summary(fun.data = mean_se, geom = "errorbar", lwd=1, width = 0.5)+
+  ylab(expression(paste( " ",mu,"g-NO3-N",g^-1," Dry Soil ")))+
+  xlab("Incubation temperature")+
+  scale_colour_manual(values=cbPalette)+
+  scale_fill_manual(values=cbPalette)+
+ ggtitle("Nitrate before and after incubation")
+
+PO4<-ggplot(B,aes(x=Inc,y=PO4))+
+  stat_summary(fun.y = mean,geom = "bar",lwd=2) +
+  stat_summary(fun.data = mean_se, geom = "errorbar", lwd=1, width = 0.5)+
+  ylab(expression(paste( " ",mu,"g-PO4-P",g^-1," Dry Soil ")))+
+  xlab("Incubation temperature")+
+  scale_colour_manual(values=cbPalette)+
+  scale_fill_manual(values=cbPalette)+
+ ggtitle("Phosphate before and after incubation")
+
+
+
+```
+
