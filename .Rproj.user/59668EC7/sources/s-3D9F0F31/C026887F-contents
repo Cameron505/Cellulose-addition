@@ -2,6 +2,7 @@ library(tidyverse) #for tidy processing and plotting
 library(vegan) # for PERMANOVA analysis
 library(ggbiplot) #for PCA biplots
 library(reshape2)
+library(pracma)
 # to install {ggbiplot}:
 # library(devtools)
 # install_github("vqv/ggbiplot")
@@ -10,7 +11,7 @@ library(reshape2)
 
 # custom ggplot theme
 cbPalette <- c("#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
-theme_kp <- function() {  # this for all the elements common across plots
+theme_CKM <- function() {  # this for all the elements common across plots
   theme_bw() %+replace%
     theme(legend.position = "none",
           legend.key=element_blank(),
