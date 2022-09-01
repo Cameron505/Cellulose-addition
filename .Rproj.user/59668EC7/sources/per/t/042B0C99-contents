@@ -21,7 +21,7 @@ ggplot(EZERROR,aes(x = Temp, y = mean_value, fill=Temp))+
   geom_errorbar(aes(ymin = mean_value - se, ymax = mean_value + se), lwd = 1, width = 1, color="black")+
   facet_wrap(~ variable, ncol = 3,scales = "free")+
   scale_fill_manual(values=cbPalette)+
-  theme_kp()
+  theme_CKM()
   
 ggsave("Graphs/Cellulose_Enzymes.png", device= "png")
 
@@ -35,7 +35,7 @@ ggplot(EZCARBON,aes(x = Temp, y = mean_value, fill=Temp))+
   facet_wrap(~ variable, ncol = 2,scales = "free")+
   scale_fill_manual(values=cbPalette)+
   ylab("Enzyme activity per g dry soil")+
-  theme_kp()
+  theme_CKM()
 ggsave("Graphs/Carbon_Enzymes.png")
 
 EZNUT = EZERROR %>%
@@ -46,7 +46,7 @@ ggplot(EZNUT,aes(x = Temp, y = value, fill=Temp))+
   geom_errorbar(aes(ymin = mean_value - se, ymax = mean_value + se), lwd = 1, width = 1, color="black")+
   facet_wrap(~ variable, ncol = 3,scales = "free")+
   scale_fill_manual(values=cbPalette)+
-  theme_kp()
+  theme_CKM()
 
 ggsave("Graphs/NUT_MISC_Enzymes.png")
 
@@ -59,7 +59,7 @@ ggplot(EZCBH,aes(x = Temp, y = mean_value, fill=Temp))+
   facet_wrap(~ variable, ncol = 2,scales = "free")+
   scale_fill_manual(values=cbPalette)+
   ylab("Enzyme activity per g dry soil")+
-  theme_kp()
+  theme_CKM()
 ggsave("Graphs/CBH_Enzymes.png")
  
 EZ[EZ < 0] <- 0.1
@@ -104,4 +104,4 @@ ggplot(EZ3,aes(x = Temp, y = value, fill=Temp))+
   facet_wrap(~ variable, ncol = 2,scales = "free")+
   scale_fill_manual(values=cbPalette)+
   #stat_compare_means(method = "anova",label = "p.signif",  label.y = c(140,1000,200,1200))+
-  theme_kp()
+  theme_CKM()

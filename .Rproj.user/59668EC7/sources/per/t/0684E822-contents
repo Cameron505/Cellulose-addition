@@ -9,22 +9,27 @@ library(reshape2)
 cbPalette <- c("#88CCEE", "#CC6677", "#DDCC77", "#117733", "#332288", "#AA4499", "#44AA99", "#999933", "#882255", "#661100", "#6699CC", "#888888")
 theme_CKM <- function() {  # this for all the elements common across plots
   theme_bw() %+replace%
-    theme(legend.text = element_text(size = 20),
+    theme(legend.text = element_text(size = 40),
+          legend.title = element_text(size = 30),
           legend.key.size = unit(1.5, 'lines'),
           legend.background = element_rect(colour = NA),
           panel.border = element_rect(color="black",size=1.5, fill = NA),
           
-          plot.title = element_text(hjust = 0, size = 20),
-          axis.text = element_text(size = 20, color = "black"),
-          axis.title = element_text(size = 20, face = "bold", color = "black"),
+          plot.title = element_text(hjust = 0, size = 50),
+          axis.text = element_text(size = 30, color = "black"),
+          axis.title = element_text(size = 40, face = "bold", color = "black"),
+          
+          panel.grid.major = element_blank(), 
+          panel.grid.minor = element_blank(),
+          axis.line = element_line(colour = "black"),
           
           # formatting for facets
           panel.background = element_blank(),
           strip.background = element_rect(colour="white", fill="white"), #facet formatting
           panel.spacing.x = unit(1.5, "lines"), #facet spacing for x axis
           panel.spacing.y = unit(1.5, "lines"), #facet spacing for x axis
-          strip.text.x = element_text(size=20, face="bold"), #facet labels
-          strip.text.y = element_text(size=20, face="bold", angle = 270) #facet labels
+          strip.text.x = element_text(size=40, face="bold"), #facet labels
+          strip.text.y = element_text(size=40, face="bold", angle = 270) #facet labels
     )
 }
 
@@ -205,11 +210,18 @@ EZ3$MONTH2<-factor(EZ3$MONTH2, levels = month.abb)
 
 ET<-ggplot(EZ3, aes(x=MONTH2, y=value, fill=decade))+
   geom_bar(stat='identity',position='dodge')+
-  ylab("Estimated Soil Temperature at 10 cm Depth (deg C)")+
+  ylab(expression(paste("10 cm estimated Soil Temp.(",degree,C,')')))+
   xlab("Month")+
   ggtitle("")+
   scale_fill_manual(values=cbPalette)+
-  ggtitle("Soil temperature estimates")+
+  ggtitle("Historic soil temperature estimates")+
+  guides(fill=guide_legend(title="Decade"))+
+  geom_hline(yintercept=10, linetype="dashed", color = "red", size=1)+
+  geom_hline(yintercept=6, linetype="dashed", color = "red", size=1)+
+  geom_hline(yintercept=2, linetype="dashed", color = "red", size=1)+
+  geom_hline(yintercept=-2, linetype="dashed", color = "red", size=1)+
+  geom_hline(yintercept=-6, linetype="dashed", color = "red", size=1)+
+  geom_hline(yintercept=-10, linetype="dashed", color = "red", size=1)+
   theme_CKM()
 
 ggsave("Graphs/Estimated soil temps.png", plot=ET, width= 20, height= 12)
