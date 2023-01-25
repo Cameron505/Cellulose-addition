@@ -9,8 +9,12 @@ EZ$CN<-EZ$BG/(EZ$LAP+EZ$NAG)
 EZ2<- melt(EZ, id.vars=c("ID","Date","Add","Temp"))
 EZ2$Temp[EZ2$Temp=="4"]<-"Pre"
 EZ2$Temp<- factor(EZ2$Temp, levels= c("-6","-2","2","6","10","Pre"))
-
-
+EZ$alpha <- (EZ$EndoC+EZ$EndoX)/(EZ$EndoC+EZ$EndoX+EZ$BG+EZ$BX)
+EZ$alpha1 <- (EZ$EndoC)/(EZ$EndoC+EZ$BG)
+EZ$alpha2 <- (EZ$EndoX)/(EZ$EndoX+EZ$BX)
+EZ$Temp[EZ$Temp=="4"]<-"Pre"
+EZ$Temp<- factor(EZ$Temp, levels= c("-6","-2","2","6","10","Pre"))
+EZalpha<- melt(EZ, id.vars=c("ID","Date","Add","Temp"))
 
 
 ##### Without additions
@@ -239,3 +243,38 @@ ggplot(EZCN,aes(x = Temp, y = mean_value, fill=Add))+
   ylab("BG/(LAP+NAG)")+
   theme_CKM()
 ggsave("Graphs/CNratio_Enzymes.png")
+
+
+
+## Temperature sensativity
+EZA = EZalpha %>%
+  filter(variable== "alpha1")
+AlphaERROR = EZA %>%
+  group_by(Temp,Add) %>%
+  summarize(mean_value = mean(value, na.rm = TRUE),
+            se = sqrt(var(value, na.rm = TRUE) / sum(!is.na(value)))) %>%
+  ungroup()
+
+ggplot(EZ,aes(x = Temp, y = alpha, fill=Temp))+
+  stat_summary(geom="bar")+
+  stat_summary(geom='errorbar')+
+  #facet_wrap(~ variable, ncol = 2,scales = "free")+
+  scale_fill_manual(values=cbPalette)+
+  ylab("alpha")+
+  theme_CKM()
+
+ggplot(EZ,aes(x = Temp, y = alpha1, fill=Temp))+
+  stat_summary(geom="bar")+
+  stat_summary(geom='errorbar')+
+  #facet_wrap(~ variable, ncol = 2,scales = "free")+
+  scale_fill_manual(values=cbPalette)+
+  ylab("alpha1")+
+  theme_CKM()
+
+ggplot(EZ,aes(x = Temp, y = alpha2, fill=Temp))+
+  stat_summary(geom="bar")+
+  stat_summary(geom='errorbar')+
+  #facet_wrap(~ variable, ncol = 2,scales = "free")+
+  scale_fill_manual(values=cbPalette)+
+  ylab("alpha2")+
+  theme_CKM()
