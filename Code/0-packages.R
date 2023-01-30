@@ -13,7 +13,7 @@ library(pracma)
 cbPalette <- c("#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
 theme_CKM <- function() {  # this for all the elements common across plots
   theme_bw() %+replace%
-    theme(legend.position = "none",
+    theme(          legend.position = "none",
           legend.key=element_blank(),
           legend.title = element_blank(),
           legend.text = element_text(size = 12),
@@ -21,16 +21,16 @@ theme_CKM <- function() {  # this for all the elements common across plots
           legend.background = element_rect(colour = NA),
           panel.border = element_rect(color="black",size=1.5, fill = NA),
           
-          plot.title = element_text(hjust = 0, size = 14),
-          axis.text = element_text(size = 14, color = "black"),
-          axis.title = element_text(size = 14, face = "bold", color = "black"),
+          plot.title = element_text(hjust = 0, size = 25),
+          axis.text = element_text(size = 30, color = "black"),
+          axis.title = element_text(size = 30, face = "bold", color = "black"),
           
           # formatting for facets
           panel.background = element_blank(),
           strip.background = element_rect(colour="white", fill="white"), #facet formatting
           panel.spacing.x = unit(1.5, "lines"), #facet spacing for x axis
           panel.spacing.y = unit(1.5, "lines"), #facet spacing for x axis
-          strip.text.x = element_text(size=12, face="bold"), #facet labels
-          strip.text.y = element_text(size=12, face="bold", angle = 270) #facet labels
+          strip.text.x = element_text(size=25, face="bold"), #facet labels
+          strip.text.y = element_text(size=25, face="bold", angle = 270) #facet labels
     )
 }
