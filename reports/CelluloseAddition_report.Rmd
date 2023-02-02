@@ -92,6 +92,16 @@ tar_read(gg_enzyme3)
 
 ---
 
+## Estimated historic soil temperatures
+<details>
+  <summary>click to open</summary>
+Soil temperature estimates were constructed by correlating several years of soil measurements to air temperatures from Kotzebue AK. Then using this relationship soil temperature estimates were constructed from the years before soil measurements were taken. 
+
+```{r , fig.height=6, fig.width=8, results='hide', fig.show="hold", out.width="100%"}
+tar_read(gg_SoilTemp)
+```
+</details>
+
 ## Session Info 
 
 <details>

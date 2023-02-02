@@ -44,10 +44,22 @@ list(
   tar_target(enzyme_processed, process_enzyme(enzyme_data)),
   tar_target(MicrobialBiomass_data_read,"Data/Cell_Microbial biomass.csv", format="file"),
   tar_target(MicrobialBiomass_data, read.csv(MicrobialBiomass_data_read)),
-  tar_target(SoilTemp_data_read,"Data/Hydric Met Station.csv", format="file"),
-  tar_target(SoilTemp_data, read.csv(AoilTemp_data_read)),
   tar_target(KotzTemp_data_read,"Data/kotz.daily.air.temp.1900.2022.csv", format="file"),
-  tar_target(KotzTemp_data, read.csv(AoilTemp_data_read)),
+  tar_target(KotzTemp_data, read.csv(KotzTemp_data_read)),
+  tar_target(Kotz_proccessed, process_KotzTemp(KotzTemp_data)),
+  tar_target(SoilTempHydric_data_read,"Data/Hydric Met Station.csv", format="file"),
+  tar_target(SoilTempHydric_data, read.csv(SoilTempHydric_data_read)),
+  tar_target(SoilTempMesic_data_read,"Data/Mesic Met Station.csv", format="file"),
+  tar_target(SoilTempMesic_data, read.csv(SoilTempMesic_data_read)),
+  tar_target(SoilTempXeric_data_read,"Data/Xeric Met Station.csv", format="file"),
+  tar_target(SoilTempXeric_data, read.csv(SoilTempXeric_data_read)),
+  
+  
+  #Merging and predicting soil temperatures based on air temps
+
+  tar_target(Kotz_proccessed_HMX, process_SoilTemp(SoilTempHydric_data,SoilTempMesic_data,SoilTempXeric_data,Kotz_proccessed)),
+  
+  
   # analysis - graphs
   tar_target(gg_respiration, plot_respiration(respiration_processed)),
   tar_target(gg_nutrients, plot_nutrients(nutrients_data)),
@@ -55,9 +67,7 @@ list(
   tar_target(gg_enzyme1, plot_enzyme1(enzyme_processed)),
   tar_target(gg_enzyme2, plot_enzyme2(enzyme_processed)),
   tar_target(gg_enzyme3, plot_enzyme3(enzyme_processed)),
-
-  
-  # combined data
+  tar_target(gg_SoilTemp, plot_PredictedSoilTemp(Kotz_proccessed_HMX)),
  
   
   # report  

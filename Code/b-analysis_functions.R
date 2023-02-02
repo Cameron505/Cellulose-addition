@@ -704,3 +704,59 @@ plot_enzyme3 = function(enzyme_processed){
   )
   
 }
+
+plot_PredictedSoilTemp = function(Kotz_proccessed_HMX){
+  
+  EZ2<- Kotz_proccessed_HMX%>%
+    pivot_longer(cols=TAVG.mean:Xeric.Soil)%>%
+    mutate(decade = floor(YEAR/10)*10) %>%
+    group_by(MONTH, decade, name)
+  EZ2$decade<- as.character(EZ2$decade)
+  
+  EZ3 = EZ2 %>%
+    filter(name== "Xeric.Soil" | name== "Mesic.Soil" |name== "Hydric.Soil", decade >= 1950) %>%
+    mutate(MONTH2 = month.abb[MONTH])
+  EZ3$MONTH2<-factor(EZ3$MONTH2, levels = month.abb)
+  
+  gg_SoilTempPredict=
+    EZ3%>%
+    ggplot(aes(x=MONTH2, y=value, fill=decade))+
+    geom_bar(stat='identity',position='dodge')+
+    ylab(expression(paste("10 cm estimated Soil Temp. °C)")))+
+    xlab("Month")+
+    scale_fill_manual(values=cbPalette)+
+    ggtitle("Historic soil temp. estimates")+
+    guides(fill=guide_legend(title="Decade"))+
+    geom_hline(yintercept=10, linetype="dashed", color = "red", size=1)+
+    geom_hline(yintercept=6, linetype="dashed", color = "red", size=1)+
+    geom_hline(yintercept=2, linetype="dashed", color = "red", size=1)+
+    geom_hline(yintercept=-2, linetype="dashed", color = "red", size=1)+
+    geom_hline(yintercept=-6, linetype="dashed", color = "red", size=1)+
+    geom_hline(yintercept=-10, linetype="dashed", color = "red", size=1)+
+    theme(          legend.text = element_text(size = 12),
+                    legend.key.size = unit(1.5, 'lines'),
+                    legend.background = element_rect(colour = NA),
+                    panel.border = element_rect(color="black",size=1.5, fill = NA),
+                    
+                    plot.title = element_text(hjust = 0, size = 25),
+                    axis.text = element_text(size = 20, color = "black"),
+                    axis.title = element_text(size = 21, face = "bold", color = "black"),
+                    axis.text.x = element_text(angle = 45,vjust=1.1,hjust= 0.9),
+                    
+                    # formatting for facets
+                    panel.background = element_blank(),
+                    strip.background = element_rect(colour="white", fill="white"), #facet formatting
+                    panel.spacing.x = unit(1.5, "lines"), #facet spacing for x axis
+                    panel.spacing.y = unit(1.5, "lines"), #facet spacing for x axis
+                    strip.text.x = element_text(size=25, face="bold"), #facet labels
+                    strip.text.y = element_text(size=25, face="bold", angle = 270) #facet labels
+    )
+
+  
+  
+  
+  
+  list("Estimated Historic Soil Temperature" = gg_SoilTempPredict
+  )
+  
+}
