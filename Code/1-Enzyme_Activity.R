@@ -5,6 +5,8 @@ source("code/0-packages.R")
 
 
 EZ = read.csv("Data/Enzyme.csv")
+EZ$EndoC <- EZ$EndoC * 50  #current units are in per mL. making more comparable to other enzymes.
+EZ$EndoX <- EZ$EndoX * 50  #current units are in per mL. making more comparable to other enzymes.
 EZ$CN<-EZ$BG/(EZ$LAP+EZ$NAG)
 EZ2<- melt(EZ, id.vars=c("ID","Date","Add","Temp"))
 EZ2$Temp[EZ2$Temp=="4"]<-"Pre"
@@ -278,3 +280,39 @@ ggplot(EZ,aes(x = Temp, y = alpha2, fill=Temp))+
   scale_fill_manual(values=cbPalette)+
   ylab("alpha2")+
   theme_CKM()
+
+
+
+
+
+
+
+
+
+
+
+EZCARBON5 = EZERROR2 %>%
+  filter(variable== "BG" | variable== "BX")
+
+ggplot(EZCARBON5,aes(x = Temp, y = mean_value, fill=Temp))+
+  geom_bar(stat = "identity")+
+  geom_errorbar(aes(ymin = mean_value - se, ymax = mean_value + se), lwd = 0.8, width = 0.7, color="black")+
+  facet_wrap(~ variable, ncol = 2,scales = "free")+
+  scale_fill_manual(values=cbPalette)+
+  ylab("Enzyme activity per g dry soil")+
+  theme_CKM()
+ggsave("Graphs/ExoCarbon_Enzymes.png")
+
+
+
+EZCARBON6 = EZERROR2 %>%
+  filter(variable== "EndoC" |variable== "EndoX")
+
+ggplot(EZCARBON6,aes(x = Temp, y = mean_value, fill=Temp))+
+  geom_bar(stat = "identity")+
+  geom_errorbar(aes(ymin = mean_value - se, ymax = mean_value + se), lwd = 0.8, width = 0.7, color="black")+
+  facet_wrap(~ variable, ncol = 2,scales = "free")+
+  scale_fill_manual(values=cbPalette)+
+  ylab("Enzyme activity per g dry soil")+
+  theme_CKM()
+ggsave("Graphs/Carbon_Enzymes.png")

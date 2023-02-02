@@ -1,0 +1,106 @@
+---
+title: "Cellulose addition experiment"
+output: 
+  github_document:
+  html_preview: True
+---
+
+```{r setup, include=FALSE, echo=FALSE}
+knitr::opts_chunk$set(echo = FALSE,
+                      message = FALSE,
+                      warning = FALSE
+                      )
+```
+
+## sample summary
+Soil samples were collected along a treeline in northwest Alaska, in the western brooks range near the agashashok river. Roughly 60 5cm diameter cores were take between 10-15 cm (only organic horizon was taken).The soil was homogenized and frozen for shipment to Toledo Ohio. In Toledo soils were thawed, further homogenized and kept at 4 °C for roughly a week. Soil subsamples were placed in mesocosms and cellobiose, cellotetraose, cellulose-20, cellulose-90, and coloidal cellulose were added in equal amounts being careful to keep soil moisture constant. Soils were then incubated at -6, -2, 2 , 6, 10 °C for several months. During the incubation respiration was measured and at the end of the incubation soils were destructively harvested for K2SO4/FUM and MPLEx extractions, and sub samples were used to measure enzyme activity. Below is the data. 
+
+## Respiration results
+
+<details>
+  <summary>click to open</summary>
+Respiration measurements were taken daily during the incubation using a Li-850 bench top respiration unit. Below are the respiration rates for each sample, as well as the calculates accumulative respiration rates.   
+
+```{r , fig.height=6, fig.width=6, results='hide', out.width="100%"}
+tar_read(gg_respiration)
+```
+
+</details>
+
+
+---
+
+## Soil Nutrients
+<details>
+  <summary>click to open</summary>
+Soil K2SO4 extracts were utilized to measure ammonium, Nitrate, Total free primary amines, phosphate, Total reducing sugars. Below is the concentration data.
+
+```{r , fig.height=6, fig.width=6, results='hide', fig.show="hold", out.width="50%"}
+tar_read(gg_nutrients)
+```
+</details>
+
+---
+
+## Microbial biomass
+<details>
+  <summary>click to open</summary>
+Soil K2SO4 extracts and fumigated K2SO4 extracts were utilized to measure microbial biomass in the soils at the end of the incubation. 
+
+```{r , fig.height=6, fig.width=6, results='hide', fig.show="hold", out.width="50%"}
+tar_read(gg_MicrobialBiomass)
+```
+</details>
+
+---
+
+
+## Enzyme data
+<details>
+  <summary>click to open</summary> 
+  
+### Cellulases and hemicellulases
+
+<details>
+  <summary>click to open</summary>
+  Cellulases and hemicellulase activity. This includes several downstream enzymes as well as upstream endo enzymes. 
+  
+```{r , fig.height=6, fig.width=6,results='hide', fig.show="hold", out.width="50%"}
+tar_read(gg_enzyme1)
+```
+  </details>
+### Nutrient and oxidative enzymes
+  <details>
+  <summary>click to open</summary>
+  Nutrient (nitrogen and phosphorus) acquiring enzyme activity
+  
+```{r , fig.height=6, fig.width=6,results='hide', fig.show="hold", out.width="50%"}
+tar_read(gg_enzyme2)
+```
+  </details>
+### Enzyme metrics
+  <details>
+  <summary>click to open</summary>
+  several calculated metrics
+  
+```{r , fig.height=6, fig.width=6,results='hide', fig.show="hold", out.width="50%"}
+tar_read(gg_enzyme3)
+```
+  </details>
+
+</details>
+
+---
+
+## Session Info 
+
+<details>
+  <summary> Session Info </summary>
+
+Date run: `r Sys.Date()`
+
+```{r}
+sessionInfo()
+```
+
+</details>
