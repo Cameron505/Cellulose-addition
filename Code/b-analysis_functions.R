@@ -70,6 +70,32 @@ plot_respiration = function(respiration_processed){
 
 plot_nutrients = function(nutrients_data){
   
+  fit_aov = function(nutrients_data){
+    
+    a = aov(conc ~ Temp, data = nutrients_data)
+    broom::tidy(a) %>% 
+      filter(term == "Temp") %>% 
+      dplyr::select(`p.value`) %>% 
+      mutate(asterisk = case_when(`p.value` <= 0.05 ~ "*"))
+    
+  }
+  
+  nutrients_data_long = nutrients_data %>%
+    pivot_longer(cols= NH4:TRS,
+                 names_to= "analyte",
+                 values_to= "conc")
+  
+  all_aov = 
+    nutrients_data_long %>% 
+    group_by(analyte,Add) %>% 
+    do(fit_aov(.)) %>% 
+    mutate(Temp = "-2")
+    # factor the Inc_temp so they can line up in the graph
+    #mutate(Temp = factor(Temp, levels=c("-6","-2","2","6","10", "Pre")))
+  
+  HSD_all = agricolae::HSD.test(all_aov, "Add") #attempting to get abc comparisons. 
+  
+  
   gg_NH4 =
     nutrients_data %>%
     mutate(Temp = factor(Temp, levels=c("-6","-2","2","6","10", "Pre"))) %>%
@@ -146,6 +172,7 @@ plot_nutrients = function(nutrients_data){
     ggplot(aes(x=Temp, y=NH4))+
     stat_summary(fun = mean,geom = "bar",size = 2, position= "dodge") +
     stat_summary(fun.data = mean_se, geom = "errorbar", position= "dodge")+
+    geom_text(data = all_aov %>% filter(analyte == "NH4"), aes(y = 5, label = asterisk))+
     theme_light()+
     scale_colour_manual(values=cbPalette)+
     scale_fill_manual(values=cbPalette)+
