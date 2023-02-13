@@ -1,14 +1,15 @@
 name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
-.Random.seed|object|4bcf599d3fa885ca|||||||||||||||
+.Random.seed|object|6219bd8ee08d1b2d|||||||||||||||
 cbPalette|object|4c5848206d8b8901|||||||||||||||
 enzyme_data|stem|61cc39661efd113c|c38e4d4eaf3129ec|c383acc97da6b002|-1760711328||t19390.781841551s|a9b58b5c7ff74dbd|14805|rds|local|vector|||0||
 enzyme_data_read|stem|869a5c3e5b6887b6|1a06cf06f72a188c|ef46db3751d8e999|1297545693|Data/Enzyme.csv|t19389.8494180531s|59de923dcfc8826a|25354|file|local|vector|||0||
 enzyme_processed|stem|1243b374a938fff4|3489f26ee766e5fc|2c5ffc6c7be4ea17|355096296||t19390.7818886524s|82523a2f4d91cf7a|18410|rds|local|vector|||0.02||
-gg_enzyme1|stem|12ea0056bfe6414c|d15ab2203d8b3172|8b2431e9db88dadf|-884824905||t19390.7819062103s|91845dc1db9a0ede|869487|rds|local|vector|||0.44||
+fit_hsd|function|5f8469af9f01ae05|||||||||||||||
+gg_enzyme1|stem|e0beb19508da25c5|d15ab2203d8b3172|f3fc42ef129930b3|-884824905||t19401.7307996813s|41f57d708b72feaf|904450|rds|local|vector|||8.33||
 gg_enzyme2|stem|043ff46be4dcefa5|96a74be50a386074|d05b601c1ff74c3e|-1124300757||t19390.7819138879s|5db323710acb6d9e|868514|rds|local|vector|||0.5||
 gg_enzyme3|stem|09a89762c4565619|1ed1e04cad4ea913|bf3350095d27d217|-1292471237||t19390.7819170488s|f43e186a1ac8766f|341807|rds|local|vector|||0.17||
-gg_MicrobialBiomass|stem|f5bc0e10a8608806|ef4f34b7fd0e8173|efda81ddc04568de|-440370533||t19390.7818957612s|344e6e083e444cf6|142933|rds|local|vector|||0.16||
-gg_nutrients|stem|ecce8b63b6358e69|29b10dcd439e7d8b|bf39c11c97d875b9|797690733||t19390.7818880829s||209389|rds|local|vector|||0.37||Cant subset columns that dont exist.31m39m Column label doesnt exist.
+gg_MicrobialBiomass|stem|f23a9fb4f6f539f9|ef4f34b7fd0e8173|2d40911ea2128a2f|-440370533||t19401.7307009815s|783df1cce527e3d0|161440|rds|local|vector|||2.46||
+gg_nutrients|stem|04127421c256f178|29b10dcd439e7d8b|70f9c201bb5492a8|797690733||t19401.7306712671s|4896c9ea20cc922b|234359|rds|local|vector|||2.44|1m22mUsing size aesthetic for lines was deprecated in ggplot2 3.4.0.36mℹ39m Please use linewidth instead.|
 gg_respiration|stem|57cd07aacf1748e2|4bd06ee6452ad87f|8cf82904bd7e733a|340829705||t19390.8278566096s|05d44777d0efc3fc|368804|rds|local|vector|||0.17||
 gg_SoilTemp|stem|3a8ad524dfd350ff|bce20d051455c025|dcada75e2f0541c1|-1428135009||t19390.8142199364s|039e110ef3523b70|270675|rds|local|vector|||0.41|1m22mUsing size aesthetic for lines was deprecated in ggplot2 3.4.0.36mℹ39m Please use linewidth instead.. 1m22mThe size argument of element_rect is deprecated as of ggplot2 3.4.0.36mℹ39m Please use the linewidth argument instead.|
 import_nutrients|function|db0a41c9198fe338|||||||||||||||
@@ -22,18 +23,18 @@ MicrobialBiomass_data|stem|00387d4ebee2aee1|30ac57fb910fe51b|72b3e547c80589a3|16
 MicrobialBiomass_data_read|stem|374cff64545f6cab|5d33513a9d786536|ef46db3751d8e999|-1702705461|Data/Cell_Microbial biomass.csv|t19389.7331910596s|7dfd05429c314150|10928|file|local|vector|||0||
 nutrients_data|stem|4d24f17170110db6|894ebbe673e63961|b8abe24f20ebd088|-443847480||t19390.7818412624s|a5b8723e3894307d|4399|rds|local|vector|||0||
 nutrients_data_read|stem|5ad7ee3a3121f08d|9df895139b55397c|ef46db3751d8e999|-1484156108|Data/Nutrients.csv|t19389.7304405246s|d3cf785ad2b8c53f|8945|file|local|vector|||0||
-plot_enzyme1|function|edeffd5686c3360e|||||||||||||||
+plot_enzyme1|function|d24394849c0b6756|||||||||||||||
 plot_enzyme2|function|1543887fe6ba1139|||||||||||||||
 plot_enzyme3|function|8b45e5e3df0d4282|||||||||||||||
-plot_MicrobialBiomass|function|0ea37f5a32f95d31|||||||||||||||
-plot_nutrients|function|afc22b658229ba92|||||||||||||||
+plot_MicrobialBiomass|function|43e79e13fa063592|||||||||||||||
+plot_nutrients|function|e19a520ef37b045b|||||||||||||||
 plot_PredictedSoilTemp|function|fca46ec4152167b4|||||||||||||||
 plot_respiration|function|d11f0f32655fe2dd|||||||||||||||
 process_enzyme|function|08cf704f69030eb3|||||||||||||||
 process_KotzTemp|function|a7d1107ad04994b6|||||||||||||||
 process_respiration|function|a830552e3c9b600d|||||||||||||||
 process_SoilTemp|function|0c256173604a3707|||||||||||||||
-report|stem|75c2c916d0876b02|b878484da8b2ea4f|2eea7cf89f8ff005|-237041703|reports/CelluloseAddition_report.md*reports/CelluloseAddition_report.Rmd*reports/CelluloseAddition_report_files|t19390.8281734911s|908c72134b938850|14447|file|local|vector|||27.29||
+report|stem|1b90d69070c3b460|b878484da8b2ea4f|ab78fd876510ceb5|-237041703|reports/CelluloseAddition_report.md*reports/CelluloseAddition_report.Rmd*reports/CelluloseAddition_report_files|t19401.7311381485s|4102573a23b0fef2|532930|file|local|vector|||29.32||
 respiration_data|stem|2f20e7fd8a93ae95|8774235604dda00d|6cdd1148b770e29f|206047441||t19390.7818235489s|b58b94192f4edcf5|16918|rds|local|vector|||0.01||
 respiration_data_read|stem|12d578418444a926|02faf97c0b24992b|ef46db3751d8e999|-2144014979|Data/Res2.csv|t19370.6406258964s|426c878af86169d8|64937|file|local|vector|||0||
 respiration_processed|stem|3670151688211b4d|a64576d46df64d99|8fc8b628f2723d29|431738530||t19390.8278526958s|363a020c5357f923|18668|rds|local|vector|||0.15||

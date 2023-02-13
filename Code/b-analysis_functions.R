@@ -75,15 +75,6 @@ plot_nutrients = function(nutrients_data){
                  names_to= "analyte",
                  values_to= "conc")
   
-  
-  fit_hsd = function(dat){
-    a = aov(conc ~ Temp, data = dat)
-    h = HSD.test(a, "Temp")
-    h$groups %>% mutate(Temp = row.names(.)) %>%
-      rename(label = groups) %>%  
-      dplyr::select(Temp, label)
-  }
-  
   hsd_label = 
     nutrients_data_long %>% 
     group_by(analyte) %>% 
@@ -263,12 +254,30 @@ plot_nutrients = function(nutrients_data){
 
 plot_MicrobialBiomass = function(MicrobialBiomass_data){
   
+  
+  
+  microbialbiomass_data_long = MicrobialBiomass_data %>%
+    pivot_longer(cols= TOC:MBN,
+                 names_to= "analyte",
+                 values_to= "conc")
+  
+  MB_hsd_label = 
+    microbialbiomass_data_long %>% 
+    group_by(analyte) %>% 
+    do(fit_hsd(.))
+  
+  MB_hsd_label2 = 
+    microbialbiomass_data_long %>% 
+    group_by(analyte,Add) %>% 
+    do(fit_hsd(.))
+  
   gg_MBC =
     MicrobialBiomass_data %>%
     mutate(Temp = factor(Temp, levels=c("-6","-2","2","6","10", "Pre"))) %>%
     ggplot(aes(x=Temp, y=MBC, fill=Add))+
     stat_summary(fun = mean,geom = "bar",size = 2, position= "dodge") +
     stat_summary(fun.data = mean_se, geom = "errorbar", position= "dodge")+
+    geom_text(data = MB_hsd_label2 %>% filter(analyte == "MBC"), aes(y = 4500, label = label),position= position_dodge(width = 1))+
     theme_light()+
     scale_colour_manual(values=cbPalette)+
     scale_fill_manual(values=cbPalette)+
@@ -283,6 +292,7 @@ plot_MicrobialBiomass = function(MicrobialBiomass_data){
     ggplot(aes(x=Temp, y=MBN, fill=Add))+
     stat_summary(fun = mean,geom = "bar",size = 2, position= "dodge") +
     stat_summary(fun.data = mean_se, geom = "errorbar", position= "dodge")+
+    geom_text(data = MB_hsd_label2 %>% filter(analyte == "MBN"), aes(y = 400, label = label),position= position_dodge(width = 1))+
     theme_light()+
     scale_colour_manual(values=cbPalette)+
     scale_fill_manual(values=cbPalette)+
@@ -297,6 +307,7 @@ plot_MicrobialBiomass = function(MicrobialBiomass_data){
     ggplot(aes(x=Temp, y=MBC))+
     stat_summary(fun = mean,geom = "bar",size = 2, position= "dodge") +
     stat_summary(fun.data = mean_se, geom = "errorbar", position= "dodge")+
+    geom_text(data = MB_hsd_label %>% filter(analyte == "MBC"), aes(y = 3300, label = label))+
     theme_light()+
     scale_colour_manual(values=cbPalette)+
     scale_fill_manual(values=cbPalette)+
@@ -311,6 +322,7 @@ plot_MicrobialBiomass = function(MicrobialBiomass_data){
     ggplot(aes(x=Temp, y=MBN))+
     stat_summary(fun = mean,geom = "bar",size = 2, position= "dodge") +
     stat_summary(fun.data = mean_se, geom = "errorbar", position= "dodge")+
+    geom_text(data = MB_hsd_label %>% filter(analyte == "MBN"), aes(y = 350, label = label))+
     theme_light()+
     scale_colour_manual(values=cbPalette)+
     scale_fill_manual(values=cbPalette)+
@@ -330,11 +342,30 @@ plot_MicrobialBiomass = function(MicrobialBiomass_data){
 
 plot_enzyme1 = function(enzyme_processed){
   
+  enzyme_data_long = enzyme_processed %>%
+    pivot_longer(cols= BG:CN,
+                 names_to= "analyte",
+                 values_to= "conc")
+  
+  ENZM_hsd_label = 
+    enzyme_data_long %>% 
+    group_by(analyte) %>% 
+    do(fit_hsd(.))
+  
+  ENZM_hsd_label2 = 
+    enzyme_data_long %>% 
+    group_by(analyte,Add) %>% 
+    do(fit_hsd(.))
+  
+  
+  
+  
   gg_BG =
     enzyme_processed %>%
     ggplot(aes(x=Temp, y=BG, fill=Add))+
     stat_summary(fun = mean,geom = "bar",size = 2, position= "dodge") +
     stat_summary(fun.data = mean_se, geom = "errorbar", position= "dodge")+
+    geom_text(data = ENZM_hsd_label2 %>% filter(analyte == "BG"), aes(y = 490, label = label),position= position_dodge(width = 1))+
     theme_light()+
     scale_colour_manual(values=cbPalette)+
     scale_fill_manual(values=cbPalette)+
@@ -348,6 +379,7 @@ plot_enzyme1 = function(enzyme_processed){
     ggplot(aes(x=Temp, y=BX, fill=Add))+
     stat_summary(fun = mean,geom = "bar",size = 2, position= "dodge") +
     stat_summary(fun.data = mean_se, geom = "errorbar", position= "dodge")+
+    geom_text(data = ENZM_hsd_label2 %>% filter(analyte == "BX"), aes(y = 250, label = label),position= position_dodge(width = 1))+
     theme_light()+
     scale_colour_manual(values=cbPalette)+
     scale_fill_manual(values=cbPalette)+
@@ -361,6 +393,7 @@ plot_enzyme1 = function(enzyme_processed){
     ggplot(aes(x=Temp, y=EndoC, fill=Add))+
     stat_summary(fun = mean,geom = "bar",size = 2, position= "dodge") +
     stat_summary(fun.data = mean_se, geom = "errorbar", position= "dodge")+
+    geom_text(data = ENZM_hsd_label2 %>% filter(analyte == "EndoC"), aes(y = 310, label = label),position= position_dodge(width = 1))+
     theme_light()+
     scale_colour_manual(values=cbPalette)+
     scale_fill_manual(values=cbPalette)+
@@ -374,6 +407,7 @@ plot_enzyme1 = function(enzyme_processed){
     ggplot(aes(x=Temp, y=EndoX, fill=Add))+
     stat_summary(fun = mean,geom = "bar",size = 2, position= "dodge") +
     stat_summary(fun.data = mean_se, geom = "errorbar", position= "dodge")+
+    geom_text(data = ENZM_hsd_label2 %>% filter(analyte == "EndoX"), aes(y = 200, label = label),position= position_dodge(width = 1))+
     theme_light()+
     scale_colour_manual(values=cbPalette)+
     scale_fill_manual(values=cbPalette)+
@@ -387,6 +421,7 @@ plot_enzyme1 = function(enzyme_processed){
     ggplot(aes(x=Temp, y=CBH, fill=Add))+
     stat_summary(fun = mean,geom = "bar",size = 2, position= "dodge") +
     stat_summary(fun.data = mean_se, geom = "errorbar", position= "dodge")+
+    geom_text(data = ENZM_hsd_label2 %>% filter(analyte == "CBH"), aes(y = 70, label = label),position= position_dodge(width = 1))+
     theme_light()+
     scale_colour_manual(values=cbPalette)+
     scale_fill_manual(values=cbPalette)+
@@ -400,6 +435,7 @@ plot_enzyme1 = function(enzyme_processed){
     ggplot(aes(x=Temp, y=BG))+
     stat_summary(fun = mean,geom = "bar",size = 2, position= "dodge") +
     stat_summary(fun.data = mean_se, geom = "errorbar", position= "dodge")+
+    geom_text(data = ENZM_hsd_label %>% filter(analyte == "BG"), aes(y = 490, label = label))+
     theme_light()+
     scale_colour_manual(values=cbPalette)+
     scale_fill_manual(values=cbPalette)+
@@ -413,6 +449,7 @@ plot_enzyme1 = function(enzyme_processed){
     ggplot(aes(x=Temp, y=BX))+
     stat_summary(fun = mean,geom = "bar",size = 2, position= "dodge") +
     stat_summary(fun.data = mean_se, geom = "errorbar", position= "dodge")+
+    geom_text(data = ENZM_hsd_label %>% filter(analyte == "BX"), aes(y = 250, label = label))+
     theme_light()+
     scale_colour_manual(values=cbPalette)+
     scale_fill_manual(values=cbPalette)+
@@ -426,6 +463,7 @@ plot_enzyme1 = function(enzyme_processed){
     ggplot(aes(x=Temp, y=EndoC))+
     stat_summary(fun = mean,geom = "bar",size = 2, position= "dodge") +
     stat_summary(fun.data = mean_se, geom = "errorbar", position= "dodge")+
+    geom_text(data = ENZM_hsd_label %>% filter(analyte == "EndoC"), aes(y = 310, label = label))+
     theme_light()+
     scale_colour_manual(values=cbPalette)+
     scale_fill_manual(values=cbPalette)+
@@ -439,6 +477,7 @@ plot_enzyme1 = function(enzyme_processed){
     ggplot(aes(x=Temp, y=EndoX))+
     stat_summary(fun = mean,geom = "bar",size = 2, position= "dodge") +
     stat_summary(fun.data = mean_se, geom = "errorbar", position= "dodge")+
+    geom_text(data = ENZM_hsd_label %>% filter(analyte == "EndoX"), aes(y = 200, label = label))+
     theme_light()+
     scale_colour_manual(values=cbPalette)+
     scale_fill_manual(values=cbPalette)+
@@ -452,6 +491,7 @@ plot_enzyme1 = function(enzyme_processed){
     ggplot(aes(x=Temp, y=CBH))+
     stat_summary(fun = mean,geom = "bar",size = 2, position= "dodge") +
     stat_summary(fun.data = mean_se, geom = "errorbar", position= "dodge")+
+    geom_text(data = ENZM_hsd_label %>% filter(analyte == "CBH"), aes(y = 70, label = label))+
     theme_light()+
     scale_colour_manual(values=cbPalette)+
     scale_fill_manual(values=cbPalette)+
@@ -465,6 +505,7 @@ plot_enzyme1 = function(enzyme_processed){
     ggplot(aes(x=Temp, y=AFS, fill=Add))+
     stat_summary(fun = mean,geom = "bar",size = 2, position= "dodge") +
     stat_summary(fun.data = mean_se, geom = "errorbar", position= "dodge")+
+    geom_text(data = ENZM_hsd_label2 %>% filter(analyte == "AFS"), aes(y = 180, label = label),position= position_dodge(width = 1))+
     theme_light()+
     scale_colour_manual(values=cbPalette)+
     scale_fill_manual(values=cbPalette)+
@@ -478,6 +519,7 @@ plot_enzyme1 = function(enzyme_processed){
     ggplot(aes(x=Temp, y=AFS))+
     stat_summary(fun = mean,geom = "bar",size = 2, position= "dodge") +
     stat_summary(fun.data = mean_se, geom = "errorbar", position= "dodge")+
+    geom_text(data = ENZM_hsd_label %>% filter(analyte == "AFS"), aes(y = 180, label = label))+
     theme_light()+
     scale_colour_manual(values=cbPalette)+
     scale_fill_manual(values=cbPalette)+

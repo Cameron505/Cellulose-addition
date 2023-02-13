@@ -16,6 +16,16 @@ length2= function (x, na.rm=FALSE) {
   else       length(x)
 }
 
+
+fit_hsd = function(dat){
+  a = aov(conc ~ Temp, data = dat)
+  h = HSD.test(a, "Temp")
+  h$groups %>% mutate(Temp = row.names(.)) %>%
+    dplyr::rename(label = groups) %>%  
+    dplyr::select(Temp, label)
+}
+
+
 # custom ggplot theme
 cbPalette <- c("#88CCEE", "#CC6677", "#DDCC77", "#117733", "#332288", "#AA4499", "#44AA99", "#999933", "#882255", "#661100", "#6699CC", "#888888")
 theme_CKM <- function() {  # this for all the elements common across plots
