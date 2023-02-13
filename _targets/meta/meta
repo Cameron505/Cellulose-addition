@@ -1,4 +1,5 @@
 name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
+.Random.seed|object|4bcf599d3fa885ca|||||||||||||||
 cbPalette|object|4c5848206d8b8901|||||||||||||||
 enzyme_data|stem|61cc39661efd113c|c38e4d4eaf3129ec|c383acc97da6b002|-1760711328||t19390.781841551s|a9b58b5c7ff74dbd|14805|rds|local|vector|||0||
 enzyme_data_read|stem|869a5c3e5b6887b6|1a06cf06f72a188c|ef46db3751d8e999|1297545693|Data/Enzyme.csv|t19389.8494180531s|59de923dcfc8826a|25354|file|local|vector|||0||
@@ -7,7 +8,7 @@ gg_enzyme1|stem|12ea0056bfe6414c|d15ab2203d8b3172|8b2431e9db88dadf|-884824905||t
 gg_enzyme2|stem|043ff46be4dcefa5|96a74be50a386074|d05b601c1ff74c3e|-1124300757||t19390.7819138879s|5db323710acb6d9e|868514|rds|local|vector|||0.5||
 gg_enzyme3|stem|09a89762c4565619|1ed1e04cad4ea913|bf3350095d27d217|-1292471237||t19390.7819170488s|f43e186a1ac8766f|341807|rds|local|vector|||0.17||
 gg_MicrobialBiomass|stem|f5bc0e10a8608806|ef4f34b7fd0e8173|efda81ddc04568de|-440370533||t19390.7818957612s|344e6e083e444cf6|142933|rds|local|vector|||0.16||
-gg_nutrients|stem|ecce8b63b6358e69|29b10dcd439e7d8b|a85a621005a6ab87|797690733||t19390.7818880829s|1fbbc2f6140d3f49|209389|rds|local|vector|||0.68|1m22mUsing size aesthetic for lines was deprecated in ggplot2 3.4.0.36mℹ39m Please use linewidth instead.|
+gg_nutrients|stem|ecce8b63b6358e69|29b10dcd439e7d8b|bf39c11c97d875b9|797690733||t19390.7818880829s||209389|rds|local|vector|||0.37||Cant subset columns that dont exist.31m39m Column label doesnt exist.
 gg_respiration|stem|57cd07aacf1748e2|4bd06ee6452ad87f|8cf82904bd7e733a|340829705||t19390.8278566096s|05d44777d0efc3fc|368804|rds|local|vector|||0.17||
 gg_SoilTemp|stem|3a8ad524dfd350ff|bce20d051455c025|dcada75e2f0541c1|-1428135009||t19390.8142199364s|039e110ef3523b70|270675|rds|local|vector|||0.41|1m22mUsing size aesthetic for lines was deprecated in ggplot2 3.4.0.36mℹ39m Please use linewidth instead.. 1m22mThe size argument of element_rect is deprecated as of ggplot2 3.4.0.36mℹ39m Please use the linewidth argument instead.|
 import_nutrients|function|db0a41c9198fe338|||||||||||||||
@@ -25,7 +26,7 @@ plot_enzyme1|function|edeffd5686c3360e|||||||||||||||
 plot_enzyme2|function|1543887fe6ba1139|||||||||||||||
 plot_enzyme3|function|8b45e5e3df0d4282|||||||||||||||
 plot_MicrobialBiomass|function|0ea37f5a32f95d31|||||||||||||||
-plot_nutrients|function|612ba76a803d0937|||||||||||||||
+plot_nutrients|function|afc22b658229ba92|||||||||||||||
 plot_PredictedSoilTemp|function|fca46ec4152167b4|||||||||||||||
 plot_respiration|function|d11f0f32655fe2dd|||||||||||||||
 process_enzyme|function|08cf704f69030eb3|||||||||||||||

@@ -70,30 +70,29 @@ plot_respiration = function(respiration_processed){
 
 plot_nutrients = function(nutrients_data){
   
-  fit_aov = function(nutrients_data){
-    
-    a = aov(conc ~ Temp, data = nutrients_data)
-    broom::tidy(a) %>% 
-      filter(term == "Temp") %>% 
-      dplyr::select(`p.value`) %>% 
-      mutate(asterisk = case_when(`p.value` <= 0.05 ~ "*"))
-    
-  }
-  
   nutrients_data_long = nutrients_data %>%
     pivot_longer(cols= NH4:TRS,
                  names_to= "analyte",
                  values_to= "conc")
   
-  all_aov = 
+  
+  fit_hsd = function(dat){
+    a = aov(conc ~ Temp, data = dat)
+    h = HSD.test(a, "Temp")
+    h$groups %>% mutate(Temp = row.names(.)) %>%
+      rename(label = groups) %>%  
+      dplyr::select(Temp, label)
+  }
+  
+  hsd_label = 
+    nutrients_data_long %>% 
+    group_by(analyte) %>% 
+    do(fit_hsd(.))
+  
+  hsd_label2 = 
     nutrients_data_long %>% 
     group_by(analyte,Add) %>% 
-    do(fit_aov(.)) %>% 
-    mutate(Temp = "-2")
-    # factor the Inc_temp so they can line up in the graph
-    #mutate(Temp = factor(Temp, levels=c("-6","-2","2","6","10", "Pre")))
-  
-  HSD_all = agricolae::HSD.test(all_aov, "Add") #attempting to get abc comparisons. 
+    do(fit_hsd(.))
   
   
   gg_NH4 =
@@ -102,6 +101,7 @@ plot_nutrients = function(nutrients_data){
     ggplot(aes(x=Temp, y=NH4, fill=Add))+
     stat_summary(fun = mean,geom = "bar",size = 2, position= "dodge") +
     stat_summary(fun.data = mean_se, geom = "errorbar", position= "dodge")+
+    geom_text(data = hsd_label2 %>% filter(analyte == "NH4"), aes(y = 14, label = label),position= position_dodge(width = 1))+
     theme_light()+
     scale_colour_manual(values=cbPalette)+
     scale_fill_manual(values=cbPalette)+
@@ -116,6 +116,7 @@ plot_nutrients = function(nutrients_data){
     ggplot(aes(x=Temp, y=NO3, fill=Add))+
     stat_summary(fun = mean,geom = "bar",size = 2, position= "dodge") +
     stat_summary(fun.data = mean_se, geom = "errorbar", position= "dodge")+
+    geom_text(data = hsd_label2 %>% filter(analyte == "NO3"), aes(y = 45, label = label),position= position_dodge(width = 1))+
     theme_light()+
     scale_colour_manual(values=cbPalette)+
     scale_fill_manual(values=cbPalette)+
@@ -130,6 +131,7 @@ plot_nutrients = function(nutrients_data){
     ggplot(aes(x=Temp, y=TFPA, fill=Add))+
     stat_summary(fun = mean,geom = "bar",size = 2, position= "dodge") +
     stat_summary(fun.data = mean_se, geom = "errorbar", position= "dodge")+
+    geom_text(data = hsd_label2 %>% filter(analyte == "TFPA"), aes(y = 145, label = label),position= position_dodge(width = 1))+
     theme_light()+
     scale_colour_manual(values=cbPalette)+
     scale_fill_manual(values=cbPalette)+
@@ -144,6 +146,7 @@ plot_nutrients = function(nutrients_data){
     ggplot(aes(x=Temp, y=TRS, fill=Add))+
     stat_summary(fun = mean,geom = "bar",size = 2, position= "dodge") +
     stat_summary(fun.data = mean_se, geom = "errorbar", position= "dodge")+
+    geom_text(data = hsd_label2 %>% filter(analyte == "TRS"), aes(y = 2.1, label = label),position= position_dodge(width = 1))+
     theme_light()+
     scale_colour_manual(values=cbPalette)+
     scale_fill_manual(values=cbPalette)+
@@ -158,6 +161,7 @@ plot_nutrients = function(nutrients_data){
     ggplot(aes(x=Temp, y=PO4, fill=Add))+
     stat_summary(fun = mean,geom = "bar",size = 2, position= "dodge") +
     stat_summary(fun.data = mean_se, geom = "errorbar", position= "dodge")+
+    geom_text(data = hsd_label2 %>% filter(analyte == "PO4"), aes(y = 0.4, label = label),position= position_dodge(width = 1))+
     theme_light()+
     scale_colour_manual(values=cbPalette)+
     scale_fill_manual(values=cbPalette)+
@@ -172,7 +176,7 @@ plot_nutrients = function(nutrients_data){
     ggplot(aes(x=Temp, y=NH4))+
     stat_summary(fun = mean,geom = "bar",size = 2, position= "dodge") +
     stat_summary(fun.data = mean_se, geom = "errorbar", position= "dodge")+
-    geom_text(data = all_aov %>% filter(analyte == "NH4"), aes(y = 5, label = asterisk))+
+    geom_text(data = hsd_label %>% filter(analyte == "NH4"), aes(y = 12.5, label = label))+
     theme_light()+
     scale_colour_manual(values=cbPalette)+
     scale_fill_manual(values=cbPalette)+
@@ -187,6 +191,7 @@ plot_nutrients = function(nutrients_data){
     ggplot(aes(x=Temp, y=NO3))+
     stat_summary(fun = mean,geom = "bar",size = 2, position= "dodge") +
     stat_summary(fun.data = mean_se, geom = "errorbar", position= "dodge")+
+    geom_text(data = hsd_label %>% filter(analyte == "NO3"), aes(y = 31, label = label))+
     theme_light()+
     scale_colour_manual(values=cbPalette)+
     scale_fill_manual(values=cbPalette)+
@@ -201,6 +206,7 @@ plot_nutrients = function(nutrients_data){
     ggplot(aes(x=Temp, y=TFPA))+
     stat_summary(fun = mean,geom = "bar",size = 2, position= "dodge") +
     stat_summary(fun.data = mean_se, geom = "errorbar", position= "dodge")+
+    geom_text(data = hsd_label %>% filter(analyte == "TFPA"), aes(y = 120, label = label))+
     theme_light()+
     scale_colour_manual(values=cbPalette)+
     scale_fill_manual(values=cbPalette)+
@@ -215,6 +221,7 @@ plot_nutrients = function(nutrients_data){
     ggplot(aes(x=Temp, y=TRS))+
     stat_summary(fun = mean,geom = "bar",size = 2, position= "dodge") +
     stat_summary(fun.data = mean_se, geom = "errorbar", position= "dodge")+
+    geom_text(data = hsd_label %>% filter(analyte == "TRS"), aes(y = 0.76, label = label))+
     theme_light()+
     scale_colour_manual(values=cbPalette)+
     scale_fill_manual(values=cbPalette)+
@@ -229,6 +236,7 @@ plot_nutrients = function(nutrients_data){
     ggplot(aes(x=Temp, y=PO4))+
     stat_summary(fun = mean,geom = "bar",size = 2, position= "dodge") +
     stat_summary(fun.data = mean_se, geom = "errorbar", position= "dodge")+
+    geom_text(data = hsd_label %>% filter(analyte == "PO4"), aes(y = 0.4, label = label))+
     theme_light()+
     scale_colour_manual(values=cbPalette)+
     scale_fill_manual(values=cbPalette)+

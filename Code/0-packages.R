@@ -6,6 +6,7 @@ library(pracma)
 library(ggpubr)
 library(doBy)
 library(lubridate)
+library(agricolae)
 # to install {ggbiplot}:
 # library(devtools)
 # install_github("vqv/ggbiplot")
