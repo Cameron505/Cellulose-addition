@@ -82,7 +82,7 @@ click to open
 Cellulases and hemicellulase activity. This includes several downstream
 enzymes as well as upstream endo enzymes.
 
-<img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-4-1.png" width="50%" /><img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-4-2.png" width="50%" /><img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-4-3.png" width="50%" /><img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-4-4.png" width="50%" /><img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-4-5.png" width="50%" /><img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-4-6.png" width="50%" /><img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-4-7.png" width="50%" /><img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-4-8.png" width="50%" /><img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-4-9.png" width="50%" /><img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-4-10.png" width="50%" /><img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-4-11.png" width="50%" /><img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-4-12.png" width="50%" />
+<img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-4-1.png" width="50%" /><img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-4-2.png" width="50%" /><img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-4-3.png" width="50%" /><img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-4-4.png" width="50%" /><img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-4-5.png" width="50%" /><img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-4-6.png" width="50%" /><img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-4-7.png" width="50%" /><img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-4-8.png" width="50%" /><img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-4-9.png" width="50%" /><img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-4-10.png" width="50%" /><img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-4-11.png" width="50%" /><img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-4-12.png" width="50%" /><img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-4-13.png" width="50%" /><img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-4-14.png" width="50%" /><img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-4-15.png" width="50%" />
 </details>
 
 ### Nutrient and oxidative enzymes
@@ -134,7 +134,7 @@ years before soil measurements were taken.
 Session Info
 </summary>
 
-Date run: 2023-03-17
+Date run: 2023-03-30
 
     ## R version 4.2.3 (2023-03-15 ucrt)
     ## Platform: x86_64-w64-mingw32/x64 (64-bit)
@@ -154,12 +154,12 @@ Date run: 2023-03-17
     ## [8] base     
     ## 
     ## other attached packages:
-    ##  [1] agricolae_1.3-5   doBy_4.6.16       ggpubr_0.6.0      pracma_2.4.2     
-    ##  [5] reshape2_1.4.4    ggbiplot_0.55     scales_1.2.1      plyr_1.8.8       
-    ##  [9] vegan_2.6-4       lattice_0.20-45   permute_0.9-7     lubridate_1.9.2  
-    ## [13] forcats_1.0.0     stringr_1.5.0     dplyr_1.1.0       purrr_1.0.1      
-    ## [17] readr_2.1.4       tidyr_1.3.0       tibble_3.2.0      ggplot2_3.4.1    
-    ## [21] tidyverse_2.0.0   tarchetypes_0.7.5 targets_0.14.3   
+    ##  [1] cowplot_1.1.1     agricolae_1.3-5   doBy_4.6.16       ggpubr_0.6.0     
+    ##  [5] pracma_2.4.2      reshape2_1.4.4    ggbiplot_0.55     scales_1.2.1     
+    ##  [9] plyr_1.8.8        vegan_2.6-4       lattice_0.20-45   permute_0.9-7    
+    ## [13] lubridate_1.9.2   forcats_1.0.0     stringr_1.5.0     dplyr_1.1.0      
+    ## [17] purrr_1.0.1       readr_2.1.4       tidyr_1.3.0       tibble_3.2.0     
+    ## [21] ggplot2_3.4.1     tidyverse_2.0.0   tarchetypes_0.7.5 targets_0.14.3   
     ## 
     ## loaded via a namespace (and not attached):
     ##  [1] nlme_3.1-162         fs_1.6.1             future.callr_0.8.1  

@@ -530,6 +530,109 @@ ENZM_hsd_label2 =
   
   
 
+  gg_BG_3 =
+    enzyme_processed %>%
+    ggplot(aes(x=Temp, y=BG))+
+    stat_summary(fun = mean,geom = "bar",size = 2, position= "dodge") +
+    stat_summary(fun.data = mean_se, geom = "errorbar", position= "dodge")+
+    geom_text(data = ENZM_hsd_label %>% filter(analyte == "BG"), aes(y = 400, label = label),size = 10, color = "black")+
+    scale_y_continuous(expand=c(0,0),limits=c(0,440))+
+    scale_colour_manual(values=cbPalette)+
+    scale_fill_manual(values=cbPalette)+
+    labs(x = "Incubation temperature", 
+         y = bquote('(nmol'~g^-1 ~ dry ~ soil~hr^-1*')'))+
+    labs(color='Addition') +
+    ggtitle("β-1,4-glucosidase (BG)")+
+    theme_CKM2()
+  
+  gg_BX_3 =
+    enzyme_processed %>%
+    ggplot(aes(x=Temp, y=BX))+
+    stat_summary(fun = mean,geom = "bar",size = 2, position= "dodge") +
+    stat_summary(fun.data = mean_se, geom = "errorbar", position= "dodge")+
+    geom_text(data = ENZM_hsd_label %>% filter(analyte == "BX"), aes(y = 200, label = label),size = 10, color = "black")+
+    scale_y_continuous(expand=c(0,0),limits=c(0,220))+
+    scale_colour_manual(values=cbPalette)+
+    scale_fill_manual(values=cbPalette)+
+    labs(x = "Incubation temperature", 
+         y = bquote('(nmol'~g^-1 ~ dry ~ soil~hr^-1*')'))+
+    labs(color='Addition') +
+    ggtitle("β-1,4-xylosidase (BX) ")+
+    theme_CKM2()
+  
+  
+  gg_EndoC_3 =
+    enzyme_processed %>%
+    ggplot(aes(x=Temp, y=EndoC))+
+    stat_summary(fun = mean,geom = "bar",size = 2, position= "dodge") +
+    stat_summary(fun.data = mean_se, geom = "errorbar", position= "dodge")+
+    geom_text(data = ENZM_hsd_label %>% filter(analyte == "EndoC"), aes(y = 400, label = label),size = 10, color = "black")+
+    scale_y_continuous(expand=c(0,0),limits=c(0,440))+
+    scale_colour_manual(values=cbPalette)+
+    scale_fill_manual(values=cbPalette)+
+    labs(x = "Incubation temperature", 
+         y = bquote('(nmol'~g^-1 ~ dry ~ soil~hr^-1*')'))+
+    labs(color='Addition') +
+    ggtitle("endo-β-D-1,4-glucanase (EC)")+
+    theme_CKM2()
+  
+  gg_EndoX_3 =
+    enzyme_processed %>%
+    ggplot(aes(x=Temp, y=EndoX))+
+    stat_summary(fun = mean,geom = "bar",size = 2, position= "dodge") +
+    stat_summary(fun.data = mean_se, geom = "errorbar", position= "dodge")+
+    geom_text(data = ENZM_hsd_label %>% filter(analyte == "EndoX"), aes(y = 200, label = label),size = 10, color = "black")+
+    scale_y_continuous(expand=c(0,0),limits=c(0,220))+
+    scale_colour_manual(values=cbPalette)+
+    scale_fill_manual(values=cbPalette)+
+    labs(x = "Incubation temperature", 
+         y = bquote('(nmol'~g^-1 ~ dry ~ soil~hr^-1*')'))+
+    labs(color='Addition') +
+    ggtitle("endo-β-1,4xylanase (EX)")+
+    theme_CKM2()
+  
+  gg_Ecombine= plot_grid(
+    gg_EndoC_3,
+    gg_EndoX_3,
+    gg_BG_3,
+    gg_BX_3,
+    align = 'vh',
+    labels = c("A", "B", "C", "D"),
+    label_size = 30,
+    label_x= 0,
+    label_y= 1.03,
+    hjust = -1,
+    nrow = 2
+  )
+
+  
+  
+  
+  gg_Ecombine2= plot_grid(
+    gg_EndoC_3,
+    gg_EndoX_3,
+    align = 'vh',
+    labels = c("A", "B"),
+    label_size = 30,
+    label_x= 0,
+    label_y= 1.03,
+    hjust = -1,
+    nrow = 1
+  )
+  
+  
+  
+  gg_Ecombine3= plot_grid(
+    gg_BG_3,
+    gg_BX_3,
+    align = 'vh',
+    labels = c("C", "D"),
+    label_size = 30,
+    label_x= 0,
+    label_y= 1.03,
+    hjust = -1,
+    nrow = 1
+  )
   
   list("BG" = gg_BG_2,
        "BG with addition" = gg_BG,
@@ -542,7 +645,10 @@ ENZM_hsd_label2 =
        "Endo Xylanase" = gg_EndoX_2,
        "Endo xylanase with addition" = gg_EndoX,
        "AFS" = gg_AFS_2,
-       "AFS" = gg_AFS
+       "AFS" = gg_AFS,
+       gg_Ecombine=gg_Ecombine,
+       gg_Ecombine2=gg_Ecombine2,
+       gg_Ecombine3=gg_Ecombine3
        )
   
 }
