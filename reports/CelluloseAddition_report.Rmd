@@ -86,6 +86,9 @@ tar_read(gg_enzyme2)
 ```{r , fig.height=6, fig.width=6,results='hide', fig.show="hold", out.width="50%"}
 tar_read(gg_enzyme3)
 ```
+```{r , fig.height=8, fig.width=8,results='hide', out.width="100%"}
+tar_read(gg_Res_Enzyme)
+```
   </details>
 
 </details>

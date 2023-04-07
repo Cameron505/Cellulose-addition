@@ -68,6 +68,7 @@ list(
   tar_target(gg_enzyme2, plot_enzyme2(enzyme_processed)),
   tar_target(gg_enzyme3, plot_enzyme3(enzyme_processed)),
   tar_target(gg_SoilTemp, plot_PredictedSoilTemp(Kotz_proccessed_HMX)),
+  tar_target(gg_Res_Enzyme, plot_enzyme_respiration(enzyme_processed,respiration_processed)),
  
   
   # report  

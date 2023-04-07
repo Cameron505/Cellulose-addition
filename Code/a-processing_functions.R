@@ -35,12 +35,12 @@ process_enzyme = function(enzyme_data){
     mutate(Temp = factor(Temp, levels=c("-6","-2","2","6","10","Pre")),
            EndoC=EndoC*50,
            EndoX=EndoX*50,
+           EndoX=ifelse(EndoX < 0, yes = 0, no = EndoX),
            alpha= (EndoC+EndoX)/(EndoC+EndoX+BG+BX),
-           alpha1= EndoC/(EndoC+BG),
-           alpha2= EndoX/(EndoX+BX),
+           alphaEC= (EndoC/(EndoC+BG)),
+            alphaEX= (EndoX/(EndoX+BX)),
            CN=BG/(LAP+NAG)
            )
-  
 }
 
 

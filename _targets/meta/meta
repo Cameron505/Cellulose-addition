@@ -1,15 +1,16 @@
 name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
-.Random.seed|object|d7f8c03269816624|||||||||||||||
+.Random.seed|object|2948ab0376dc0e70|||||||||||||||
 cbPalette|object|4c5848206d8b8901|||||||||||||||
 enzyme_data|stem|ec873dcc12aa4b59|c38e4d4eaf3129ec|c383acc97da6b002|-1760711328||t19433.9149864526s|a9b58b5c7ff74dbd|14805|rds|local|vector|||0||
 enzyme_data_read|stem|869a5c3e5b6887b6|1a06cf06f72a188c|ef46db3751d8e999|1297545693|Data/Enzyme.csv|t19432.8556623337s|59de923dcfc8826a|25354|file|local|vector|||0||
-enzyme_processed|stem|d7f8b4e8b64291ad|3489f26ee766e5fc|69fc3bbb3ea204c6|355096296||t19433.9150549705s|82523a2f4d91cf7a|18410|rds|local|vector|||0.07||
+enzyme_processed|stem|8b17cff11bb5887a|3489f26ee766e5fc|0763b8220f4c2293|355096296||t19454.8529071714s|c214cfb1ee07f16d|18180|rds|local|vector|||0.11||
 fit_hsd|function|5f8469af9f01ae05|||||||||||||||
-gg_enzyme1|stem|0de97ffa75de56ed|d15ab2203d8b3172|7a18ff521db76e08|-884824905||t19446.6961893203s|4bb9c009b90e549d|1740534|rds|local|vector|||10.44|1m22mUsing size aesthetic for lines was deprecated in ggplot2 3.4.0.36mℹ39m Please use linewidth instead.. 1m22mThe size argument of element_line is deprecated as of ggplot2 3.4.0.36mℹ39m Please use the linewidth argument instead.. 1m22mThe size argument of element_rect is deprecated as of ggplot2 3.4.0.36mℹ39m Please use the linewidth argument instead.. 1m22mRemoved 17 rows containing nonfinite values stat_summary.. 1m22mRemoved 17 rows containing nonfinite values stat_summary.. 1m22mRemoved 2 rows containing nonfinite values stat_summary.. 1m22mRemoved 2 rows containing nonfinite values stat_summary.. 1m22mRemoved 2 rows containing nonfinite values stat_summary.. 1m22mRemoved 2 rows containing nonfinite values stat_summary.. 1m22mRemoved 17 rows containing nonfinite values stat_summary.. 1m22mRemoved 17 rows containing nonfinite values stat_summary.. 1m22mRemoved 2 rows containing nonfinite values stat_summary.. 1m22mRemoved 2 rows containing nonfinite values stat_summary.. 1m22mRemoved 2 rows containing nonfinite values stat_summary.. 1m22mRemoved 2 rows containing nonfinite values stat_summary.|
-gg_enzyme2|stem|81658ea715c2c1da|96a74be50a386074|fe082e077a43fc61|-1124300757||t19433.9152911083s|fbbd8ca61117fcab|904195|rds|local|vector|||8.53||
-gg_enzyme3|stem|524f67c3c6f90b40|1ed1e04cad4ea913|5b0b74476eccc03d|-1292471237||t19433.9153814987s|74e541344d70abe9|365069|rds|local|vector|||7.69||
+gg_enzyme1|stem|dcedf0af71dfd036|d15ab2203d8b3172|d1cfcc29ac27c40e|-884824905||t19454.853035759s|01fa9c2430c594c9|1726801|rds|local|vector|||10.51|1m22mUsing size aesthetic for lines was deprecated in ggplot2 3.4.0.36mℹ39m Please use linewidth instead.. 1m22mThe size argument of element_line is deprecated as of ggplot2 3.4.0.36mℹ39m Please use the linewidth argument instead.. 1m22mThe size argument of element_rect is deprecated as of ggplot2 3.4.0.36mℹ39m Please use the linewidth argument instead.. 1m22mRemoved 2 rows containing nonfinite values stat_summary.. 1m22mRemoved 2 rows containing nonfinite values stat_summary.. 1m22mRemoved 2 rows containing nonfinite values stat_summary.. 1m22mRemoved 2 rows containing nonfinite values stat_summary.. 1m22mRemoved 2 rows containing nonfinite values stat_summary.. 1m22mRemoved 2 rows containing nonfinite values stat_summary.. 1m22mRemoved 2 rows containing nonfinite values stat_summary.. 1m22mRemoved 2 rows containing nonfinite values stat_summary.|
+gg_enzyme2|stem|dad21a8be9fbdc9d|96a74be50a386074|f564d1825ffac776|-1124300757||t19454.8531407946s|b57b50cfd022605c|896611|rds|local|vector|||8.89||
+gg_enzyme3|stem|df02b9dd44fe263a|1ed1e04cad4ea913|d6ff55ffac4e6187|-1292471237||t19454.8661417617s|f89a0c912bf466b8|628200|rds|local|vector|||9.31|1m22mUsing size aesthetic for lines was deprecated in ggplot2 3.4.0.36mℹ39m Please use linewidth instead.|
 gg_MicrobialBiomass|stem|ce34d60697f3aac1|ef4f34b7fd0e8173|7e1f4bddc9d070c2|-440370533||t19433.9150881813s|7668d553592d3cd2|161738|rds|local|vector|||2.43||
 gg_nutrients|stem|99b2213e45854a00|29b10dcd439e7d8b|94d9301114fd7225|797690733||t19433.9150539669s|fbb3e6ef119b5c9b|234756|rds|local|vector|||2.56|1m22mUsing size aesthetic for lines was deprecated in ggplot2 3.4.0.36mℹ39m Please use linewidth instead.|
+gg_Res_Enzyme|stem|87a5c4cfeda1d983|18f6a12a4910305a|f808d82d56d11d4b|-2145237107||t19454.856516867s|e27020779c237a9d|127618|rds|local|vector|||0.18||
 gg_respiration|stem|a987f86b983b5b6a|4bd06ee6452ad87f|ad3295fcbae2cd7f|340829705||t19433.9150916314s|1632c1570182beb2|369184|rds|local|vector|||0.16||
 gg_SoilTemp|stem|b3f97ffbe4a2736b|bce20d051455c025|16f10c66e580d3ef|-1428135009||t19433.9153921062s|1b467a1c3d15cb0a|270883|rds|local|vector|||0.35|1m22mThe size argument of element_rect is deprecated as of ggplot2 3.4.0.36mℹ39m Please use the linewidth argument instead.|
 import_nutrients|function|db0a41c9198fe338|||||||||||||||
@@ -23,18 +24,19 @@ MicrobialBiomass_data|stem|7d8930483d4fa944|30ac57fb910fe51b|72b3e547c80589a3|16
 MicrobialBiomass_data_read|stem|374cff64545f6cab|5d33513a9d786536|ef46db3751d8e999|-1702705461|Data/Cell_Microbial biomass.csv|t19432.8556623337s|7dfd05429c314150|10928|file|local|vector|||0||
 nutrients_data|stem|2b831f243ab287ce|894ebbe673e63961|b8abe24f20ebd088|-443847480||t19433.9149861119s|4bebaef8e75b95ff|4402|rds|local|vector|||0||
 nutrients_data_read|stem|5ad7ee3a3121f08d|9df895139b55397c|ef46db3751d8e999|-1484156108|Data/Nutrients.csv|t19432.855663908s|d3cf785ad2b8c53f|8945|file|local|vector|||0||
+plot_enzyme_respiration|function|ad2597e9726b2c6d|||||||||||||||
 plot_enzyme1|function|8ae176f8fcae7456|||||||||||||||
 plot_enzyme2|function|4b87c1c2e36d8e37|||||||||||||||
-plot_enzyme3|function|a8880282250f7e5b|||||||||||||||
+plot_enzyme3|function|d8b043faa032c7d8|||||||||||||||
 plot_MicrobialBiomass|function|43e79e13fa063592|||||||||||||||
 plot_nutrients|function|e19a520ef37b045b|||||||||||||||
 plot_PredictedSoilTemp|function|fca46ec4152167b4|||||||||||||||
 plot_respiration|function|d11f0f32655fe2dd|||||||||||||||
-process_enzyme|function|08cf704f69030eb3|||||||||||||||
+process_enzyme|function|1e4336e233653cf5|||||||||||||||
 process_KotzTemp|function|a7d1107ad04994b6|||||||||||||||
 process_respiration|function|a830552e3c9b600d|||||||||||||||
 process_SoilTemp|function|0c256173604a3707|||||||||||||||
-report|stem|bffa2e4970d9456d|b878484da8b2ea4f|38571d0f3df38f33|-237041703|reports/CelluloseAddition_report.md*reports/CelluloseAddition_report.Rmd*reports/CelluloseAddition_report_files|t19446.6965219933s|96ac4bc8d3b6d1b5|577205|file|local|vector|||28.79||
+report|stem|92e5d8209ebffa13|2c4f6a4eb6da71f3|d6f5a27db1cbc4c2|-237041703|reports/CelluloseAddition_report.md*reports/CelluloseAddition_report.Rmd*reports/CelluloseAddition_report_files|t19454.8665679284s|77c50378ae8cd7af|608214|file|local|vector|||36.42||
 respiration_data|stem|bca562c7cd446266|8774235604dda00d|6cdd1148b770e29f|206047441||t19433.9149694529s|b58b94192f4edcf5|16918|rds|local|vector|||0.02||
 respiration_data_read|stem|12d578418444a926|02faf97c0b24992b|ef46db3751d8e999|-2144014979|Data/Res2.csv|t19432.8556639833s|426c878af86169d8|64937|file|local|vector|||0||
 respiration_processed|stem|f950145017e8397e|a64576d46df64d99|46d593e314c625bd|431738530||t19433.915022631s|363a020c5357f923|18668|rds|local|vector|||0.2|1m22mReturning more or less than 1 row per summarise group was deprecated indplyr 1.1.0.36mℹ39m Please use reframe instead.36mℹ39m When switching from summarise to reframe, remember that reframe  always returns an ungrouped data frame and adjust accordingly.|

@@ -928,13 +928,78 @@ plot_enzyme3 = function(enzyme_processed){
          y = bquote(alpha))+
     labs(color='Addition') +
     ggtitle("alpha [(EC+EX)/(EC+EX+BG+BX)]")
+  
+  
+  
+  
+  gg_alpha1 =
+    enzyme_processed %>%
+    ggplot(aes(x=Temp, y=alphaEC, fill=Add))+
+    stat_summary(fun = mean,geom = "bar",size = 2, position= "dodge") +
+    stat_summary(fun.data = mean_se, geom = "errorbar", position= "dodge")+
+    geom_text(data = ENZM_hsd_label2 %>% filter(analyte == "alphaEC"), aes(y = 0.68, label = label),position= position_dodge(width = 1))+
+    theme_light()+
+    scale_colour_manual(values=cbPalette)+
+    scale_fill_manual(values=cbPalette)+
+    labs(x = "Incubation tempature", 
+         y = bquote(alpha))+
+    labs(color='Addition') +
+    ggtitle("alpha [EndoC/(EndoC+BG)]")
+  
+  gg_alpha_12 =
+    enzyme_processed %>%
+    ggplot(aes(x=Temp, y=alphaEC))+
+    stat_summary(fun = mean,geom = "bar",size = 2, position= "dodge") +
+    stat_summary(fun.data = mean_se, geom = "errorbar", position= "dodge")+
+    geom_text(data = ENZM_hsd_label %>% filter(analyte == "alphaEC"), aes(y = 0.68, label = label))+
+    theme_light()+
+    scale_colour_manual(values=cbPalette)+
+    scale_fill_manual(values=cbPalette)+
+    labs(x = "Incubation tempature", 
+         y = bquote(alpha))+
+    labs(color='Addition') +
+    ggtitle("alpha [EndoC/(EndoC+BG)]")
+  
+  gg_alpha2 =
+    enzyme_processed %>%
+    ggplot(aes(x=Temp, y=alphaEX, fill=Add))+
+    stat_summary(fun = mean,geom = "bar",size = 2, position= "dodge") +
+    stat_summary(fun.data = mean_se, geom = "errorbar", position= "dodge")+
+    geom_text(data = ENZM_hsd_label2 %>% filter(analyte == "alphaEX"), aes(y = 0.82, label = label),position= position_dodge(width = 1))+
+    theme_light()+
+    scale_colour_manual(values=cbPalette)+
+    scale_fill_manual(values=cbPalette)+
+    labs(x = "Incubation tempature", 
+         y = bquote(alpha))+
+    labs(color='Addition') +
+    ggtitle("alpha [EndoX/(EndoX+BX)]")
+  
+  gg_alpha_22 =
+    enzyme_processed %>%
+    ggplot(aes(x=Temp, y=alphaEX))+
+    stat_summary(fun = mean,geom = "bar",size = 2, position= "dodge") +
+    stat_summary(fun.data = mean_se, geom = "errorbar", position= "dodge")+
+    geom_text(data = ENZM_hsd_label %>% filter(analyte == "alphaEX"), aes(y = 0.82, label = label))+
+    theme_light()+
+    scale_colour_manual(values=cbPalette)+
+    scale_fill_manual(values=cbPalette)+
+    labs(x = "Incubation tempature", 
+         y = bquote(alpha))+
+    labs(color='Addition') +
+    ggtitle("alpha [EndoX/(EndoX+BX)]")
 
   
   
   list("BG/(LAP+NAG)" = gg_CN_2,
        "BG/(LAP+NAG)" = gg_CN,
        "Alpha" = gg_alpha_2,
-       "Alpha" = gg_alpha
+       "Alpha" = gg_alpha,
+       gg_alpha_12=gg_alpha_12,
+       gg_alpha1=gg_alpha1,
+       gg_alpha_22=gg_alpha_22,
+       gg_alpha2=gg_alpha2
+       
+       
   )
   
 }
@@ -991,6 +1056,54 @@ plot_PredictedSoilTemp = function(Kotz_proccessed_HMX){
   
   
   list("Estimated Historic Soil Temperature" = gg_SoilTempPredict
+  )
+  
+}
+
+
+
+plot_enzyme_respiration = function(enzyme_processed,respiration_processed){
+  
+  
+  
+    
+  enzyme_processed[enzyme_processed$EndoX<0, "EndoX"] <- 0
+  
+  enzyme_data = enzyme_processed %>%
+    select(ID,Temp,Add,BG,BX,EndoC,EndoX,alpha)%>%
+    mutate(alphaEC= (EndoC/(EndoC+BG)),alphaEX= (EndoX/(EndoX+BX)))%>%
+    filter(Add=="None", Temp != "Pre")
+  
+  respiration_processed = respiration_processed %>%
+    select(ID,Temp,Add,val,JD2)%>%
+    mutate(Temp = factor(Temp, levels=c("-6","-2","2","6","10")))%>%
+    filter(Add=="None")%>%
+    group_by(Temp)%>%
+    filter(JD2==max(JD2, na.rm=TRUE))
+  
+  MERG<-c("ID","Temp","Add")
+RESENZYME = merge(enzyme_data,respiration_processed, by= MERG) %>%
+  pivot_longer(cols=BG:alphaEX,
+               names_to= "enzyme",
+               values_to= "activ")
+  
+Graphs = RESENZYME %>%
+  ggplot(aes(x=activ, y=val))+
+  geom_point(size=5)+
+  geom_smooth(method=lm, color="black")+
+  stat_cor(label.y=3000)+
+  #stat_regline_equation(label.y = 3000, aes(label = ..rr.label..))+
+  theme_light()+
+  scale_colour_manual(values=cbPalette)+
+  scale_fill_manual(values=cbPalette)+
+  labs(x = "enzyme activity")+
+  labs(y = "Total C respired")+
+  facet_wrap(~enzyme,  scales = "free")+
+  ggtitle("Enzyme activity vs total C respired")
+
+
+  
+  list(Graphs=Graphs
   )
   
 }
