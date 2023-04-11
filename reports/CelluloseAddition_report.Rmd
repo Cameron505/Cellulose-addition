@@ -21,7 +21,7 @@ Soil samples were collected along a treeline in northwest Alaska, in the western
   <summary>click to open</summary>
 Respiration measurements were taken daily during the incubation using a Li-850 bench top respiration unit. Below are the respiration rates for each sample, as well as the calculates accumulative respiration rates.   
 
-```{r , fig.height=6, fig.width=6, results='hide', out.width="100%"}
+```{r , fig.height=9, fig.width=9, results='hide', out.width="100%"}
 tar_read(gg_respiration)
 ```
 
