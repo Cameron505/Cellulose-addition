@@ -82,7 +82,7 @@ click to open
 Cellulases and hemicellulase activity. This includes several downstream
 enzymes as well as upstream endo enzymes.
 
-<img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-4-1.png" width="50%" /><img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-4-2.png" width="50%" /><img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-4-3.png" width="50%" /><img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-4-4.png" width="50%" /><img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-4-5.png" width="50%" /><img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-4-6.png" width="50%" /><img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-4-7.png" width="50%" /><img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-4-8.png" width="50%" /><img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-4-9.png" width="50%" /><img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-4-10.png" width="50%" /><img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-4-11.png" width="50%" /><img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-4-12.png" width="50%" /><img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-4-13.png" width="50%" /><img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-4-14.png" width="50%" /><img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-4-15.png" width="50%" />
+![](CelluloseAddition_report_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->![](CelluloseAddition_report_files/figure-gfm/unnamed-chunk-4-2.png)<!-- -->![](CelluloseAddition_report_files/figure-gfm/unnamed-chunk-4-3.png)<!-- -->![](CelluloseAddition_report_files/figure-gfm/unnamed-chunk-4-4.png)<!-- -->![](CelluloseAddition_report_files/figure-gfm/unnamed-chunk-4-5.png)<!-- -->![](CelluloseAddition_report_files/figure-gfm/unnamed-chunk-4-6.png)<!-- -->![](CelluloseAddition_report_files/figure-gfm/unnamed-chunk-4-7.png)<!-- -->![](CelluloseAddition_report_files/figure-gfm/unnamed-chunk-4-8.png)<!-- -->![](CelluloseAddition_report_files/figure-gfm/unnamed-chunk-4-9.png)<!-- -->![](CelluloseAddition_report_files/figure-gfm/unnamed-chunk-4-10.png)<!-- -->![](CelluloseAddition_report_files/figure-gfm/unnamed-chunk-4-11.png)<!-- -->![](CelluloseAddition_report_files/figure-gfm/unnamed-chunk-4-12.png)<!-- -->![](CelluloseAddition_report_files/figure-gfm/unnamed-chunk-4-13.png)<!-- -->![](CelluloseAddition_report_files/figure-gfm/unnamed-chunk-4-14.png)<!-- -->![](CelluloseAddition_report_files/figure-gfm/unnamed-chunk-4-15.png)<!-- -->![](CelluloseAddition_report_files/figure-gfm/unnamed-chunk-4-16.png)<!-- -->
 </details>
 
 ### Nutrient and oxidative enzymes
@@ -107,7 +107,7 @@ click to open
 several calculated metrics
 
 <img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-6-1.png" width="50%" /><img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-6-2.png" width="50%" /><img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-6-3.png" width="50%" /><img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-6-4.png" width="50%" /><img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-6-5.png" width="50%" /><img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-6-6.png" width="50%" /><img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-6-7.png" width="50%" /><img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-6-8.png" width="50%" />
-<img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-7-1.png" width="100%" /><img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-7-2.png" width="100%" />
+<img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-7-1.png" width="100%" /><img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-7-2.png" width="100%" /><img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-7-3.png" width="100%" /><img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-7-4.png" width="100%" />
 </details>
 </details>
 
@@ -135,7 +135,7 @@ years before soil measurements were taken.
 Session Info
 </summary>
 
-Date run: 2023-04-11
+Date run: 2023-05-16
 
     ## R version 4.2.3 (2023-03-15 ucrt)
     ## Platform: x86_64-w64-mingw32/x64 (64-bit)
@@ -156,39 +156,39 @@ Date run: 2023-04-11
     ## 
     ## other attached packages:
     ##  [1] cowplot_1.1.1     agricolae_1.3-5   doBy_4.6.16       ggpubr_0.6.0     
-    ##  [5] pracma_2.4.2      reshape2_1.4.4    ggbiplot_0.55     scales_1.2.1     
+    ##  [5] pracma_2.4.2      reshape2_1.4.4    ggbiplot_0.55     scales_1.2.1.9000
     ##  [9] plyr_1.8.8        vegan_2.6-4       lattice_0.20-45   permute_0.9-7    
-    ## [13] lubridate_1.9.2   forcats_1.0.0     stringr_1.5.0     dplyr_1.1.0      
-    ## [17] purrr_1.0.1       readr_2.1.4       tidyr_1.3.0       tibble_3.2.0     
-    ## [21] ggplot2_3.4.1     tidyverse_2.0.0   tarchetypes_0.7.5 targets_0.14.3   
+    ## [13] lubridate_1.9.2   forcats_1.0.0     stringr_1.5.0     dplyr_1.1.1      
+    ## [17] purrr_1.0.1       readr_2.1.4       tidyr_1.3.0       tibble_3.2.1     
+    ## [21] ggplot2_3.4.1     tidyverse_2.0.0   tarchetypes_0.7.6 targets_0.14.3   
     ## 
     ## loaded via a namespace (and not attached):
-    ##  [1] nlme_3.1-162         fs_1.6.1             future.callr_0.8.1  
-    ##  [4] Deriv_4.1.3          tools_4.2.3          backports_1.4.1     
-    ##  [7] utf8_1.2.3           R6_2.5.1             AlgDesign_1.2.1     
-    ## [10] mgcv_1.8-42          questionr_0.7.8      colorspace_2.1-0    
-    ## [13] withr_2.5.0          tidyselect_1.2.0     processx_3.8.0      
-    ## [16] klaR_1.7-1           compiler_4.2.3       cli_3.6.0           
-    ## [19] microbenchmark_1.4.9 labeling_0.4.2       callr_3.7.3         
-    ## [22] digest_0.6.31        rmarkdown_2.20       pkgconfig_2.0.3     
-    ## [25] htmltools_0.5.4      parallelly_1.34.0    labelled_2.10.0     
-    ## [28] highr_0.10           fastmap_1.1.1        rlang_1.1.0         
-    ## [31] rstudioapi_0.14      shiny_1.7.4          farver_2.1.1        
-    ## [34] generics_0.1.3       combinat_0.0-8       car_3.1-1           
-    ## [37] magrittr_2.0.3       Matrix_1.5-3         Rcpp_1.0.10         
-    ## [40] munsell_0.5.0        fansi_1.0.4          abind_1.4-5         
-    ## [43] lifecycle_1.0.3      furrr_0.3.1          stringi_1.7.12      
-    ## [46] yaml_2.3.7           carData_3.0-5        MASS_7.3-58.2       
-    ## [49] promises_1.2.0.1     parallel_4.2.3       listenv_0.9.0       
-    ## [52] miniUI_0.1.1.1       haven_2.5.2          splines_4.2.3       
-    ## [55] hms_1.1.2            knitr_1.42           ps_1.7.2            
-    ## [58] pillar_1.8.1         igraph_1.4.1         ggsignif_0.6.4      
-    ## [61] base64url_1.4        codetools_0.2-19     glue_1.6.2          
-    ## [64] evaluate_0.20        data.table_1.14.8    httpuv_1.6.9        
-    ## [67] vctrs_0.6.0          tzdb_0.3.0           gtable_0.3.1        
-    ## [70] future_1.32.0        xfun_0.37            mime_0.12           
-    ## [73] xtable_1.8-4         broom_1.0.4          later_1.3.0         
-    ## [76] rstatix_0.7.2        cluster_2.1.4        timechange_0.2.0    
-    ## [79] globals_0.16.2       ellipsis_0.3.2
+    ##  [1] nlme_3.1-162          fs_1.6.2              future.callr_0.8.1   
+    ##  [4] Deriv_4.1.3           tools_4.2.3           backports_1.4.1      
+    ##  [7] utf8_1.2.3            R6_2.5.1              AlgDesign_1.2.1      
+    ## [10] mgcv_1.8-42           questionr_0.7.8       colorspace_2.1-0     
+    ## [13] withr_2.5.0           tidyselect_1.2.0      processx_3.8.0       
+    ## [16] klaR_1.7-2            compiler_4.2.3        cli_3.6.0            
+    ## [19] microbenchmark_1.4.10 labeling_0.4.2        callr_3.7.3          
+    ## [22] digest_0.6.31         rmarkdown_2.21        pkgconfig_2.0.3      
+    ## [25] htmltools_0.5.4       parallelly_1.35.0     labelled_2.11.0      
+    ## [28] highr_0.10            fastmap_1.1.1         rlang_1.1.0          
+    ## [31] rstudioapi_0.14       shiny_1.7.4           farver_2.1.1         
+    ## [34] generics_0.1.3        combinat_0.0-8        car_3.1-2            
+    ## [37] magrittr_2.0.3        Matrix_1.5-4          Rcpp_1.0.10          
+    ## [40] munsell_0.5.0         fansi_1.0.4           abind_1.4-5          
+    ## [43] lifecycle_1.0.3       furrr_0.3.1           stringi_1.7.12       
+    ## [46] yaml_2.3.7            carData_3.0-5         MASS_7.3-60          
+    ## [49] promises_1.2.0.1      parallel_4.2.3        listenv_0.9.0        
+    ## [52] miniUI_0.1.1.1        haven_2.5.2           splines_4.2.3        
+    ## [55] hms_1.1.3             knitr_1.42            ps_1.7.2             
+    ## [58] pillar_1.9.0          igraph_1.4.1          ggsignif_0.6.4       
+    ## [61] base64url_1.4         codetools_0.2-19      glue_1.6.2           
+    ## [64] evaluate_0.21         data.table_1.14.8     httpuv_1.6.9         
+    ## [67] vctrs_0.6.0           tzdb_0.3.0            gtable_0.3.3         
+    ## [70] future_1.32.0         xfun_0.38             mime_0.12            
+    ## [73] xtable_1.8-4          broom_1.0.4           later_1.3.0          
+    ## [76] rstatix_0.7.2         cluster_2.1.4         timechange_0.2.0     
+    ## [79] globals_0.16.2        ellipsis_0.3.2
 
 </details>

@@ -65,7 +65,7 @@ tar_read(gg_MicrobialBiomass)
   <summary>click to open</summary>
   Cellulases and hemicellulase activity. This includes several downstream enzymes as well as upstream endo enzymes. 
   
-```{r , fig.height=6, fig.width=6,results='hide', fig.show="hold", out.width="50%"}
+```{r , fig.height=6, fig.width=12,results='hide'}
 tar_read(gg_enzyme1)
 ```
   </details>
@@ -86,7 +86,7 @@ tar_read(gg_enzyme2)
 ```{r , fig.height=6, fig.width=6,results='hide', fig.show="hold", out.width="50%"}
 tar_read(gg_enzyme3)
 ```
-```{r , fig.height=8, fig.width=8,results='hide', out.width="100%"}
+```{r , fig.height=4, fig.width=8,results='hide', out.width="100%"}
 tar_read(gg_Res_Enzyme)
 ```
   </details>
