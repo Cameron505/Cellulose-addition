@@ -73,6 +73,14 @@ plot_respiration = function(respiration_processed){
     ggtitle("Cumulative Soil Respiration")
   
   
+  A<- respiration_processed%>%
+    group_by(Temp,Add)%>%
+    filter(JD2==max(JD2))%>%
+    summarise(mean(val),sd(val))
+    
+    
+  
+  
   list("Respiration" = gg_res,
        "Average Respiration" = gg_Avgres,
        "Cumulative Respiration" = gg_cumres,
