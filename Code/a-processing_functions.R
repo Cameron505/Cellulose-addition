@@ -43,7 +43,6 @@ process_enzyme = function(enzyme_data){
            )
 }
 
-
 process_KotzTemp = function(KotzTemp_data){
   KotzTemp_data2 = KotzTemp_data %>%
     mutate(DATE=as.Date(DATE),
@@ -52,7 +51,6 @@ process_KotzTemp = function(KotzTemp_data){
     )
   Kotz_proccessed=summaryBy(data=KotzTemp_data2, TAVG~YEAR+MONTH, FUN=c(length2, mean), na.rm=TRUE)
 }
-
 
 process_SoilTemp = function(SoilTempHydric_data,SoilTempMesic_data,SoilTempXeric_data,Kotz_proccessed){
   

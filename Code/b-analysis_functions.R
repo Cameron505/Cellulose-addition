@@ -1124,8 +1124,6 @@ plot_PredictedSoilTemp = function(Kotz_proccessed_HMX){
   
 }
 
-
-
 plot_enzyme_respiration = function(enzyme_processed,respiration_processed){
   
   
