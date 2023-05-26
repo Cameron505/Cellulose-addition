@@ -632,6 +632,16 @@ ENZM_hsd_label2 =
     ggtitle("endo-β-1,4xylanase (EX)")+
     theme_CKM2()
   
+  
+  
+  E<- enzyme_processed%>%
+    pivot_longer(BG:EndoX)%>%
+    group_by(Temp,name)%>%
+    summarise(mean(value),sd(value))%>%
+    filter(name %in% c("BG","BX","EndoC","EndoX"))
+  
+  
+  
   gg_Ecombine= plot_grid(
     gg_EndoC_3,
     gg_EndoX_3,
@@ -1033,7 +1043,15 @@ plot_enzyme3 = function(enzyme_processed){
          y = bquote(alpha))+
     labs(color='Addition') +
     ggtitle("alpha [EndoX/(EndoX+BX)]")
-
+  
+  
+  EA<- enzyme_processed%>%
+    pivot_longer(alpha:alphaEX)%>%
+    group_by(Temp,name)%>%
+    summarise(mean(value),sd(value))%>%
+    filter(name %in% c("alpha","alphaEC","alphaEX"))
+  
+  
   plot_grid(gg_alpha_12,gg_alpha_22)
   
   list("BG/(LAP+NAG)" = gg_CN_2,
