@@ -634,6 +634,101 @@ ENZM_hsd_label2 =
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  gg_BG5 =
+    Enzyme_Pre_4 %>%
+    ggplot(aes(x=Temp, y=BG))+
+    geom_point(size = 2) +
+    theme_light()+
+    scale_colour_manual(values=cbPalette)+
+    scale_fill_manual(values=cbPalette)+
+    stat_smooth(method= "lm")+
+    stat_cor(label.y=c(400), size=10)+
+    stat_regline_equation(label.y=c(450), size=10)+
+    labs(x = "Incubation temperature", 
+         y = bquote('(nmol'~g^-1 ~ dry ~ soil~hr^-1*')'))+
+    labs(color='Addition') +
+    ggtitle("β-1,4-glucosidase (BG)")
+  
+  gg_BX5 =
+    Enzyme_Pre_4 %>%
+    ggplot(aes(x=Temp, y=BX))+
+    geom_point(size = 2) +
+    theme_light()+
+    scale_colour_manual(values=cbPalette)+
+    scale_fill_manual(values=cbPalette)+
+    stat_smooth(method= "lm")+
+    stat_cor(label.y=c(400), size=10)+
+    stat_regline_equation(label.y=c(450), size=10)+
+    labs(x = "Incubation temperature", 
+         y = bquote('(nmol'~g^-1 ~ dry ~ soil~hr^-1*')'))+
+    labs(color='Addition') +
+    ggtitle("β-1,4-xylosidase (BX) ")
+  
+  gg_EndoC5 =
+    Enzyme_Pre_4 %>%
+    ggplot(aes(x=Temp, y=EndoC))+
+    geom_point(size = 2) +
+    theme_light()+
+    scale_colour_manual(values=cbPalette)+
+    scale_fill_manual(values=cbPalette)+
+    stat_smooth(method= "lm")+
+    stat_cor(label.y=c(400), size=10)+
+    stat_regline_equation(label.y=c(450), size=10)+
+    labs(x = "Incubation temperature", 
+         y = bquote('(nmol'~g^-1 ~ dry ~ soil~hr^-1*')'))+
+    labs(color='Addition') +
+    ggtitle("endo-β-D-1,4-glucanase (EC)")
+  
+  
+  gg_EndoX5 =
+    Enzyme_Pre_4 %>%
+    ggplot(aes(x=Temp, y=EndoX))+
+    geom_point(size = 2) +
+    theme_light()+
+    scale_colour_manual(values=cbPalette)+
+    scale_fill_manual(values=cbPalette)+
+    stat_smooth(method= "lm")+
+    stat_cor(label.y=c(400), size=10)+
+    stat_regline_equation(label.y=c(450), size=10)+
+    labs(x = "Incubation temperature", 
+         y = bquote('(nmol'~g^-1 ~ dry ~ soil~hr^-1*')'))+
+    labs(color='Addition') +
+    ggtitle("endo-β-1,4xylanase (EX)")
+  
+  
+  
+  
+  
+  Enzyme_Pre_4<- enzyme_processed%>%
+    mutate(Temp=as.character(Temp),
+           Temp = replace(Temp, Temp == "Pre", "4"),
+           Temp = as.numeric(as.character(Temp)))
+  
+  
+  
+  lm1 = lm(EndoX ~ Temp,data=Enzyme_Pre_4)
+  summary(lm1)
+  lm2 = lm(EndoC ~ Temp,data=Enzyme_Pre_4)
+  summary(lm2)
+  lm3 = lm(BG ~ Temp,data=Enzyme_Pre_4)
+  summary(lm3)
+  lm4 = lm(BX ~ Temp,data=Enzyme_Pre_4)
+  summary(lm4)
+  
+  
+  
+  
+  
+  
+  
+  
   E<- enzyme_processed%>%
     pivot_longer(BG:EndoX)%>%
     group_by(Temp,name)%>%
