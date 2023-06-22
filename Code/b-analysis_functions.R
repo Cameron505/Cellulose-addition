@@ -14,7 +14,8 @@ plot_respiration = function(respiration_processed){
     ylab(expression(paste( "Respiration (",mu,"g-C",day^-1, ")")))+
     xlab("incubation day")+
     labs(color='Addition') +
-    ggtitle("Soil Respiration")
+    ggtitle("Soil Respiration")+
+    theme_CKM2()
   
   gg_cumres =
     respiration_processed %>%
@@ -30,7 +31,8 @@ plot_respiration = function(respiration_processed){
     ylab(expression(paste( "Respiration (",mu,"g-C)")))+
     xlab("incubation day")+
     labs(shape = 'Addition', color = 'Addition')+
-    ggtitle("Cumulative Soil Respiration")
+    ggtitle("Cumulative Soil Respiration")+
+    theme_CKM2()
   
   gg_Avgres =
     respiration_processed %>%
@@ -45,7 +47,8 @@ plot_respiration = function(respiration_processed){
     ylab(expression(paste( "Respiration (",mu,"g-C",day^-1, ")")))+
     xlab("incubation day")+
     labs(color='Addition') +
-    ggtitle("Average Soil Respiration")
+    ggtitle("Average Soil Respiration")+
+    theme_CKM2()
   
   
   R.label<- c("-6 °C","-2 °C","2 °C","6 °C","10 °C")
@@ -61,16 +64,11 @@ plot_respiration = function(respiration_processed){
     facet_wrap(~Temp, scale="free", labeller = labeller(Temp=R.label))+
     labs(shape = 'Addition', color = 'Addition')+
     theme_light()+
-    theme(axis.title=element_text(size=14,face="bold"),
-          axis.text=element_text(size=10),
-          title=element_text(size=18, face ="bold"),
-          legend.title = element_text(size=14, face ="bold"),
-          strip.text.x = element_text(size = 12, face="bold", color="black"),
-          strip.background = element_rect(color=NA, fill=NA  ))+
     scale_color_manual(values=cbPalette)+
     ylab(expression(paste( "Respiration (",mu,"g-C)")))+
-    xlab("incubation day")+
-    ggtitle("Cumulative Soil Respiration")
+    xlab("Incubation day")+
+    ggtitle("Cumulative Soil Respiration")+
+    theme_CKM3()
   
   
   A<- respiration_processed%>%
@@ -637,7 +635,10 @@ ENZM_hsd_label2 =
   
   
   
-  
+  Enzyme_Pre_4<- enzyme_processed%>%
+    mutate(Temp=as.character(Temp),
+           Temp = replace(Temp, Temp == "Pre", "4"),
+           Temp = as.numeric(as.character(Temp)))
   
   
   
@@ -706,10 +707,7 @@ ENZM_hsd_label2 =
   
   
   
-  Enzyme_Pre_4<- enzyme_processed%>%
-    mutate(Temp=as.character(Temp),
-           Temp = replace(Temp, Temp == "Pre", "4"),
-           Temp = as.numeric(as.character(Temp)))
+  
   
   
   
@@ -729,11 +727,7 @@ ENZM_hsd_label2 =
   
   
   
-  E<- enzyme_processed%>%
-    pivot_longer(BG:EndoX)%>%
-    group_by(Temp,name)%>%
-    summarise(mean(value),sd(value))%>%
-    filter(name %in% c("BG","BX","EndoC","EndoX"))
+ 
   
   
   
@@ -1140,11 +1134,11 @@ plot_enzyme3 = function(enzyme_processed){
     ggtitle("alpha [EndoX/(EndoX+BX)]")
   
   
-  EA<- enzyme_processed%>%
-    pivot_longer(alpha:alphaEX)%>%
-    group_by(Temp,name)%>%
-    summarise(mean(value),sd(value))%>%
-    filter(name %in% c("alpha","alphaEC","alphaEX"))
+  #EA<- enzyme_processed%>%
+   # pivot_longer(alpha:alphaEX)%>%
+    #group_by(Temp,name)%>%
+    #summarise(mean(value),sd(value))%>%
+    #filter(name %in% c("alpha","alphaEC","alphaEX"))
   
   
   plot_grid(gg_alpha_12,gg_alpha_22)
@@ -1180,7 +1174,7 @@ plot_PredictedSoilTemp = function(Kotz_proccessed_HMX){
     EZ3%>%
     ggplot(aes(x=MONTH2, y=value, fill=decade))+
     geom_bar(stat='identity',position='dodge')+
-    ylab(expression(paste("10 cm estimated Soil Temp. °C)")))+
+    ylab(expression(paste("10 cm estimated Soil Temp. (°C)")))+
     xlab("Month")+
     scale_fill_manual(values=cbPalette)+
     ggtitle("Historic soil temp. estimates")+
@@ -1195,10 +1189,10 @@ plot_PredictedSoilTemp = function(Kotz_proccessed_HMX){
                     legend.key.size = unit(1.5, 'lines'),
                     legend.background = element_rect(colour = NA),
                     panel.border = element_rect(color="black",size=1.5, fill = NA),
-                    
-                    plot.title = element_text(hjust = 0, size = 25),
-                    axis.text = element_text(size = 20, color = "black"),
-                    axis.title = element_text(size = 21, face = "bold", color = "black"),
+                    plot.title = element_text(size = 20, face = "bold"),
+                    axis.text = element_text(size = 12, color = "black"),
+                    axis.title.x = element_text(size = 15, face = "bold", color = "black"),
+                    axis.title.y = element_text(size = 15, face = "bold", color = "black"),
                     axis.text.x = element_text(angle = 45,vjust=1.1,hjust= 0.9),
                     
                     # formatting for facets
@@ -1248,18 +1242,16 @@ plot_enzyme_respiration = function(enzyme_processed,respiration_processed){
                  position = position_dodge(width = 0.6), 
                  alpha = 0.2,
                  aes(group = interaction(Temp)))+
-    geom_point(position = position_dodge(width = 0.6), size = 4)+
-    geom_text(data = ENZM_hsd_label %>% filter(analyte == "alphaEC"), aes(y = 0.80, label = label))+
+    geom_point(position = position_dodge(width = 0.6), size = 3)+
+    geom_text(data = ENZM_hsd_label %>% filter(analyte == "alphaEC"), aes(y = 1.15, label = label))+
     theme_light()+
-    theme(axis.title=element_text(size=14,face="bold"),
-          axis.text=element_text(size=10),
-          title=element_text(size=10, face ="bold"),
-          legend.title = element_text(size=14, face ="bold"))+
+    ylim(NA, 1.3)+
     #scale_y_continuous(expand = c(0,0), limits=c(0,0.62),oob=rescale_none)+
     labs(x = "Incubation tempature (°C)", 
          y = bquote(alpha))+
     labs(color='Addition') +
-    ggtitle("EC-alpha [EC/(EC+BG)]")
+    ggtitle("EC-alpha [EC/(EC+BG)]")+
+    theme_CKM3()
   
   gg_alpha_22 =
     enzyme_processed %>%
@@ -1270,28 +1262,25 @@ plot_enzyme_respiration = function(enzyme_processed,respiration_processed){
                  position = position_dodge(width = 0.6), 
                  alpha = 0.2,
                  aes(group = interaction(Temp)))+
-    geom_point(position = position_dodge(width = 0.6), size = 4)+
-    geom_text(data = ENZM_hsd_label %>% filter(analyte == "alphaEX"), aes(y = 1.05, label = label))+
+    geom_point(position = position_dodge(width = 0.6), size = 3)+
+    geom_text(data = ENZM_hsd_label %>% filter(analyte == "alphaEX"), aes(y = 1.15, label = label))+
     theme_light()+
-    theme(axis.title=element_text(size=14,face="bold"),
-          axis.text=element_text(size=10),
-          title=element_text(size=10, face ="bold"),
-          legend.title = element_text(size=10, face ="bold"))+
+    ylim(NA, 1.3)+
     #scale_y_continuous(expand = c(0,0), limits=c(0,0.9),oob=rescale_none)+
     scale_colour_manual(values=cbPalette)+
     scale_fill_manual(values=cbPalette)+
     labs(x = "Incubation tempature (°C)", 
          y = bquote(alpha))+
     labs(color='Addition') +
-    ggtitle("EX-alpha [EX/(EX+BX)]")
+    ggtitle("EX-alpha [EX/(EX+BX)]")+
+    theme_CKM3()
   
   
   
   
-  title1 <- ggdraw() + draw_label("EC and EX α values", size=18,fontface='bold')+theme(plot.margin = unit(c(0.1, 0.1, 0.1, 0.1), "cm"))
-  EndoAlpha <- plot_grid(gg_alpha_12,gg_alpha_22, nrow=1, labels = c("A", "B"))
+  title1 <- ggdraw() + draw_label("EC and EX α values", size=20,fontface='bold')+theme(plot.margin = unit(c(0.1, 0.1, 0.1, 0.1), "cm"))
   
-  
+  EndoAlpha <- plot_grid(gg_alpha_12,gg_alpha_22,gg_alpha_12,gg_alpha_22, nrow=2, labels = c("A", "B","C","D"),label_size = 12)
   
   
   
@@ -1317,7 +1306,7 @@ RESENZYME = merge(enzyme_data,respiration_processed, by= MERG) %>%
   
 Graphs = RESENZYME %>%
   ggplot(aes(x=activ, y=val))+
-  geom_point(size=5)+
+  geom_point(size = 2)+
   geom_smooth(method=lm, color="black")+
   stat_cor(label.y=3000)+
   theme_light()+
@@ -1326,7 +1315,8 @@ Graphs = RESENZYME %>%
   labs(x = "enzyme activity")+
   labs(y = "Total C respired")+
   facet_wrap(~enzyme,  scales = "free")+
-  ggtitle("Enzyme activity vs total C respired")
+  ggtitle("Enzyme activity vs total C respired")+
+  theme_CKM3()
 
 
 RESENZYME2 = merge(enzyme_data,respiration_processed, by= MERG) %>%
@@ -1339,103 +1329,86 @@ names(e.label)<- c("BG","BX","EndoC","EndoX")
 
 Graphs2 = RESENZYME2 %>%
   ggplot(aes(x=activ, y=val))+
-  geom_point(size=5)+
+  geom_point(size = 3)+
   geom_smooth(method=lm, color="black")+
-  stat_cor(label.y=4300)+
+  stat_cor(label.y=5000)+
   theme_light()+
-  theme(axis.title=element_text(size=14,face="bold"),
-        axis.text=element_text(size=10),
-        title=element_text(size=18, face ="bold"),
-        legend.title = element_text(size=14, face ="bold"))+
+  ylim(NA, 5500)+
   scale_colour_manual(values=cbPalette)+
   scale_fill_manual(values=cbPalette)+
-  labs(x = "enzyme activity")+
+  labs(x = "Enzyme activity")+
   labs(y = "Total C respired")+
   facet_wrap(~enzyme,  scales = "free", labeller= labeller(enzyme=e.label))+
-  ggtitle("Enzyme activity vs total C respired")
+  ggtitle("Enzyme activity vs total C respired")+
+  theme_CKM3()
 
 Graphs3 = RESENZYME2 %>%
   filter(enzyme=="EndoC")%>%
   ggplot(aes(x=activ, y=val))+
-  geom_point(size=5)+
+  geom_point(size = 3)+
   geom_smooth(method=lm, color="black")+
-  stat_cor(label.y=4300)+
+  stat_cor(label.y=5000)+
   theme_light()+
-  theme(axis.title.x = element_blank(),
-        plot.margin = unit(c(0, 0.2, 0, 0), "cm"),
-        axis.title=element_text(size=14,face="bold"),
-        axis.text=element_text(size=10),
-        title=element_text(size=10, face ="bold"),
-        legend.title = element_text(size=14, face ="bold"))+
+  ylim(NA, 5500)+
   scale_colour_manual(values=cbPalette)+
   scale_fill_manual(values=cbPalette)+
   labs(y = "Total C respired")+
-  ggtitle("endo-β-D-1,4-glucanase (EC)")
+  ggtitle("endo-β-D-1,4-glucanase (EC)")+
+  theme_CKM3()
 Graphs4 = RESENZYME2 %>%
   filter(enzyme=="EndoX")%>%
   ggplot(aes(x=activ, y=val))+
-  geom_point(size=5)+
+  geom_point(size = 3)+
   geom_smooth(method=lm, color="black")+
-  stat_cor(label.y=4300)+
+  stat_cor(label.y=5000)+
   theme_light()+
-  theme(axis.title.x = element_blank(),
-        axis.title.y = element_blank(),
-        plot.margin = unit(c(0, 0, 0, 0), "cm"),
-        axis.title=element_text(size=14,face="bold"),
-        axis.text=element_text(size=10),
-        title=element_text(size=10, face ="bold"),
-        legend.title = element_text(size=14, face ="bold"))+
+  ylim(NA, 5500)+
   scale_colour_manual(values=cbPalette)+
   scale_fill_manual(values=cbPalette)+
-  ggtitle("endo-β-1,4xylanase (EX)")
+  ggtitle("endo-β-1,4xylanase (EX)")+
+  theme_CKM3()
 Graphs5 = RESENZYME2 %>%
   filter(enzyme=="BG")%>%
   ggplot(aes(x=activ, y=val))+
-  geom_point(size=5)+
+  geom_point(size = 3)+
   geom_smooth(method=lm, color="black")+
-  stat_cor(label.y=4300)+
+  stat_cor(label.y=5000)+
   theme_light()+
-  theme(plot.margin = unit(c(0, 0.2, 0, 0), "cm"),
-        axis.title=element_text(size=14,face="bold"),
-        axis.text=element_text(size=10),
-        title=element_text(size=10, face ="bold"),
-        legend.title = element_text(size=14, face ="bold"))+
+  ylim(NA, 5500)+
   scale_colour_manual(values=cbPalette)+
   scale_fill_manual(values=cbPalette)+
-  labs(x = "enzyme activity")+
+  labs(x = "Enzyme activity")+
   labs(y = "Total C respired")+
-  ggtitle("β-1,4-glucosidase (BG)")
+  ggtitle("β-1,4-glucosidase (BG)")+
+  theme_CKM3()
 Graphs6 = RESENZYME2 %>%
   filter(enzyme=="BX")%>%
   ggplot(aes(x=activ, y=val))+
-  geom_point(size=5)+
+  geom_point(size = 3)+
   geom_smooth(method=lm, color="black")+
-  stat_cor(label.y=4300)+
+  stat_cor(label.y=5000)+
+  ylim(NA, 5500)+
   theme_light()+
-  theme(axis.title.y = element_blank(),
-        plot.margin = unit(c(0, 0, 0, 0), "cm"),
-        axis.title=element_text(size=14,face="bold"),
-        axis.text=element_text(size=10),
-        title=element_text(size=10, face ="bold"),
-        legend.title = element_text(size=14, face ="bold"))+
   scale_colour_manual(values=cbPalette)+
   scale_fill_manual(values=cbPalette)+
-  labs(x = "enzyme activity")+
-  ggtitle("β-1,4-xylosidase (BX)")
+  labs(x = "Enzyme activity")+
+  ggtitle("β-1,4-xylosidase (BX)")+
+  theme_CKM3()
 
 
-title <- ggdraw() + draw_label("Enzyme activity vs total C respired", size=18,fontface='bold')
+title <- ggdraw() + draw_label("Enzyme activity vs total C respired", size=20,fontface='bold')
 
 
 
 
-res_EA<- plot_grid(Graphs3,Graphs4,Graphs5,Graphs6,ncol=2,labels = c("A", "B","C","D"))
+res_EA<- plot_grid(Graphs3,Graphs4,Graphs5,Graphs6,ncol=2,labels = c("A", "B","C","D"),label_size = 12)
 
-res_EA2<-plot_grid(title,res_EA, ncol=1, rel_heights = c(0.1,2))
-EndoAlpha2<-plot_grid(title1,EndoAlpha, ncol=1, rel_heights = c(0.1,1))
+res_EA2<-plot_grid(title,res_EA, ncol=1, rel_heights = c(0.2,2))
+
+EndoAlpha2<-plot_grid(title1,EndoAlpha, ncol=1, rel_heights = c(0.2,2))
 
 
-alpha_Res_EA<-plot_grid(title,res_EA,title1,EndoAlpha, ncol=1, rel_heights = c(0.1,2,0.1,1))
+alpha_Res_EA<-plot_grid(title,res_EA,title1,EndoAlpha, ncol=1, rel_heights = c(0.2,2,0.2,1))
   
   list(Graphs=Graphs,
        alpha_Res_EA=alpha_Res_EA,
