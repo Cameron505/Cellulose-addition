@@ -76,13 +76,38 @@ plot_respiration = function(respiration_processed){
     filter(JD2==max(JD2))%>%
     summarise(mean(val),sd(val))
     
-    
+  a = nlme::lme(Res ~ Temp + Add + JD2,
+                random = ~1|ID,
+                data = respiration_processed)
+  
+  aanova<-anova(a) %>%
+    knitr::kable("simple")
+  
+  
+  respiration_processed[c('ID2','rep')]<-str_split_fixed(respiration_processed$ID,'-',2)
+  
+  PD<- respiration_processed%>%
+    group_by(Temp,Add,rep)%>%
+    filter(JD2==max(JD2))%>%
+    select(-c(ID2,Res,ID))%>%
+    pivot_wider(names_from=Add, values_from = val)
+  PD2<- respiration_processed%>%
+    group_by(Temp,Add)%>%
+    filter(JD2==max(JD2),Add==c("Cellobiose"))%>%
+    pivot_wider(names_from=Add, values_from = val)
+  
+  PDT<-PD%>%
+    mutate(PC= (None/(Cellobiose))*100,PT= (None/(Cellotetraose))*100,P90= (None/(`Cellulose- 90`))*100,P20= (None/(`Cellulose- 20`))*100,PCC= (None/(`Coloidal cellulose`))*100)%>%
+    pivot_longer(cols= PC:PCC,
+                 names_to= "compare",
+                 values_to= "Percent")
   
   
   list("Respiration" = gg_res,
        "Average Respiration" = gg_Avgres,
        "Cumulative Respiration" = gg_cumres,
-       "Average Cumulative Respiration" = gg_Avgcumres)
+       "Average Cumulative Respiration" = gg_Avgcumres,
+       aanova=aanova)
   
 }
 
@@ -1185,10 +1210,11 @@ plot_PredictedSoilTemp = function(Kotz_proccessed_HMX){
     geom_hline(yintercept=-2, linetype="dashed", color = "red", size=1)+
     geom_hline(yintercept=-6, linetype="dashed", color = "red", size=1)+
     geom_hline(yintercept=-10, linetype="dashed", color = "red", size=1)+
+    geom_hline(yintercept=0, color = "black", size=1)+
     theme(          legend.text = element_text(size = 12),
                     legend.key.size = unit(1.5, 'lines'),
                     legend.background = element_rect(colour = NA),
-                    panel.border = element_rect(color="black",size=1.5, fill = NA),
+                    panel.border = element_rect(color="black",size=2, fill = NA),
                     plot.title = element_text(size = 20, face = "bold"),
                     axis.text = element_text(size = 12, color = "black"),
                     axis.title.x = element_text(size = 15, face = "bold", color = "black"),
@@ -1308,7 +1334,7 @@ Graphs = RESENZYME %>%
   ggplot(aes(x=activ, y=val))+
   geom_point(size = 2)+
   geom_smooth(method=lm, color="black")+
-  stat_cor(label.y=3000)+
+  stat_cor(aes(label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),label.y=3000)+
   theme_light()+
   scale_colour_manual(values=cbPalette)+
   scale_fill_manual(values=cbPalette)+
@@ -1331,7 +1357,7 @@ Graphs2 = RESENZYME2 %>%
   ggplot(aes(x=activ, y=val))+
   geom_point(size = 3)+
   geom_smooth(method=lm, color="black")+
-  stat_cor(label.y=5000)+
+  stat_cor(aes(label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),label.y=5000)+
   theme_light()+
   ylim(NA, 5500)+
   scale_colour_manual(values=cbPalette)+
@@ -1347,7 +1373,7 @@ Graphs3 = RESENZYME2 %>%
   ggplot(aes(x=activ, y=val))+
   geom_point(size = 3)+
   geom_smooth(method=lm, color="black")+
-  stat_cor(label.y=5000)+
+  stat_cor(aes(label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),label.y=5000)+
   theme_light()+
   ylim(NA, 5500)+
   scale_colour_manual(values=cbPalette)+
@@ -1360,7 +1386,7 @@ Graphs4 = RESENZYME2 %>%
   ggplot(aes(x=activ, y=val))+
   geom_point(size = 3)+
   geom_smooth(method=lm, color="black")+
-  stat_cor(label.y=5000)+
+  stat_cor(aes(label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),label.y=5000)+
   theme_light()+
   ylim(NA, 5500)+
   scale_colour_manual(values=cbPalette)+
@@ -1372,7 +1398,7 @@ Graphs5 = RESENZYME2 %>%
   ggplot(aes(x=activ, y=val))+
   geom_point(size = 3)+
   geom_smooth(method=lm, color="black")+
-  stat_cor(label.y=5000)+
+  stat_cor(aes(label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),label.y=5000)+
   theme_light()+
   ylim(NA, 5500)+
   scale_colour_manual(values=cbPalette)+
@@ -1386,7 +1412,7 @@ Graphs6 = RESENZYME2 %>%
   ggplot(aes(x=activ, y=val))+
   geom_point(size = 3)+
   geom_smooth(method=lm, color="black")+
-  stat_cor(label.y=5000)+
+  stat_cor(aes(label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),label.y=5000)+
   ylim(NA, 5500)+
   theme_light()+
   scale_colour_manual(values=cbPalette)+

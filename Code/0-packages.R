@@ -28,7 +28,7 @@ fit_hsd = function(dat){
 
 
 # custom ggplot theme
-cbPalette <- c("#88CCEE", "#CC6677", "#DDCC77", "#117733", "#332288", "#AA4499", "#44AA99", "#999933", "#882255", "#661100", "#6699CC", "#888888")
+cbPalette <- c("#003152", "#CC6677", "#DDCC77", "#117733", "#332288", "#AA4499", "#44AA99", "#999933", "#882255", "#661100", "#6699CC", "#888888")
 theme_CKM <- function() {  # this for all the elements common across plots
   theme_bw() %+replace%
     theme(          legend.position = "none",
@@ -37,7 +37,7 @@ theme_CKM <- function() {  # this for all the elements common across plots
           legend.text = element_text(size = 12),
           legend.key.size = unit(1.5, 'lines'),
           legend.background = element_rect(colour = NA),
-          panel.border = element_rect(color="black",size=1.5, fill = NA),
+          panel.border = element_rect(color="black",size=2, fill = NA),
           
           plot.title = element_text(hjust = 0, size = 25),
           axis.text = element_text(size = 30, color = "black"),
@@ -59,8 +59,7 @@ theme_CKM <- function() {  # this for all the elements common across plots
 theme_CKM2 <- function() {  # this for all the elements common across plots
   theme_bw() %+replace%
     theme(          legend.position = "none",
-                    panel.border = element_rect(color="black",size=1.5, fill = NA),
-                    
+                    panel.border = element_rect(color="black",size=2, fill = NA),
                     plot.title = element_text(vjust = 2, size = 15, face="bold"),
                     axis.title.x = element_blank(),
                     axis.title.y = element_blank(),
@@ -83,7 +82,7 @@ theme_CKM2 <- function() {  # this for all the elements common across plots
 theme_CKM3 <- function() {  # this for all the elements common across plots
   theme_bw() %+replace%
     theme(          legend.position = "none",
-                    panel.border = element_rect(color="black",size=1.5, fill = NA),
+                    panel.border = element_rect(color="black",size=2, fill = NA),
                     plot.title = element_text(vjust = 2, size = 10, face="bold"),
                     axis.title.x = element_blank(),
                     axis.title.y = element_blank(),
