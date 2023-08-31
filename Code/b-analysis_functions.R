@@ -8,7 +8,7 @@ plot_respiration = function(respiration_processed){
                size = 2)+
     ylab(expression(paste( "Respiration (",mu,"g-C",day^-1, ")")))+
     facet_wrap(~Temp, scale="free")+
-    theme_light()+
+    #theme_light()+
     scale_colour_manual(values=cbPalette)+
     scale_fill_manual(values=cbPalette)+
     ylab(expression(paste( "Respiration (",mu,"g-C",day^-1, ")")))+
