@@ -68,7 +68,7 @@ plot_respiration = function(respiration_processed){
     ylab(expression(paste( "Respiration (",mu,"g-C)")))+
     xlab("Incubation day")+
     ggtitle("Cumulative Soil Respiration")+
-    theme_CKM3()
+    theme_CKM2()
   
   
   A<- respiration_processed%>%
@@ -104,7 +104,10 @@ plot_respiration = function(respiration_processed){
   
   
   
- 
+  A<-text_grob("Incubation day", size=22)
+  B<-text_grob(bquote('Cumulative C respired (μg)'), size=22, rot = 90)
+  EA22<-arrangeGrob(gg_Avgcumres, left = B, bottom = A)
+  EA222<-as_ggplot(EA22)
   
   
   
@@ -114,7 +117,8 @@ plot_respiration = function(respiration_processed){
        "Average Respiration" = gg_Avgres,
        "Cumulative Respiration" = gg_cumres,
        "Average Cumulative Respiration" = gg_Avgcumres,
-       aanova=aanova)
+       aanova=aanova,
+       EA222=EA222)
   
 }
 
@@ -778,8 +782,10 @@ ENZM_hsd_label2 =
   )
   title3 <- ggdraw() + draw_label("Enzyme Activity", size=30,fontface='bold')
   gg_EcombineA=plot_grid(title3,gg_Ecombine, ncol = 1, rel_heights = c(0.19,2))
-  
-  
+  A<-text_grob("Incubation tempature (°C)", size=22)
+  B<-text_grob(bquote('nmol'~g^-1 ~ dry ~ soil~hr^-1*''), size=22, rot = 90)
+  EA22<-arrangeGrob(gg_EcombineA, left = B, bottom = A)
+  EA222<-as_ggplot(EA22)
   gg_Ecombine2= plot_grid(
     gg_EndoC_3,
     gg_EndoX_3,
@@ -810,6 +816,7 @@ ENZM_hsd_label2 =
   )
   gg_Ecombine5=plot_grid(title4,gg_Ecombine4, ncol = 1, rel_heights = c(0.1,1))
   
+  
   list("BG" = gg_BG_2,
        "BG with addition" = gg_BG,
        "Endo cellulase" = gg_EndoC_2,
@@ -825,7 +832,8 @@ ENZM_hsd_label2 =
        gg_Ecombine=gg_Ecombine,
        gg_Ecombine3=gg_Ecombine3,
        gg_Ecombine5=gg_Ecombine5,
-       gg_EcombineA=gg_EcombineA
+       gg_EcombineA=gg_EcombineA,
+       EA222=EA222
        )
   
 }
@@ -1237,11 +1245,15 @@ plot_PredictedSoilTemp = function(Kotz_proccessed_HMX){
                     strip.text.y = element_text(size=25, face="bold", angle = 270) #facet labels
     )
 
+  A<-text_grob("Month", size=22)
+  B<-text_grob(bquote('Predicted soil temperature ( °C)'), size=22, rot = 90)
+  EA22<-arrangeGrob(gg_SoilTempPredict + theme_CKM2(), left = B, bottom = A)
+  EA222<-as_ggplot(EA22)
   
   
   
-  
-  list("Estimated Historic Soil Temperature" = gg_SoilTempPredict
+  list("Estimated Historic Soil Temperature" = gg_SoilTempPredict,
+       EA222=EA222
   )
   
 }
@@ -1284,7 +1296,7 @@ plot_enzyme_respiration = function(enzyme_processed,respiration_processed){
          y = bquote(alpha))+
     labs(color='Addition') +
     ggtitle("EC-alpha [EC/(EC+BG)]")+
-    theme_CKM3()
+    theme_CKM2()
   
   gg_alpha_22 =
     enzyme_processed %>%
@@ -1306,14 +1318,18 @@ plot_enzyme_respiration = function(enzyme_processed,respiration_processed){
          y = bquote(alpha))+
     labs(color='Addition') +
     ggtitle("EX-alpha [EX/(EX+BX)]")+
-    theme_CKM3()
+    theme_CKM2()
   
   
   
   
   title1 <- ggdraw() + draw_label("EC and EX α values", size=20,fontface='bold')+theme(plot.margin = unit(c(0.1, 0.1, 0.1, 0.1), "cm"))
   
-  EndoAlpha <- plot_grid(gg_alpha_12,gg_alpha_22,gg_alpha_12,gg_alpha_22, nrow=2, labels = c("A", "B","C","D"),label_size = 12)
+  EndoAlpha <- plot_grid(gg_alpha_12+ theme_CKM2(),gg_alpha_22+ theme_CKM2(), nrow=1, labels = c("A", "B"),label_size = 12)
+  A<-text_grob("Incubation tempature (°C)", size=22)
+  B<-text_grob("α", size=22, rot = 90)
+  EA22<-arrangeGrob(EndoAlpha, left = B, bottom = A)
+  EA222<-as_ggplot(EA22)
   
   
   
@@ -1349,7 +1365,7 @@ Graphs = RESENZYME %>%
   labs(y = "Total C respired")+
   facet_wrap(~enzyme,  scales = "free")+
   ggtitle("Enzyme activity vs total C respired")+
-  theme_CKM3()
+  theme_CKM2()
 
 
 RESENZYME2 = merge(enzyme_data,respiration_processed, by= MERG) %>%
@@ -1373,7 +1389,7 @@ Graphs2 = RESENZYME2 %>%
   labs(y = "Total C respired")+
   facet_wrap(~enzyme,  scales = "free", labeller= labeller(enzyme=e.label))+
   ggtitle("Enzyme activity vs total C respired")+
-  theme_CKM3()
+  theme_CKM2()
 
 Graphs3 = RESENZYME2 %>%
   filter(enzyme=="EndoC")%>%
@@ -1387,7 +1403,7 @@ Graphs3 = RESENZYME2 %>%
   scale_fill_manual(values=cbPalette)+
   labs(y = "Total C respired")+
   ggtitle("endo-β-D-1,4-glucanase (EC)")+
-  theme_CKM3()
+  theme_CKM2()
 Graphs4 = RESENZYME2 %>%
   filter(enzyme=="EndoX")%>%
   ggplot(aes(x=activ, y=val))+
@@ -1399,7 +1415,7 @@ Graphs4 = RESENZYME2 %>%
   scale_colour_manual(values=cbPalette)+
   scale_fill_manual(values=cbPalette)+
   ggtitle("endo-β-1,4xylanase (EX)")+
-  theme_CKM3()
+  theme_CKM2()
 Graphs5 = RESENZYME2 %>%
   filter(enzyme=="BG")%>%
   ggplot(aes(x=activ, y=val))+
@@ -1413,7 +1429,7 @@ Graphs5 = RESENZYME2 %>%
   labs(x = "Enzyme activity")+
   labs(y = "Total C respired")+
   ggtitle("β-1,4-glucosidase (BG)")+
-  theme_CKM3()
+  theme_CKM2()
 Graphs6 = RESENZYME2 %>%
   filter(enzyme=="BX")%>%
   ggplot(aes(x=activ, y=val))+
@@ -1426,7 +1442,7 @@ Graphs6 = RESENZYME2 %>%
   scale_fill_manual(values=cbPalette)+
   labs(x = "Enzyme activity")+
   ggtitle("β-1,4-xylosidase (BX)")+
-  theme_CKM3()
+  theme_CKM2()
 
 
 title <- ggdraw() + draw_label("Enzyme activity vs total C respired", size=20,fontface='bold')
@@ -1437,16 +1453,24 @@ title <- ggdraw() + draw_label("Enzyme activity vs total C respired", size=20,fo
 res_EA<- plot_grid(Graphs3,Graphs4,Graphs5,Graphs6,ncol=2,labels = c("A", "B","C","D"),label_size = 12)
 
 res_EA2<-plot_grid(title,res_EA, ncol=1, rel_heights = c(0.2,2))
+A<-text_grob(expression(paste('nmol g'^-1, "dry soil hr "^-1*'enzyme potential' )), size=22)
+B<-text_grob(expression(paste("Total C respired (μg)" )), size=22, rot = 90)
+res_EA22<-arrangeGrob(res_EA2, left = B, bottom = A)
+AA<-grid.draw(res_EA22)
+res_EA222<-as_ggplot(res_EA22)
 
 EndoAlpha2<-plot_grid(title1,EndoAlpha, ncol=1, rel_heights = c(0.2,2))
 
 
 alpha_Res_EA<-plot_grid(title,res_EA,title1,EndoAlpha, ncol=1, rel_heights = c(0.2,2,0.2,1))
-  
+
+
+
   list(Graphs=Graphs,
        alpha_Res_EA=alpha_Res_EA,
-       res_EA2=res_EA2,
-       EndoAlpha2=EndoAlpha2
+       res_EA222=res_EA222,
+       EndoAlpha2=EndoAlpha2,
+       EA222=EA222
   )
   
 }

@@ -21,13 +21,11 @@ Soil samples were collected along a treeline in northwest Alaska, in the western
   <summary>click to open</summary>
 Respiration measurements were taken daily during the incubation using a Li-850 bench top respiration unit. Below are the respiration rates for each sample, as well as the calculates accumulative respiration rates.   
 
-```{r , fig.height=9, fig.width=9, results='hide', out.width="100%"}
+```{r , fig.height=6, fig.width=9, results='hide', out.width="100%"}
 tar_read(gg_respiration)
 ```
 
 </details>
-
-
 ---
 
 ## Soil Nutrients
@@ -39,7 +37,6 @@ Soil K2SO4 extracts were utilized to measure ammonium, Nitrate, Total free prima
 tar_read(gg_nutrients)
 ```
 </details>
-
 ---
 
 ## Microbial biomass
@@ -51,7 +48,6 @@ Soil K2SO4 extracts and fumigated K2SO4 extracts were utilized to measure microb
 tar_read(gg_MicrobialBiomass)
 ```
 </details>
-
 ---
 
 
@@ -65,7 +61,7 @@ tar_read(gg_MicrobialBiomass)
   <summary>click to open</summary>
   Cellulases and hemicellulase activity. This includes several downstream enzymes as well as upstream endo enzymes. 
   
-```{r , fig.height=6, fig.width=12,results='hide'}
+```{r , fig.height=8, fig.width=8,results='hide'}
 tar_read(gg_enzyme1)
 ```
   </details>
@@ -83,18 +79,21 @@ tar_read(gg_enzyme2)
   <summary>click to open</summary>
   several calculated metrics
   
-```{r , fig.height=6, fig.width=6,results='hide', fig.show="hold", out.width="50%"}
+```{r , fig.height=8, fig.width=8,results='hide', fig.show="hold", out.width="50%"}
 tar_read(gg_enzyme3)
 ```
 
 
-```{r , fig.height=4, fig.width=8,results='hide', out.width="100%"}
+```{r , fig.height=8, fig.width=8,results='hide', out.width="100%"}
 tar_read(gg_Res_Enzyme)
+```
+
+```{r , fig.height=4, fig.width=8,results='hide', out.width="100%"}
+tar_read(gg_Res_Enzyme)$EA222
 ```
   </details>
 
 </details>
-
 ---
 
 ## Estimated historic soil temperatures

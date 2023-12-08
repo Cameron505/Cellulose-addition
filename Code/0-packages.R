@@ -8,6 +8,7 @@ library(doBy)
 library(lubridate)
 library(agricolae)
 library(cowplot)
+library(gridExtra)
 # to install {ggbiplot}:
 # library(devtools)
 # install_github("vqv/ggbiplot")
@@ -64,6 +65,7 @@ theme_CKM2 <- function() {  # this for all the elements common across plots
                     axis.text=element_text(size=16, color="black"),
                     title=element_text(size=10, face ="bold"),
                     legend.title = element_text(size=14, face ="bold"),
+                    panel.border = element_rect(color="black",size=2, fill = NA),
                     # formatting for facets
                     panel.background = element_rect(color="black",size=1, fill = NA),
                     strip.background = element_rect(colour= NA, fill= NA), #facet formatting
