@@ -16,7 +16,7 @@ process_respiration = function(respiration_data){
            JD2 = as.numeric(JD)-152) %>%
     filter(Temp !="4", ID!='C10-2',ID!='D10-3',ID!='E10-4',ID!='AN2-4',ID!='EN2-4')%>%   #Removing pre-incubation measurements, and extreme outliers. 
     group_by(ID,Temp,Add) %>%
-    dplyr::summarise(val=cumtrapz(JD2,Res),Res, JD2)
+    dplyr::summarise(val=cumtrapz(JD2,Res),Res, JD2,Date)
 
 }
 
@@ -110,3 +110,9 @@ process_SoilTemp = function(SoilTempHydric_data,SoilTempMesic_data,SoilTempXeric
   
    }
 
+process_KotzTempPredict = function(KotzTempPredict_data){
+  KotzTempPredict_data2 = KotzTempPredict_data %>%
+    filter(type== "Temperature", scenario== "rcp60")%>%
+    select(daterange,janMean,febMean,marMean,aprMean,mayMean,junMean,julMean,augMean,sepMean,octMean,novMean,decMean)
+    
+}

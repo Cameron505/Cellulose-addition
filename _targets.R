@@ -54,6 +54,10 @@ list(
   tar_target(SoilTempXeric_data_read,"Data/Xeric Met Station.csv", format="file"),
   tar_target(SoilTempXeric_data, read.csv(SoilTempXeric_data_read)),
   
+  tar_target(KotzTempPredict_data_read,"Data/Kotzebue_RCP6_SNAP_Predict.csv", format="file"),
+  tar_target(KotzTempPredict_data, read.csv(KotzTempPredict_data_read)),
+  tar_target(KotzPredict_proccessed, process_KotzTempPredict(KotzTempPredict_data)),
+  
   
   #Merging and predicting soil temperatures based on air temps
 

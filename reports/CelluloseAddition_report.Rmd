@@ -91,6 +91,10 @@ tar_read(gg_Res_Enzyme)
 ```{r , fig.height=4, fig.width=8,results='hide', out.width="100%"}
 tar_read(gg_Res_Enzyme)$EA222
 ```
+
+```{r , fig.height=4, fig.width=8,results='hide', out.width="100%"}
+tar_read(gg_Res_Enzyme)$alpha_Res_EA
+```
   </details>
 
 </details>

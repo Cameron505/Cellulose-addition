@@ -111,6 +111,8 @@ several calculated metrics
 <img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-7-1.png" width="100%" /><img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-7-2.png" width="100%" /><img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-7-3.png" width="100%" /><img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-7-4.png" width="100%" /><img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-7-5.png" width="100%" />
 
 <img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-8-1.png" width="100%" />
+
+<img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-9-1.png" width="100%" />
 </details>
 </details>
 
@@ -128,7 +130,7 @@ of soil measurements to air temperatures from Kotzebue AK. Then using
 this relationship soil temperature estimates were constructed from the
 years before soil measurements were taken.
 
-<img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-9-1.png" width="100%" /><img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-9-2.png" width="100%" />
+<img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-10-1.png" width="100%" /><img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-10-2.png" width="100%" />
 </details>
 
 ## Session Info
@@ -138,11 +140,11 @@ years before soil measurements were taken.
 Session Info
 </summary>
 
-Date run: 2023-12-04
+Date run: 2024-01-30
 
     ## R version 4.3.2 (2023-10-31 ucrt)
     ## Platform: x86_64-w64-mingw32/x64 (64-bit)
-    ## Running under: Windows 10 x64 (build 19045)
+    ## Running under: Windows 11 x64 (build 22621)
     ## 
     ## Matrix products: default
     ## 
