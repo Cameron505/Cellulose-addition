@@ -71,8 +71,8 @@ theme_CKM2 <- function() {  # this for all the elements common across plots
                     strip.background = element_rect(colour= NA, fill= NA), #facet formatting
                     #panel.spacing.x = unit(1.5, "lines"), #facet spacing for x axis
                     #panel.spacing.y = unit(1.5, "lines"), #facet spacing for x axis
-                    strip.text.x = element_text(size=10, face="bold"), #facet labels
-                    strip.text.y = element_text(size=10, face="bold", angle = 270) #facet labels
+                    strip.text.x = element_text(size=18, face="bold"), #facet labels
+                    strip.text.y = element_text(size=18, face="bold", angle = 270) #facet labels
     )
 }
 

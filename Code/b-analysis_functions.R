@@ -469,7 +469,7 @@ ENZM_hsd_label2 =
     labs(x = "Incubation temperature", 
          y = bquote('(nmol'~g^-1 ~ dry ~ soil~hr^-1*')'))+
     labs(color='Addition') +
-    ggtitle("endo-β-1,4xylanase (EX)")
+    ggtitle("endo-β-1,4-xylanase (EX)")
   
  
   gg_CBH =
@@ -540,7 +540,7 @@ ENZM_hsd_label2 =
     labs(x = "Incubation temperature", 
          y = bquote('(nmol'~g^-1 ~ dry ~ soil~hr^-1*')'))+
     labs(color='Addition') +
-    ggtitle("endo-β-1,4xylanase (EX)")
+    ggtitle("endo-β-1,4-xylanase (EX)")
   
   gg_CBH_2 =
     enzyme_processed %>%
@@ -663,7 +663,7 @@ ENZM_hsd_label2 =
     labs(x = "Incubation temperature", 
          y = bquote('(nmol'~g^-1 ~ dry ~ soil~hr^-1*')'))+
     labs(color='Addition') +
-    ggtitle("endo-β-1,4xylanase (EX)")+
+    ggtitle("endo-β-1,4-xylanase (EX)")+
     theme_CKM2()
   
   
@@ -737,7 +737,7 @@ ENZM_hsd_label2 =
     labs(x = "Incubation temperature", 
          y = bquote('(nmol'~g^-1 ~ dry ~ soil~hr^-1*')'))+
     labs(color='Addition') +
-    ggtitle("endo-β-1,4xylanase (EX)")
+    ggtitle("endo-β-1,4-xylanase (EX)")
   
   
   
@@ -775,14 +775,14 @@ ENZM_hsd_label2 =
     align = 'vh',
     labels = c("A", "B", "C", "D"),
     label_size = 16,
-    label_x= 0,
-    label_y= 1.03,
+    label_x= 0.95,
+    label_y= 1.02,
     hjust = -1,
     nrow = 2
   )
-  title3 <- ggdraw() + draw_label("Enzyme Activity", size=30,fontface='bold')
+  title3 <- ggdraw() + draw_label("Enzyme Activity", size=25,fontface='bold')
   gg_EcombineA=plot_grid(title3,gg_Ecombine, ncol = 1, rel_heights = c(0.19,2))
-  A<-text_grob("Incubation tempature (°C)", size=22)
+  A<-text_grob("Incubation tempature (°C)", size=20)
   B<-text_grob(bquote('nmol'~g^-1 ~ dry ~ soil~hr^-1*''), size=22, rot = 90)
   EA22<-arrangeGrob(gg_EcombineA, left = B, bottom = A)
   EA222<-as_ggplot(EA22)
@@ -1217,7 +1217,7 @@ plot_PredictedSoilTemp = function(Kotz_proccessed_HMX){
     ylab(expression(paste("10 cm estimated Soil Temp. (°C)")))+
     xlab("Month")+
     scale_fill_manual(values=cbPalette)+
-    ggtitle("Historic soil temp. estimates")+
+    ggtitle("Historic soil temperature estimates")+
     guides(fill=guide_legend(title="Decade"))+
     geom_hline(yintercept=10, linetype="dashed", color = "red", size=1)+
     geom_hline(yintercept=6, linetype="dashed", color = "red", size=1)+
@@ -1373,7 +1373,7 @@ RESENZYME2 = merge(enzyme_data,respiration_processed, by= MERG) %>%
                names_to= "enzyme",
                values_to= "activ")
 
-e.label<- c("β-1,4-glucosidase (BG)","β-1,4-xylosidase (BX)","endo-β-D-1,4-glucanase(EC)","endo-β-1,4xylanase (EX)")
+e.label<- c("β-1,4-glucosidase (BG)","β-1,4-xylosidase (BX)","endo-β-D-1,4-glucanase(EC)","endo-β-1,4-xylanase (EX)")
 names(e.label)<- c("BG","BX","EndoC","EndoX")
 
 Graphs2 = RESENZYME2 %>%
@@ -1414,7 +1414,7 @@ Graphs4 = RESENZYME2 %>%
   ylim(NA, 5500)+
   scale_colour_manual(values=cbPalette)+
   scale_fill_manual(values=cbPalette)+
-  ggtitle("endo-β-1,4xylanase (EX)")+
+  ggtitle("endo-β-1,4-xylanase (EX)")+
   theme_CKM2()
 Graphs5 = RESENZYME2 %>%
   filter(enzyme=="BG")%>%
@@ -1453,7 +1453,7 @@ title <- ggdraw() + draw_label("Enzyme activity vs total C respired", size=20,fo
 res_EA<- plot_grid(Graphs3,Graphs4,Graphs5,Graphs6,ncol=2,labels = c("A", "B","C","D"),label_size = 12)
 
 res_EA2<-plot_grid(title,res_EA, ncol=1, rel_heights = c(0.2,2))
-A<-text_grob(expression(paste('nmol g'^-1, "dry soil hr "^-1*'enzyme potential' )), size=22)
+A<-text_grob(expression(paste('nmol g'^-1, "dry soil hr "^-1*'potential enzyme activities' )), size=22)
 B<-text_grob(expression(paste("Total C respired (μg)" )), size=22, rot = 90)
 res_EA22<-arrangeGrob(res_EA2, left = B, bottom = A)
 AA<-grid.draw(res_EA22)
