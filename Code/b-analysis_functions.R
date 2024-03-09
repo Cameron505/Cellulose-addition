@@ -1288,9 +1288,9 @@ plot_enzyme_respiration = function(enzyme_processed,respiration_processed){
                  alpha = 0.2,
                  aes(group = interaction(Temp)))+
     geom_point(position = position_dodge(width = 0.6), size = 3)+
-    geom_text(data = ENZM_hsd_label %>% filter(analyte == "alphaEC"), aes(y = 1.15, label = label))+
+    geom_text(data = ENZM_hsd_label %>% filter(analyte == "alphaEC"), aes(y = 1.1, label = label))+
     theme_light()+
-    ylim(NA, 1.3)+
+    ylim(0, 1.1)+
     #scale_y_continuous(expand = c(0,0), limits=c(0,0.62),oob=rescale_none)+
     labs(x = "Incubation tempature (°C)", 
          y = bquote(alpha))+
@@ -1308,9 +1308,9 @@ plot_enzyme_respiration = function(enzyme_processed,respiration_processed){
                  alpha = 0.2,
                  aes(group = interaction(Temp)))+
     geom_point(position = position_dodge(width = 0.6), size = 3)+
-    geom_text(data = ENZM_hsd_label %>% filter(analyte == "alphaEX"), aes(y = 1.15, label = label))+
+    geom_text(data = ENZM_hsd_label %>% filter(analyte == "alphaEX"), aes(y = 1.1, label = label))+
     theme_light()+
-    ylim(NA, 1.3)+
+    ylim(0, 1.1)+
     #scale_y_continuous(expand = c(0,0), limits=c(0,0.9),oob=rescale_none)+
     scale_colour_manual(values=cbPalette)+
     scale_fill_manual(values=cbPalette)+
@@ -1399,6 +1399,7 @@ Graphs3 = RESENZYME2 %>%
   stat_cor(aes(label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),label.y=5000)+
   theme_light()+
   ylim(NA, 5500)+
+  xlim(NA,299)+
   scale_colour_manual(values=cbPalette)+
   scale_fill_manual(values=cbPalette)+
   labs(y = "Total C respired")+
