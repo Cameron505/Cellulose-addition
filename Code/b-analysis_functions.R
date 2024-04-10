@@ -83,6 +83,17 @@ plot_respiration = function(respiration_processed){
   aanova<-anova(a) %>%
     knitr::kable("simple")
   
+  # Get lsmeans
+  lsmeans_result <- lsmeans(a, ~ Temp + Add + JD2)
+  
+  # Perform pairwise comparisons
+  pairwise_result <- pairs(lsmeans_result)
+  
+  # Convert results to a dataframe
+  pairwise_df <- as.data.frame(pairwise_result)
+  
+  # View the results
+  print(pairwise_df)
   
   respiration_processed[c('ID2','rep')]<-str_split_fixed(respiration_processed$ID,'-',2)
   
@@ -91,6 +102,7 @@ plot_respiration = function(respiration_processed){
     filter(JD2==max(JD2))%>%
     select(-c(ID2,Res,ID))%>%
     pivot_wider(names_from=Add, values_from = val)
+  
   PD2<- respiration_processed%>%
     group_by(Temp,Add)%>%
     filter(JD2==max(JD2),Add==c("Cellobiose"))%>%
@@ -101,6 +113,11 @@ plot_respiration = function(respiration_processed){
     pivot_longer(cols= PC:PCC,
                  names_to= "compare",
                  values_to= "Percent")
+  
+  PDTT<- PDT %>%
+    filter(compare!="PC")%>%
+    filter(compare!="PT")
+  range(PDTT$Percent, na.rm=TRUE)
   
   
   
@@ -1326,6 +1343,7 @@ plot_enzyme_respiration = function(enzyme_processed,respiration_processed){
   title1 <- ggdraw() + draw_label("EC and EX α values", size=20,fontface='bold')+theme(plot.margin = unit(c(0.1, 0.1, 0.1, 0.1), "cm"))
   
   EndoAlpha <- plot_grid(gg_alpha_12+ theme_CKM2(),gg_alpha_22+ theme_CKM2(), nrow=1, labels = c("A", "B"),label_size = 12)
+  
   A<-text_grob("Incubation tempature (°C)", size=22)
   B<-text_grob("α", size=22, rot = 90)
   EA22<-arrangeGrob(EndoAlpha, left = B, bottom = A)
@@ -1475,3 +1493,5 @@ alpha_Res_EA<-plot_grid(title,res_EA,title1,EndoAlpha, ncol=1, rel_heights = c(0
   )
   
 }
+
+

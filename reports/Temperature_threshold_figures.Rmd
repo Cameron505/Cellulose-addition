@@ -1,0 +1,83 @@
+---
+title: "Temperature threshold figures"
+output: 
+  github_document:
+  html_preview: True
+---
+
+```{r setup, include=FALSE, echo=FALSE}
+knitr::opts_chunk$set(echo = FALSE,
+                      message = FALSE,
+                      warning = FALSE
+                      )
+```
+
+
+## Respiration results
+
+<details>
+  <summary>click to open</summary>
+
+
+```{r , fig.height=8, fig.width=12, results='hide', out.width="100%"}
+tar_read(gg_respiration2)
+```
+
+</details>
+---
+
+
+## Enzyme data
+<details>
+  <summary>click to open</summary> 
+
+<details>
+  <summary>click to open</summary>
+  
+  
+```{r , fig.height=8, fig.width=8,results='hide'}
+tar_read(gg_enzyme12)
+```
+  </details>
+
+### Enzyme metrics
+  <details>
+  <summary>click to open</summary>
+
+  
+```{r , fig.height=4, fig.width=8,results='hide', fig.show="hold", out.width="50%"}
+tar_read(gg_alpha2)
+```
+
+
+```{r , fig.height=8, fig.width=8,results='hide', out.width="100%"}
+tar_read(gg_Res_Enzyme2)
+```
+
+  </details>
+
+</details>
+---
+
+## Estimated historic soil temperatures
+<details>
+  <summary>click to open</summary>
+ 
+
+```{r , fig.height=8, fig.width=8, results='hide', fig.show="hold", out.width="100%"}
+tar_read(gg_SoilTemp2)
+```
+</details>
+
+## Session Info 
+
+<details>
+  <summary> Session Info </summary>
+
+Date run: `r Sys.Date()`
+
+```{r}
+sessionInfo()
+```
+
+</details>

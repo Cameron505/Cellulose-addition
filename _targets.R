@@ -23,6 +23,7 @@ tar_option_set(
 source("Code/0-packages.R")
 source("Code/a-processing_functions.R")
 source("Code/b-analysis_functions.R")
+source("Code/c-plotting_for_manuscript.R")
 
 
 # source("other_functions.R") # Source other scripts as needed. # nolint
@@ -62,7 +63,12 @@ list(
   #Merging and predicting soil temperatures based on air temps
 
   tar_target(Kotz_proccessed_HMX, process_SoilTemp(SoilTempHydric_data,SoilTempMesic_data,SoilTempXeric_data,Kotz_proccessed)),
-  
+  #Plotting for manuscript
+  tar_target(gg_respiration2, plot_respiration_MS(respiration_processed)),
+  tar_target(gg_enzyme12, plot_enzyme1_MS(enzyme_processed)),
+  tar_target(gg_SoilTemp2, plot_PredictedSoilTemp_MS(Kotz_proccessed_HMX)),
+  tar_target(gg_Res_Enzyme2, plot_enzyme_respiration_MS(enzyme_processed,respiration_processed)),
+  tar_target(gg_alpha2, plot_alpha_MS(enzyme_processed,respiration_processed)),
   
   # analysis - graphs
   tar_target(gg_respiration, plot_respiration(respiration_processed)),
@@ -76,6 +82,7 @@ list(
  
   
   # report  
-  tar_render(report, path = "reports/CelluloseAddition_report.Rmd")
+  tar_render(report, path = "reports/CelluloseAddition_report.Rmd"),
+  tar_render(report2, path = "reports/Temperature_threshold_figures.Rmd")
   
 )

@@ -9,9 +9,18 @@ library(lubridate)
 library(agricolae)
 library(cowplot)
 library(gridExtra)
+library(lsmeans)
 # to install {ggbiplot}:
 # library(devtools)
 # install_github("vqv/ggbiplot")
+
+#graphing parameters
+Axis.x=20    #xaxis font size
+Axis.y=20    #yaxis font size
+tit=22       #title font size
+lab=12      #ABCD label sizes
+
+
 
 length2= function (x, na.rm=FALSE) {
   if (na.rm) sum(!is.na(x))
@@ -58,11 +67,11 @@ theme_CKM <- function() {  # this for all the elements common across plots
 theme_CKM2 <- function() {  # this for all the elements common across plots
   theme_bw() %+replace%
     theme(          legend.position = "none",
-                    plot.title = element_text(vjust = 2, size = 15, face="bold"),
+                    plot.title = element_text(vjust = 2, size = 12, face="bold"),
                     axis.title.x = element_blank(),
                     axis.title.y = element_blank(),
-                    axis.ticks=element_line(size=2, color="black"),
-                    axis.text=element_text(size=16, color="black"),
+                    axis.ticks=element_line(size=1, color="black"),
+                    axis.text=element_text(size=12, color="black"),
                     title=element_text(size=10, face ="bold"),
                     legend.title = element_text(size=14, face ="bold"),
                     panel.border = element_rect(color="black",size=2, fill = NA),
@@ -71,8 +80,10 @@ theme_CKM2 <- function() {  # this for all the elements common across plots
                     strip.background = element_rect(colour= NA, fill= NA), #facet formatting
                     #panel.spacing.x = unit(1.5, "lines"), #facet spacing for x axis
                     #panel.spacing.y = unit(1.5, "lines"), #facet spacing for x axis
-                    strip.text.x = element_text(size=18, face="bold"), #facet labels
-                    strip.text.y = element_text(size=18, face="bold", angle = 270) #facet labels
+                    strip.text.x = element_text(size=12, face="bold"), #facet labels
+                    strip.text.y = element_text(size=12, face="bold", angle = 270), #facet labels
+                    panel.grid.major = element_blank(), 
+                    panel.grid.minor = element_blank()
     )
 }
 
