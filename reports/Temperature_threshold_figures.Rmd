@@ -21,9 +21,11 @@ knitr::opts_chunk$set(echo = FALSE,
 
 ```{r , fig.height=8, fig.width=12, results='hide', out.width="100%"}
 tar_read(gg_respiration2)
+
 ```
 
 </details>
+
 ---
 
 
@@ -49,15 +51,25 @@ tar_read(gg_enzyme12)
 tar_read(gg_alpha2)
 ```
 
-
+ ## With only controls
 ```{r , fig.height=8, fig.width=8,results='hide', out.width="100%"}
 tar_read(gg_Res_Enzyme2)
 ```
 
+
+ ## With Color and All data
+```{r , fig.height=8, fig.width=8,results='hide', out.width="100%"}
+tar_read(gg_Res_Enzyme3)
+```
+
   </details>
 
-</details>
+ </details>
+ 
 ---
+
+
+
 
 ## Estimated historic soil temperatures
 <details>
@@ -68,6 +80,8 @@ tar_read(gg_Res_Enzyme2)
 tar_read(gg_SoilTemp2)
 ```
 </details>
+
+
 
 ## Session Info 
 

@@ -38,7 +38,9 @@ fit_hsd = function(dat){
 
 
 # custom ggplot theme
-cbPalette <- c("#003152", "#CC6677", "#DDCC77", "#117733", "#332288", "#AA4499", "#44AA99", "#999933", "#882255", "#661100", "#6699CC", "#888888")
+cbPalette <- c("#003152", "#CC6677", "#DDCC77", "#117733", "#332288", "#AA4499", "#44AA99", "#999933", "#882255", "#888888")
+cbPalette4 <-c("#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+cbPalette5 <-c("#1F78B4", "#33A02C", "#6A3D9A", "#FF7F00", "#B15928", "#A6CEE3", "#B2DF8A", "#661100", "#6699CC")
 theme_CKM <- function() {  # this for all the elements common across plots
   theme_bw() %+replace%
     theme(legend.position = "none",
@@ -86,7 +88,29 @@ theme_CKM2 <- function() {  # this for all the elements common across plots
                     panel.grid.minor = element_blank()
     )
 }
-
+theme_CKMM <- function() {  # this for all the elements common across plots
+  theme_bw() %+replace%
+    theme(          legend.position = "none",
+                    plot.title = element_text(vjust = 2, size = 12, face="bold"),
+                    axis.title.x = element_blank(),
+                    axis.title.y = element_blank(),
+                    axis.ticks=element_line(size=1, color="black"),
+                    axis.text=element_text(size=10, color="black"),
+                    axis.text.x = element_text(size=10, angle = 90),
+                    title=element_text(size=10, face ="bold"),
+                    legend.title = element_text(size=14, face ="bold"),
+                    panel.border = element_rect(color="black",size=2, fill = NA),
+                    # formatting for facets
+                    panel.background = element_rect(color="black",size=1, fill = NA),
+                    strip.background = element_rect(colour= NA, fill= NA), #facet formatting
+                    #panel.spacing.x = unit(1.5, "lines"), #facet spacing for x axis
+                    #panel.spacing.y = unit(1.5, "lines"), #facet spacing for x axis
+                    strip.text.x = element_text(size=12, face="bold"), #facet labels
+                    strip.text.y = element_text(size=12, face="bold", angle = 270), #facet labels
+                    panel.grid.major = element_blank(), 
+                    panel.grid.minor = element_blank()
+    )
+}
 theme_CKM3 <- function() {  # this for all the elements common across plots
   theme_bw() %+replace%
     theme(          legend.position = "none",

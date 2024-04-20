@@ -54,6 +54,8 @@ list(
   tar_target(SoilTempMesic_data, read.csv(SoilTempMesic_data_read)),
   tar_target(SoilTempXeric_data_read,"Data/Xeric Met Station.csv", format="file"),
   tar_target(SoilTempXeric_data, read.csv(SoilTempXeric_data_read)),
+  tar_target(SoilTempClass_read,"Data/Winter Soil Temperature Categories.csv", format="file"),
+  tar_target(SoilTempClass_data, read.csv(SoilTempClass_read)),
   
   tar_target(KotzTempPredict_data_read,"Data/Kotzebue_RCP6_SNAP_Predict.csv", format="file"),
   tar_target(KotzTempPredict_data, read.csv(KotzTempPredict_data_read)),
@@ -63,11 +65,13 @@ list(
   #Merging and predicting soil temperatures based on air temps
 
   tar_target(Kotz_proccessed_HMX, process_SoilTemp(SoilTempHydric_data,SoilTempMesic_data,SoilTempXeric_data,Kotz_proccessed)),
+ 
   #Plotting for manuscript
   tar_target(gg_respiration2, plot_respiration_MS(respiration_processed)),
   tar_target(gg_enzyme12, plot_enzyme1_MS(enzyme_processed)),
-  tar_target(gg_SoilTemp2, plot_PredictedSoilTemp_MS(Kotz_proccessed_HMX)),
+  tar_target(gg_SoilTemp2, plot_PredictedSoilTemp_MS(Kotz_proccessed_HMX,SoilTempClass_data)),
   tar_target(gg_Res_Enzyme2, plot_enzyme_respiration_MS(enzyme_processed,respiration_processed)),
+  tar_target(gg_Res_Enzyme3, plot_enzyme_respiration_MS2(enzyme_processed,respiration_processed)),
   tar_target(gg_alpha2, plot_alpha_MS(enzyme_processed,respiration_processed)),
   
   # analysis - graphs
