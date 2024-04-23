@@ -24,7 +24,7 @@ click to open
 <summary>
 click to open
 </summary>
-![](Temperature_threshold_figures_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->![](Temperature_threshold_figures_files/figure-gfm/unnamed-chunk-2-2.png)<!-- -->
+![](Temperature_threshold_figures_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->![](Temperature_threshold_figures_files/figure-gfm/unnamed-chunk-2-2.png)<!-- -->![](Temperature_threshold_figures_files/figure-gfm/unnamed-chunk-2-3.png)<!-- -->
 </details>
 
 ### Enzyme metrics
@@ -42,7 +42,7 @@ click to open
 
 ## With Color and All data
 
-<img src="Temperature_threshold_figures_files/figure-gfm/unnamed-chunk-5-1.png" width="100%" />
+<img src="Temperature_threshold_figures_files/figure-gfm/unnamed-chunk-5-1.png" width="100%" /><img src="Temperature_threshold_figures_files/figure-gfm/unnamed-chunk-5-2.png" width="100%" /><img src="Temperature_threshold_figures_files/figure-gfm/unnamed-chunk-5-3.png" width="100%" /><img src="Temperature_threshold_figures_files/figure-gfm/unnamed-chunk-5-4.png" width="100%" />
 
 </details>
 </details>
@@ -65,7 +65,7 @@ click to open
 Session Info
 </summary>
 
-Date run: 2024-04-19
+Date run: 2024-04-23
 
     ## R version 4.3.2 (2023-10-31 ucrt)
     ## Platform: x86_64-w64-mingw32/x64 (64-bit)

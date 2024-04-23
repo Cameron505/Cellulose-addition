@@ -129,7 +129,7 @@ plot_enzyme1_MS = function(enzyme_processed){
     scale_colour_manual(values=cbPalette)+
     scale_fill_manual(values=cbPalette)+
     labs(x = "Incubation temperature", 
-         y = bquote('(nmol'~g^-1 ~ dry ~ soil~hr^-1*')'))+
+         y = bquote('(miliCellG5 Units'~g^-1 ~ dry ~ soil~hr^-1*')'))+
     labs(color='Addition') +
     ggtitle("endo-β-D-1,4-glucanase (EC)")+
     theme_CKM2()
@@ -148,7 +148,7 @@ plot_enzyme1_MS = function(enzyme_processed){
     scale_colour_manual(values=cbPalette)+
     scale_fill_manual(values=cbPalette)+
     labs(x = "Incubation temperature", 
-         y = bquote('(nmol'~g^-1 ~ dry ~ soil~hr^-1*')'))+
+         y = bquote('(miliCellG5 Units'~g^-1 ~ dry ~ soil~hr^-1*')'))+
     labs(color='Addition') +
     ggtitle("endo-β-1,4-xylanase (EX)")+
     theme_CKM2()
@@ -166,9 +166,42 @@ plot_enzyme1_MS = function(enzyme_processed){
   )
   
  
+  gg_EcombineA= plot_grid(
+    gg_EndoC_3,
+    gg_EndoX_3,
+    ncol=2,
+    nrow=1,
+    labels = c("A", "B"),
+    label_size = lab,
+    hjust = -1
+  )
+  
+  gg_EcombineB= plot_grid(
+    gg_BG_3,
+    gg_BX_3,
+    ncol=2,
+    labels = c( "C", "D"),
+    label_size = lab,
+    hjust = -1
+  )
+  
+  
+  
+  
+  
+  
   C<-text_grob("Enzyme activities", size=tit)
   A<-text_grob("Incubation tempature (°C)", size=Axis.x)
-  B<-text_grob(bquote('nmol'~g^-1 ~ dry ~ soil~hr^-1*''), size=Axis.y, rot = 90)
+  B<-text_grob(bquote('nmol'~g^-1 ~ dry ~ soil~hr^-1*''), size=Axis.y2, rot = 90)
+  B2<-text_grob(bquote('miliCellG5 units '~g^-1 ~ dry ~ soil*''), size=Axis.y2, rot = 90)
+  Q<-arrangeGrob(gg_EcombineA, left = B2)
+  Q2<-arrangeGrob(gg_EcombineB, left = B)
+  
+  gg_Q<-plot_grid(Q,Q2,ncol=1)
+  
+  gg_QQ<-arrangeGrob(gg_Q, bottom = A, top=C)
+  gg_fix<-as_ggplot(gg_QQ)
+  
   EA22<-arrangeGrob(gg_Ecombine, left = B, bottom = A, top=C)
   Legend<- get_legend(gg_BG_L)
   EA222<-as_ggplot(EA22)
@@ -176,7 +209,8 @@ plot_enzyme1_MS = function(enzyme_processed){
   
   
   list(EA222=EA222,
-       L=L
+       L=L,
+       gg_fix=gg_fix
   )
   
 }
@@ -564,8 +598,134 @@ plot_enzyme_respiration_MS2 = function(enzyme_processed,respiration_processed){
   res_EA2222<-as_ggplot(res_EA2222)
   
   
+  
+  CTS<-c("BG", "BX", "EndoC","EndoX","val")
+  
+  
+  
+  RelativeChange <- RESENZYME2 %>%
+    pivot_wider(names_from = enzyme, values_from = activ) %>%
+    mutate_at(vars(Temp), as.character) %>%
+    mutate_at(vars(Temp, BG, BX, EndoC, EndoX, val), as.numeric) %>%
+    group_by(Temp) %>%
+    summarise_at(
+      vars(all_of(CTS)),
+      .funs = list(average = mean),
+      .names = "average_{.col}"
+    ) %>%
+    mutate_at(vars(Temp, BG_average, BX_average, EndoC_average, EndoX_average,val_average), as.numeric) %>%
+    mutate(
+      relative_change_BG = (BG_average - lag(BG_average)) / lag(BG_average),
+      relative_change_BX = (BX_average - lag(BX_average)) / lag(BX_average),
+      relative_change_EndoC = (EndoC_average - lag(EndoC_average)) / lag(EndoC_average),
+      relative_change_EndoX = (EndoX_average - lag(EndoX_average)) / lag(EndoX_average),
+      relative_change_res = (val_average - lag(val_average)) / lag(val_average)
+    )
+  
+  
+  custom_levels <- c("-6 to -2", "-2 to 2", "2 to 6", "6 to 10")
+  
+  A<-RelativeChange%>%
+    pivot_longer(relative_change_BG:relative_change_res)%>%
+    mutate(Temp = case_when(
+      is.na(Temp) ~ NA_character_,
+      Temp <= -2 ~ "-6 to -2",
+      Temp > -2 & Temp <= 2 ~ "-2 to 2",
+      Temp > 2 & Temp <= 6 ~ "2 to 6",
+      Temp > 6 & Temp <= 10 ~ "6 to 10"
+    )) %>%
+    filter(!is.na(Temp))%>%
+    mutate(Temp = factor(Temp, levels = custom_levels))%>%
+  ggplot(aes(x=Temp, y=value, color=name))+
+    geom_point(size = 3, position=position_dodge(width=1))+
+    scale_colour_manual(values=cbPalette6)+
+    scale_fill_manual(values=cbPalette)+
+    labs(x = "Proportional activity")+
+    ggtitle("")
+    theme_CKM2()
+  
+  
+  
+  
+  
+  AA<-RelativeChange%>%
+    pivot_longer(relative_change_BG:relative_change_res)%>%
+    filter(name!="relative_change_res")%>%
+    mutate(Temp = case_when(
+      is.na(Temp) ~ NA_character_,
+      Temp <= -2 ~ "-6 to -2",
+      Temp > -2 & Temp <= 2 ~ "-2 to 2",
+      Temp > 2 & Temp <= 6 ~ "2 to 6",
+      Temp > 6 & Temp <= 10 ~ "6 to 10"
+    )) %>%
+    filter(!is.na(Temp))%>%
+    mutate(Temp = factor(Temp, levels = custom_levels))%>%
+    ggplot(aes(x=Temp, y=value))+
+    geom_point(size = 3)+
+    scale_colour_manual(values=cbPalette6)+
+    scale_fill_manual(values=cbPalette)+
+    labs(x = "Proportional activity")+
+    ggtitle("")+
+    facet_wrap(~name)+
+    scale_colour_manual(values=cbPalette)+
+    theme_CKM2()
+  
+  
+  
+  AR<-RelativeChange%>%
+    pivot_longer(relative_change_BG:relative_change_res)%>%
+    filter(name=="relative_change_res")%>%
+    mutate(Temp = case_when(
+      is.na(Temp) ~ NA_character_,
+      Temp <= -2 ~ "-6 to -2",
+      Temp > -2 & Temp <= 2 ~ "-2 to 2",
+      Temp > 2 & Temp <= 6 ~ "2 to 6",
+      Temp > 6 & Temp <= 10 ~ "6 to 10"
+    )) %>%
+    filter(!is.na(Temp))%>%
+    mutate(Temp = factor(Temp, levels = custom_levels))%>%
+    ggplot(aes(x=Temp, y=value))+
+    geom_point(size = 3)+
+    scale_colour_manual(values=cbPalette6)+
+    scale_fill_manual(values=cbPalette)+
+    labs(x = "Proportional activity")+
+    ggtitle("")+
+    facet_wrap(~name)+
+    scale_colour_manual(values=cbPalette)+
+    theme_CKM2()
+  
+  
+  RER<-RelativeChange%>%
+    pivot_longer(relative_change_BG:relative_change_EndoX)%>%
+    mutate(Temp = case_when(
+      is.na(Temp) ~ NA_character_,
+      Temp <= -2 ~ "-6 to -2",
+      Temp > -2 & Temp <= 2 ~ "-2 to 2",
+      Temp > 2 & Temp <= 6 ~ "2 to 6",
+      Temp > 6 & Temp <= 10 ~ "6 to 10"
+    )) %>%
+    filter(!is.na(Temp))%>%
+    mutate(Temp = factor(Temp, levels = custom_levels))%>%
+    ggplot(aes(x=relative_change_res, y=value, color=Temp))+
+    geom_point(size = 3)+
+    scale_colour_manual(values=cbPalette6)+
+    scale_fill_manual(values=cbPalette)+
+    labs(x = "Proportional activity")+
+    ggtitle("")+
+    facet_wrap(~name)+
+    ylab("Relative change in respiration")+
+    theme_CKML()
+  
+  
+  
+  
+  
+  
   list(res_EA2222=res_EA2222,
-       Legend=Legend
+       Legend=Legend,
+       AA=AA,
+       AR=AR,
+       RER=RER
   )
   
 }
