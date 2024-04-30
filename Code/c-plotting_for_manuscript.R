@@ -607,13 +607,16 @@ plot_enzyme_respiration_MS2 = function(enzyme_processed,respiration_processed){
     pivot_wider(names_from = enzyme, values_from = activ) %>%
     mutate_at(vars(Temp), as.character) %>%
     mutate_at(vars(Temp, BG, BX, EndoC, EndoX, val), as.numeric) %>%
-    group_by(Temp) %>%
+    group_by(Temp,Add) %>%
     summarise_at(
       vars(all_of(CTS)),
       .funs = list(average = mean),
       .names = "average_{.col}"
     ) %>%
     mutate_at(vars(Temp, BG_average, BX_average, EndoC_average, EndoX_average,val_average), as.numeric) %>%
+    ungroup()%>%
+    group_by(Add)%>%
+    arrange(Add,Temp)%>%
     mutate(
       relative_change_BG = (BG_average - lag(BG_average)) / lag(BG_average),
       relative_change_BX = (BX_average - lag(BX_average)) / lag(BX_average),
@@ -641,8 +644,8 @@ plot_enzyme_respiration_MS2 = function(enzyme_processed,respiration_processed){
     scale_colour_manual(values=cbPalette6)+
     scale_fill_manual(values=cbPalette)+
     labs(x = "Proportional activity")+
-    ggtitle("")
-    theme_CKM2()
+    ggtitle("")+
+    theme_CKML()
   
   
   
@@ -694,6 +697,34 @@ plot_enzyme_respiration_MS2 = function(enzyme_processed,respiration_processed){
     scale_colour_manual(values=cbPalette)+
     theme_CKM2()
   
+  RelativeChange<-na.omit(RelativeChange)
+  
+  RER1<-RelativeChange%>%
+    pivot_longer(relative_change_BG:relative_change_EndoX)%>%
+    mutate(Temp = case_when(
+      is.na(Temp) ~ NA_character_,
+      Temp <= -2 ~ "-6 to -2",
+      Temp > -2 & Temp <= 2 ~ "-2 to 2",
+      Temp > 2 & Temp <= 6 ~ "2 to 6",
+      Temp > 6 & Temp <= 10 ~ "6 to 10"
+    )) %>%
+    filter(!is.na(Temp))%>%
+    mutate(Temp = factor(Temp, levels = custom_levels))%>%
+    mutate_at(vars(value, relative_change_res), as.numeric) %>%
+    ggplot(aes(x=relative_change_res, y=value))+
+    stat_summary(aes(color=Temp), fun="mean")+
+    scale_colour_manual(values=cbPalette6)+
+    scale_fill_manual(values=cbPalette)+
+    labs(y = "Proportional activity")+
+    ggtitle("")+
+    facet_wrap(~name)+
+    xlab("Relative change in respiration")+
+    geom_smooth() +  
+    theme_CKML()
+  
+  
+  
+  
   
   RER<-RelativeChange%>%
     pivot_longer(relative_change_BG:relative_change_EndoX)%>%
@@ -706,16 +737,107 @@ plot_enzyme_respiration_MS2 = function(enzyme_processed,respiration_processed){
     )) %>%
     filter(!is.na(Temp))%>%
     mutate(Temp = factor(Temp, levels = custom_levels))%>%
-    ggplot(aes(x=relative_change_res, y=value, color=Temp))+
+    mutate_at(vars(value, relative_change_res), as.numeric) %>%
+    ggplot(aes(x=relative_change_res, y=value))+
+    geom_point(aes(color=Temp),size = 3)+
+    scale_colour_manual(values=cbPalette6)+
+    scale_fill_manual(values=cbPalette)+
+    labs(y = "Proportional activity")+
+    ggtitle("")+
+    facet_wrap(~name)+
+    xlab("Relative change in respiration")+
+    #geom_smooth() +  
+    theme_CKML()
+  
+  
+  RelativeChange2 <- RESENZYME2 %>%
+    pivot_wider(names_from = enzyme, values_from = activ) %>%
+    mutate_at(vars(Temp), as.character) %>%
+    mutate_at(vars(Temp, BG, BX, EndoC, EndoX, val), as.numeric) %>%
+    group_by(Temp) %>%
+    summarise_at(
+      vars(all_of(CTS)),
+      .funs = list(average = mean),
+      .names = "average_{.col}"
+    ) %>%
+    mutate_at(vars(Temp, BG_average, BX_average, EndoC_average, EndoX_average,val_average), as.numeric) %>%
+    mutate(
+      relative_change_BG = (BG_average - lag(BG_average)) / lag(BG_average),
+      relative_change_BX = (BX_average - lag(BX_average)) / lag(BX_average),
+      relative_change_EndoC = (EndoC_average - lag(EndoC_average)) / lag(EndoC_average),
+      relative_change_EndoX = (EndoX_average - lag(EndoX_average)) / lag(EndoX_average),
+      relative_change_res = (val_average - lag(val_average)) / lag(val_average)
+    )
+  
+  RERR<-RelativeChange2%>%
+    pivot_longer(relative_change_BG:relative_change_EndoX)%>%
+    mutate(Temp = case_when(
+      is.na(Temp) ~ NA_character_,
+      Temp <= -2 ~ "-6 to -2",
+      Temp > -2 & Temp <= 2 ~ "-2 to 2",
+      Temp > 2 & Temp <= 6 ~ "2 to 6",
+      Temp > 6 & Temp <= 10 ~ "6 to 10"
+    )) %>%
+    filter(!is.na(Temp))%>%
+    mutate(Temp = factor(Temp, levels = custom_levels))%>%
+    mutate_at(vars(value, relative_change_res), as.numeric) %>%
+    ggplot(aes(x=relative_change_res, y=value))+
+    geom_point(aes(color=Temp),size = 3)+
+    scale_colour_manual(values=cbPalette6)+
+    scale_fill_manual(values=cbPalette)+
+    labs(y = "Relative change in enzyme potential")+
+    ggtitle("")+
+    facet_wrap(~name)+
+    xlab("Relative change in respiration")+
+    #geom_smooth(method = "loess") +
+    theme_CKML()
+  
+  AAR<-RelativeChange2%>%
+    pivot_longer(relative_change_BG:relative_change_res)%>%
+    filter(name!="relative_change_res")%>%
+    mutate(Temp = case_when(
+      is.na(Temp) ~ NA_character_,
+      Temp <= -2 ~ "-6 to -2",
+      Temp > -2 & Temp <= 2 ~ "-2 to 2",
+      Temp > 2 & Temp <= 6 ~ "2 to 6",
+      Temp > 6 & Temp <= 10 ~ "6 to 10"
+    )) %>%
+    filter(!is.na(Temp))%>%
+    mutate(Temp = factor(Temp, levels = custom_levels))%>%
+    ggplot(aes(x=Temp, y=value))+
     geom_point(size = 3)+
     scale_colour_manual(values=cbPalette6)+
     scale_fill_manual(values=cbPalette)+
     labs(x = "Proportional activity")+
     ggtitle("")+
     facet_wrap(~name)+
-    ylab("Relative change in respiration")+
-    theme_CKML()
+    scale_colour_manual(values=cbPalette)+
+    theme_CKM2()
   
+  
+  
+  ARR<-RelativeChange2%>%
+    pivot_longer(relative_change_BG:relative_change_res)%>%
+    filter(name=="relative_change_res")%>%
+    mutate(Temp = case_when(
+      is.na(Temp) ~ NA_character_,
+      Temp <= -2 ~ "-6 to -2",
+      Temp > -2 & Temp <= 2 ~ "-2 to 2",
+      Temp > 2 & Temp <= 6 ~ "2 to 6",
+      Temp > 6 & Temp <= 10 ~ "6 to 10"
+    )) %>%
+    filter(!is.na(Temp))%>%
+    mutate(Temp = factor(Temp, levels = custom_levels))%>%
+    ggplot(aes(x=Temp, y=value))+
+    geom_point(size = 3)+
+    scale_colour_manual(values=cbPalette6)+
+    scale_fill_manual(values=cbPalette)+
+    labs(x = "Proportional activity")+
+    ggtitle("")+
+    facet_wrap(~name)+
+    scale_colour_manual(values=cbPalette)+
+    theme_CKM2()
+
   
   
   
@@ -725,7 +847,10 @@ plot_enzyme_respiration_MS2 = function(enzyme_processed,respiration_processed){
        Legend=Legend,
        AA=AA,
        AR=AR,
-       RER=RER
+       RER=RER,
+       RERR=RERR,
+       AAR=AAR,
+       ARR=ARR
   )
   
 }

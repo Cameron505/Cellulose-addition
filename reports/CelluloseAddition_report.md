@@ -133,6 +133,15 @@ years before soil measurements were taken.
 <img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-10-1.png" width="100%" /><img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-10-2.png" width="100%" />
 </details>
 
+## Respiration rates divided by biomass plotted against Alpha
+
+<details>
+<summary>
+click to open
+</summary>
+<img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-11-1.png" width="100%" /><img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-11-2.png" width="100%" /><img src="CelluloseAddition_report_files/figure-gfm/unnamed-chunk-11-3.png" width="100%" />
+</details>
+
 ## Session Info
 
 <details>
@@ -140,7 +149,7 @@ years before soil measurements were taken.
 Session Info
 </summary>
 
-Date run: 2024-04-17
+Date run: 2024-04-30
 
     ## R version 4.3.2 (2023-10-31 ucrt)
     ## Platform: x86_64-w64-mingw32/x64 (64-bit)

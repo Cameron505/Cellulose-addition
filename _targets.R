@@ -83,7 +83,7 @@ list(
   tar_target(gg_enzyme3, plot_enzyme3(enzyme_processed)),
   tar_target(gg_SoilTemp, plot_PredictedSoilTemp(Kotz_proccessed_HMX)),
   tar_target(gg_Res_Enzyme, plot_enzyme_respiration(enzyme_processed,respiration_processed)),
- 
+  tar_target(gg_Res_Bio_alpha, plot_resBio_Alpha(respiration_processed,MicrobialBiomass_data,enzyme_processed)),
   
   # report  
   tar_render(report, path = "reports/CelluloseAddition_report.Rmd"),

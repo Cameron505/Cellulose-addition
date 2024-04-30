@@ -110,6 +110,17 @@ tar_read(gg_SoilTemp)
 ```
 </details>
 
+
+## Respiration rates divided by biomass plotted against Alpha
+<details>
+  <summary>click to open</summary>
+
+
+```{r , fig.height=8, fig.width=8, results='hide', fig.show="hold", out.width="100%"}
+tar_read(gg_Res_Bio_alpha)
+```
+</details>
+
 ## Session Info 
 
 <details>

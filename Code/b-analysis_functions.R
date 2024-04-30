@@ -70,8 +70,8 @@ plot_respiration = function(respiration_processed){
     ggtitle("Cumulative Soil Respiration")+
     theme_CKM2()
   
-  
-  A<- respiration_processed%>%
+  ##NOTE THAT IF grouped summaries are not working then the issue is probably in the package loading order. detach(package:plyr) if needed
+  AR<- respiration_processed%>%
     group_by(Temp,Add)%>%
     filter(JD2==max(JD2))%>%
     summarise(mean(val),sd(val))
@@ -1495,3 +1495,67 @@ alpha_Res_EA<-plot_grid(title,res_EA,title1,EndoAlpha, ncol=1, rel_heights = c(0
 }
 
 
+plot_resBio_Alpha = function(respiration_processed,MicrobialBiomass_data,enzyme_processed){
+  
+  Res <- respiration_processed %>%
+    mutate(Temp = as.character(Temp))%>%
+    group_by(Temp, Add) %>%
+    filter(JD2 == max(JD2)) %>%
+    full_join(MicrobialBiomass_data, by = c("ID", "Temp","Add"))%>%
+    full_join(enzyme_processed, by = c("ID", "Temp","Add"))%>%
+    mutate(resBio= Res/MBC,resCBIO= val/MBC)%>%
+    filter(resBio>0)
+  
+ 
+  gg1<-Res%>%
+    ggplot(aes(x=alpha, y=resCBIO, color=Temp))+
+    geom_point()+
+    labs(x="Alpha", y="Total respired C divided by biomass")+
+    theme_CKML()
+  
+  gg2<-Res%>%
+    ggplot(aes(x=alpha, y=resBio, color=Temp))+
+    geom_point()+
+    labs(x="Alpha", y="respiration rate divided by biomass")+
+    theme_CKML()+
+    xlim(c(0,1))
+  
+  
+  gg3<-Res%>%
+    ggplot(aes(x=alphaEC, y=resCBIO, color=Temp))+
+    geom_point()+
+    labs(x="AlphaEC", y="Total respired C divided by biomass")+
+    theme_CKML()
+  
+  gg4<-Res%>%
+    ggplot(aes(x=alphaEC, y=resBio, color=Temp))+
+    geom_point()+
+    labs(x="AlphaEC", y="respiration rate divided by biomass")+
+    theme_CKML()+
+    xlim(c(0,1))
+  
+  
+  
+  gg5<-Res%>%
+    ggplot(aes(x=alphaEX, y=resCBIO, color=Temp))+
+    geom_point()+
+    labs(x="AlphaEX", y="Total respired C divided by biomass")+
+    theme_CKML()
+  
+  gg6<-Res%>%
+    ggplot(aes(x=alphaEX, y=resBio, color=Temp))+
+    geom_point()+
+    labs(x="AlphaEX", y="respiration rate divided by biomass")+
+    theme_CKML()+
+    xlim(c(0,1))
+  
+  
+  
+  
+  
+  list(gg2=gg2,
+       gg4=gg4,
+       gg6=gg6)
+  
+  
+}
