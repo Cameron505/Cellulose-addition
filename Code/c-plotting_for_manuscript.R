@@ -888,7 +888,7 @@ plot_PredictedSoilTemp_MS = function(Kotz_proccessed_HMX,SoilTempClass_data){
     theme(plot.title = element_blank())
     
   
-  
+ 
   gg_SoilTempPredict_Site=
     EZ3%>%
     mutate(name = recode(name, "Hydric.Soil" = "Wet", "Mesic.Soil" = "Moist", "Xeric.Soil" = "Dry"))%>%
@@ -933,18 +933,30 @@ plot_PredictedSoilTemp_MS = function(Kotz_proccessed_HMX,SoilTempClass_data){
     FF<-get_legend(gg_SoilTempPredict_SiteL)
     Legend2<- as_ggplot(FF)
   
-  C<-text_grob("Historic soil temperature estimates", size=tit)
+  C<-text_grob("Historic soil temperature estimates and day counts", size=tit)
   A<-text_grob("Month", size=Axis.x)
   B<-text_grob(bquote('Predicted soil temperature ( °C)'), size=Axis.y, rot = 90)
-  EA22<-arrangeGrob(gg_SoilTempPredict_Site, left = B, bottom = A, top=C)
-  EA222<-as_ggplot(EA22)
   
-  SET<- plot_grid(EA222,Legend2, rel_widths = c(1,0.2))
+  
+  
+  
+  EA22<-arrangeGrob(gg_SoilTempPredict, left = B, top=C)
+  SET<-as_ggplot(EA22)
+  
+  #SET<- plot_grid(EA222, rel_widths = c(1,0.2))
   
   
   
   #### DAY COUNTS
   temp_cat_order <- c( "Near Freezing", "Weak Cold", "Very Cold","Extreme Cold")
+  
+  
+  inc.lab<-c("2 to -2 °C", "-2 to -6 °C", "-6 to -10 °C", "<-10 °C")
+  names(inc.lab) <- c("Near Freezing","Weak Cold",
+                      "Very Cold",
+                      "Extreme Cold")
+  
+  
   
   # Reorder Temp_Cat variable
   SoilTempClass_data1 <- SoilTempClass_data %>%
@@ -954,24 +966,27 @@ plot_PredictedSoilTemp_MS = function(Kotz_proccessed_HMX,SoilTempClass_data){
  gg_daycount<- SoilTempClass_data1%>%
     ggplot(aes(x=as.factor(WaterYear),y=obs.day, fill= Temp_Cat))+
     geom_bar(stat="identity")+
-    facet_wrap(~Site)+
+    #facet_wrap(~Site)+
     theme_CKMM()+
     scale_y_continuous(expand = expansion(mult = c(0, 0)))+
     scale_fill_manual(values=cbPalette4)+
    ylab("# of days")+
-   xlab("Year")
+   xlab("Year")+
+   scale_fill_discrete(labels= c("2 to -2 °C", "-2 to -6 °C", "-6 to -10 °C", "<-10 °C"))
   
  
  
  gg_daycountL<- SoilTempClass_data1%>%
    ggplot(aes(x=as.factor(WaterYear),y=obs.day, fill= Temp_Cat))+
    geom_bar(stat="identity")+
-   facet_wrap(~Site)+
+   #facet_wrap(~Site)+
    guides(fill=guide_legend(title="Temperature category"))+
    scale_y_continuous(expand = expansion(mult = c(0, 0)))+
    scale_fill_manual(values=cbPalette4)+
    ylab("# of days")+
-   xlab("Year")
+   xlab("Year")+
+   scale_fill_discrete(labels= c("2 to -2 °C", "-2 to -6 °C", "-6 to -10 °C", "<-10 °C"))
+ 
   AF<-get_legend(gg_daycountL)
   Legend1<- as_ggplot(AF)
   
@@ -981,18 +996,18 @@ plot_PredictedSoilTemp_MS = function(Kotz_proccessed_HMX,SoilTempClass_data){
   #CD<-text_grob("Days spent between ranges, 5 cm soil depth", size=tit)
   AD<-text_grob("Year", size=Axis.x)
   BD<-text_grob(bquote('Day counts'), size=Axis.y, rot = 90)
-  EAD<-arrangeGrob(gg_daycount, left = BD, bottom = AD)
+  CD<-text_grob(bquote('Days spent between temp. thresholds 2017-2023'))
+  EAD<-arrangeGrob(gg_daycount, left = BD, bottom = AD, top= CD)
   EAD2<- plot_grid(EAD, Legend1, rel_widths = c(1,0.2))
   
   
- EAS<- plot_grid(SET,NULL,EAD2, ncol=1, rel_heights = c(1,0.01,0.7))
+ EAS<- plot_grid(SET,NULL,EAD, ncol=1, rel_heights = c(1,0.01,0.7), labels = c("A","", "B"),label_size = lab)
   
   
+ 
   
   
-  
-  
-  list(EA222=EA222,
+  list(SET=SET,
        gg_SoilTempPredict_Site=gg_SoilTempPredict_Site,
        gg_daycount=gg_daycount,
        Legend1=Legend1,

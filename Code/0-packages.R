@@ -70,66 +70,46 @@ theme_CKM <- function() {  # this for all the elements common across plots
 
 theme_CKM2 <- function() {  # this for all the elements common across plots
   theme_bw() %+replace%
-    theme(          legend.position = "none",
-                    plot.title = element_text(vjust = 2, size = 12, face="bold"),
-                    axis.title.x = element_blank(),
-                    axis.title.y = element_blank(),
-                    axis.ticks=element_line(size=1, color="black"),
-                    axis.text=element_text(size=12, color="black"),
-                    title=element_text(size=10, face ="bold"),
-                    legend.title = element_text(size=14, face ="bold"),
-                    panel.border = element_rect(color="black",size=2, fill = NA),
-                    # formatting for facets
-                    panel.background = element_rect(color="black",size=1, fill = NA),
-                    strip.background = element_rect(colour= NA, fill= NA), #facet formatting
-                    #panel.spacing.x = unit(1.5, "lines"), #facet spacing for x axis
-                    #panel.spacing.y = unit(1.5, "lines"), #facet spacing for x axis
-                    strip.text.x = element_text(size=12, face="bold"), #facet labels
-                    strip.text.y = element_text(size=12, face="bold", angle = 270), #facet labels
-                    panel.grid.major = element_blank(), 
-                    panel.grid.minor = element_blank()
+    theme(
+      legend.position = "none",
+      panel.background = element_blank(),
+      axis.text = element_text(size = 14, color = "black"),
+      strip.background = element_rect(colour=NA, fill=NA), #facet formatting
+      strip.text.x = element_text(size=12, face="bold"), #facet labels
+      strip.text.y = element_text(size=12, face="bold", angle = 270), #facet labels
+      axis.title.x = element_blank(),
+      axis.title.y = element_blank(),
+      panel.grid.major = element_blank(), 
+      panel.grid.minor = element_blank()
     )
 }
 theme_CKML <- function() {  # this for all the elements common across plots
   theme_bw() %+replace%
-    theme(          plot.title = element_text(vjust = 2, size = 12, face="bold"),
-                    axis.ticks=element_line(size=1, color="black"),
-                    axis.text=element_text(size=12, color="black"),
-                    title=element_text(size=10, face ="bold"),
-                    legend.title = element_text(size=14, face ="bold"),
-                    panel.border = element_rect(color="black",size=2, fill = NA),
-                    # formatting for facets
-                    panel.background = element_rect(color="black",size=1, fill = NA),
-                    strip.background = element_rect(colour= NA, fill= NA), #facet formatting
-                    #panel.spacing.x = unit(1.5, "lines"), #facet spacing for x axis
-                    #panel.spacing.y = unit(1.5, "lines"), #facet spacing for x axis
-                    strip.text.x = element_text(size=12, face="bold"), #facet labels
-                    strip.text.y = element_text(size=12, face="bold", angle = 270), #facet labels
-                    panel.grid.major = element_blank(), 
-                    panel.grid.minor = element_blank()
+    theme(
+      panel.background = element_blank(),
+      axis.text = element_text(size = 14, color = "black"),
+      strip.background = element_rect(colour=NA, fill=NA), #facet formatting
+      strip.text.x = element_text(size=12, face="bold"), #facet labels
+      strip.text.y = element_text(size=12, face="bold", angle = 270), #facet labels
+      axis.title.x = element_blank(),
+      axis.title.y = element_blank(),
+      panel.grid.major = element_blank(), 
+      panel.grid.minor = element_blank()
     )
 }
 theme_CKMM <- function() {  # this for all the elements common across plots
   theme_bw() %+replace%
-    theme(          legend.position = "none",
-                    plot.title = element_text(vjust = 2, size = 12, face="bold"),
-                    axis.title.x = element_blank(),
-                    axis.title.y = element_blank(),
-                    axis.ticks=element_line(size=1, color="black"),
-                    axis.text=element_text(size=10, color="black"),
-                    axis.text.x = element_text(size=10, angle = 90),
-                    title=element_text(size=10, face ="bold"),
-                    legend.title = element_text(size=14, face ="bold"),
-                    panel.border = element_rect(color="black",size=2, fill = NA),
-                    # formatting for facets
-                    panel.background = element_rect(color="black",size=1, fill = NA),
-                    strip.background = element_rect(colour= NA, fill= NA), #facet formatting
-                    #panel.spacing.x = unit(1.5, "lines"), #facet spacing for x axis
-                    #panel.spacing.y = unit(1.5, "lines"), #facet spacing for x axis
-                    strip.text.x = element_text(size=12, face="bold"), #facet labels
-                    strip.text.y = element_text(size=12, face="bold", angle = 270), #facet labels
-                    panel.grid.major = element_blank(), 
-                    panel.grid.minor = element_blank()
+    theme(
+      legend.position = "none",
+      panel.background = element_blank(),
+      axis.text = element_text(size = 14, color = "black"),
+      strip.background = element_rect(colour=NA, fill=NA), #facet formatting
+      strip.text.x = element_text(size=12, face="bold"), #facet labels
+      strip.text.y = element_text(size=12, face="bold", angle = 270), #facet labels
+      axis.title.x = element_blank(),
+      axis.title.y = element_blank(),
+      panel.grid.major = element_blank(), 
+      panel.grid.minor = element_blank()
     )
 }
 theme_CKM3 <- function() {  # this for all the elements common across plots
@@ -144,8 +124,8 @@ theme_CKM3 <- function() {  # this for all the elements common across plots
                     title=element_text(size=10, face="bold"),
                     legend.title = element_text(size=10, face ="bold"),
                     # formatting for facets
-                    panel.background = element_blank(),
-                    strip.background = element_rect(colour="white", fill="white"), #facet formatting
+                    #panel.background = element_blank(),
+                    #strip.background = element_rect(colour="white", fill="white"), #facet formatting
                     panel.spacing.x = unit(1.5, "lines"), #facet spacing for x axis
                     panel.spacing.y = unit(1.5, "lines"), #facet spacing for x axis
                     strip.text.x = element_text(size=10, face="bold"), #facet labels
