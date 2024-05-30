@@ -1,3 +1,5 @@
+library(plyr)
+library(dplyr)
 library(tidyverse) #for tidy processing and plotting
 library(vegan) # for PERMANOVA analysis
 library(ggbiplot) #for PCA biplots

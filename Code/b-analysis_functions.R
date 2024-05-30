@@ -76,7 +76,7 @@ plot_respiration = function(respiration_processed){
     filter(JD2==max(JD2))%>%
     summarise(mean(val),sd(val))
     
-  a = nlme::lme(Res ~ Temp + Add + JD2,
+  a = nlme::lme(Res ~ as.factor(Temp) + Add + JD2,
                 random = ~1|ID,
                 data = respiration_processed)
   
@@ -84,7 +84,7 @@ plot_respiration = function(respiration_processed){
     knitr::kable("simple")
   
   # Get lsmeans
-  lsmeans_result <- lsmeans(a, ~ Temp + Add + JD2)
+  lsmeans_result <- lsmeans(a, ~ Temp + Add)
   
   # Perform pairwise comparisons
   pairwise_result <- pairs(lsmeans_result)
