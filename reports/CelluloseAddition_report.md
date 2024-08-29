@@ -149,7 +149,7 @@ click to open
 Session Info
 </summary>
 
-Date run: 2024-05-13
+Date run: 2024-08-09
 
     ## R version 4.3.2 (2023-10-31 ucrt)
     ## Platform: x86_64-w64-mingw32/x64 (64-bit)
@@ -175,11 +175,11 @@ Date run: 2024-05-13
     ## other attached packages:
     ##  [1] lsmeans_2.30-0    emmeans_1.10.0    gridExtra_2.3     cowplot_1.1.1    
     ##  [5] agricolae_1.3-7   doBy_4.6.20       ggpubr_0.6.0      pracma_2.4.4     
-    ##  [9] reshape2_1.4.4    ggbiplot_0.55     scales_1.3.0      plyr_1.8.9       
-    ## [13] vegan_2.6-4       lattice_0.21-9    permute_0.9-7     lubridate_1.9.3  
-    ## [17] forcats_1.0.0     stringr_1.5.1     dplyr_1.1.4       purrr_1.0.2      
-    ## [21] readr_2.1.4       tidyr_1.3.0       tibble_3.2.1      ggplot2_3.4.4    
-    ## [25] tidyverse_2.0.0   tarchetypes_0.7.9 targets_1.3.2    
+    ##  [9] reshape2_1.4.4    ggbiplot_0.55     scales_1.3.0      vegan_2.6-4      
+    ## [13] lattice_0.21-9    permute_0.9-7     lubridate_1.9.3   forcats_1.0.0    
+    ## [17] stringr_1.5.1     purrr_1.0.2       readr_2.1.4       tidyr_1.3.0      
+    ## [21] tibble_3.2.1      ggplot2_3.4.4     tidyverse_2.0.0   dplyr_1.1.4      
+    ## [25] plyr_1.8.9        tarchetypes_0.7.9 targets_1.3.2    
     ## 
     ## loaded via a namespace (and not attached):
     ##  [1] tidyselect_1.2.0      farver_2.1.1          fastmap_1.1.1        

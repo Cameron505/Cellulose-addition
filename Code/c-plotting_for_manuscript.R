@@ -24,7 +24,7 @@ plot_respiration_MS = function(respiration_processed){
   EA22<-arrangeGrob(gg_Avgcumres, left = B, bottom = A, top=C)
   EA222<-as_ggplot(EA22)
   
-  title3 <- ggdraw() + draw_label("Theoretical barrier for cellulose decomposition", size=tit)
+  title3 <- ggdraw() + draw_label("Theoretical halt for cellulose decomposition", size=tit)
   
   
   
@@ -150,7 +150,7 @@ plot_enzyme1_MS = function(enzyme_processed){
     labs(x = "Incubation temperature", 
          y = bquote('(miliCellG5 Units'~g^-1 ~ dry ~ soil~hr^-1*')'))+
     labs(color='Addition') +
-    ggtitle("endo-β-1,4-xylanase (EX)")+
+    ggtitle("endo-β-1,4-xylanase (EnX)")+
     theme_CKM2()
   
   gg_Ecombine= plot_grid(
