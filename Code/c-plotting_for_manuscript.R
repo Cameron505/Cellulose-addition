@@ -24,7 +24,7 @@ plot_respiration_MS = function(respiration_processed){
   EA22<-arrangeGrob(gg_Avgcumres, left = B, bottom = A, top=C)
   EA222<-as_ggplot(EA22)
   
-  title3 <- ggdraw() + draw_label("Theoretical halt for cellulose decomposition", size=tit)
+  title3 <- ggdraw() + draw_label("Theoretical constraint to cellulose decomposition", size=tit)
   
   
   
@@ -191,7 +191,7 @@ plot_enzyme1_MS = function(enzyme_processed){
   
   
   C<-text_grob("Enzyme activities", size=tit)
-  A<-text_grob("Incubation tempature (°C)", size=Axis.x)
+  A<-text_grob("Incubation temperature (°C)", size=Axis.x)
   B<-text_grob(bquote('nmol'~g^-1 ~ dry ~ soil~hr^-1*''), size=Axis.y2, rot = 90)
   B2<-text_grob(bquote('miliCellG5 units '~g^-1 ~ dry ~ soil*''), size=Axis.y2, rot = 90)
   Q<-arrangeGrob(gg_EcombineA, left = B2)
@@ -249,7 +249,7 @@ plot_alpha_MS = function(enzyme_processed,respiration_processed){
     theme_light()+
     ylim(0, 1.1)+
     #scale_y_continuous(expand = c(0,0), limits=c(0,0.62),oob=rescale_none)+
-    labs(x = "Incubation tempature (°C)", 
+    labs(x = "Incubation temperature (°C)", 
          y = bquote(alpha))+
     labs(color='Addition') +
     ggtitle("EC-alpha [EC/(EC+BG)]")+
@@ -266,16 +266,16 @@ plot_alpha_MS = function(enzyme_processed,respiration_processed){
                  alpha = 0.2,
                  aes(group = interaction(Temp)))+
     geom_point(aes(color=Add),position = position_dodge(width = 0.6), size = 3)+
-    geom_text(data = ENZM_hsd_label %>% filter(analyte == "alphaEX"), aes(y = 1.1, label = label))+
+    geom_text(data = ENZM_hsd_label %>% filter(analyte == "alphaEnX"), aes(y = 1.1, label = label))+
     theme_light()+
     ylim(0, 1.1)+
     #scale_y_continuous(expand = c(0,0), limits=c(0,0.9),oob=rescale_none)+
     scale_colour_manual(values=cbPalette)+
     scale_fill_manual(values=cbPalette)+
-    labs(x = "Incubation tempature (°C)", 
+    labs(x = "Incubation temperature (°C)", 
          y = bquote(alpha))+
     labs(color='Addition') +
-    ggtitle("EX-alpha [EX/(EX+BX)]")+
+    ggtitle("EnX-alpha [EnX/(EnX+BX)]")+
     theme_CKM2()
   
   
@@ -284,8 +284,8 @@ plot_alpha_MS = function(enzyme_processed,respiration_processed){
   
   
   EndoAlpha <- plot_grid(gg_alpha_12,gg_alpha_22, nrow=1, labels = c("A", "B"),label_size = lab)
-  C<-text_grob("EC and EX α values", size=tit)
-  A<-text_grob("Incubation tempature (°C)", size= Axis.x)
+  C<-text_grob("EC and EnX α values", size=tit)
+  A<-text_grob("Incubation temperature (°C)", size= Axis.x)
   B<-text_grob("α", size=Axis.y, rot = 90)
   EA22<-arrangeGrob(EndoAlpha, left = B, bottom = A, top=C)
   EA222<-as_ggplot(EA22)
@@ -344,7 +344,7 @@ plot_enzyme_respiration_MS = function(enzyme_processed,respiration_processed){
                  names_to= "enzyme",
                  values_to= "activ")
   
-  e.label<- c("β-1,4-glucosidase (BG)","β-1,4-xylosidase (BX)","endo-β-D-1,4-glucanase(EC)","endo-β-1,4-xylanase (EX)")
+  e.label<- c("β-1,4-glucosidase (BG)","β-1,4-xylosidase (BX)","endo-β-D-1,4-glucanase(EC)","endo-β-1,4-xylanase (EnX)")
   names(e.label)<- c("BG","BX","EndoC","EndoX")
   
   Graphs2 = RESENZYME2 %>%
@@ -387,7 +387,7 @@ plot_enzyme_respiration_MS = function(enzyme_processed,respiration_processed){
     scale_x_continuous(breaks = seq(0, 150, by=50), labels = function(x) ifelse(x == 150, "", x)) +
     scale_colour_manual(values=cbPalette)+
     scale_fill_manual(values=cbPalette)+
-    ggtitle("endo-β-1,4-xylanase (EX)")+
+    ggtitle("endo-β-1,4-xylanase (EnX)")+
     theme_CKM2()
   Graphs5 = RESENZYME2 %>%
     filter(enzyme=="BG")%>%
@@ -486,7 +486,7 @@ plot_enzyme_respiration_MS2 = function(enzyme_processed,respiration_processed){
                  names_to= "enzyme",
                  values_to= "activ")
   
-  e.label<- c("β-1,4-glucosidase (BG)","β-1,4-xylosidase (BX)","endo-β-D-1,4-glucanase(EC)","endo-β-1,4-xylanase (EX)")
+  e.label<- c("β-1,4-glucosidase (BG)","β-1,4-xylosidase (BX)","endo-β-D-1,4-glucanase(EC)","endo-β-1,4-xylanase (EnX)")
   names(e.label)<- c("BG","BX","EndoC","EndoX")
   
   GraphsL = RESENZYME2 %>%
@@ -548,7 +548,7 @@ plot_enzyme_respiration_MS2 = function(enzyme_processed,respiration_processed){
     scale_x_continuous(breaks = seq(0, 250, by=50), labels = function(x) ifelse(x == 150, "", x)) +
     scale_colour_manual(values=cbPalette)+
     scale_fill_manual(values=cbPalette)+
-    ggtitle("endo-β-1,4-xylanase (EX)")+
+    ggtitle("endo-β-1,4-xylanase (EnX)")+
     theme_CKM2()
   Graphs5 = RESENZYME2 %>%
     filter(enzyme=="BG")%>%
@@ -875,7 +875,7 @@ plot_PredictedSoilTemp_MS = function(Kotz_proccessed_HMX,SoilTempClass_data){
     ylab(expression(paste("10 cm estimated Soil Temp. (°C)")))+
     xlab("Month")+
     scale_fill_manual(values=cbPalette)+
-    ggtitle("Historic soil temperature estimates")+
+    ggtitle("Historical soil temperature estimates")+
     guides(fill=guide_legend(title="Decade ending"))+
     geom_hline(yintercept=10, linetype="dashed", color = "red", size=1)+
     geom_hline(yintercept=6, linetype="dashed", color = "red", size=1)+
@@ -897,7 +897,7 @@ plot_PredictedSoilTemp_MS = function(Kotz_proccessed_HMX,SoilTempClass_data){
     ylab(expression(paste("10 cm estimated Soil Temp. (°C)")))+
     xlab("Month")+
     scale_fill_manual(values=cbPalette5)+
-    ggtitle("Historic soil temperature estimates")+
+    ggtitle("Historical soil temperature estimates")+
     guides(fill=guide_legend(title="Decade ending"))+
     geom_hline(yintercept=10, linetype="dashed", color = "red", size=1)+
     geom_hline(yintercept=6, linetype="dashed", color = "red", size=1)+
@@ -919,7 +919,7 @@ plot_PredictedSoilTemp_MS = function(Kotz_proccessed_HMX,SoilTempClass_data){
       ylab(expression(paste("10 cm estimated Soil Temp. (°C)")))+
       xlab("Month")+
       scale_fill_manual(values=cbPalette5)+
-      ggtitle("Historic soil temperature estimates")+
+      ggtitle("Historical soil temperature estimates")+
       guides(fill=guide_legend(title="Decade ending"))+
       geom_hline(yintercept=10, linetype="dashed", color = "red", size=1)+
       geom_hline(yintercept=6, linetype="dashed", color = "red", size=1)+
@@ -933,7 +933,7 @@ plot_PredictedSoilTemp_MS = function(Kotz_proccessed_HMX,SoilTempClass_data){
     FF<-get_legend(gg_SoilTempPredict_SiteL)
     Legend2<- as_ggplot(FF)
   
-  C<-text_grob("Historic soil temperature estimates and day counts", size=tit)
+  C<-text_grob("Historical soil temperature estimates and day counts", size=tit)
   A<-text_grob("Month", size=Axis.x)
   B<-text_grob(bquote('Predicted soil temperature ( °C)'), size=Axis.y, rot = 90)
   
@@ -964,8 +964,9 @@ plot_PredictedSoilTemp_MS = function(Kotz_proccessed_HMX,SoilTempClass_data){
            Site = recode(Site, "hydric" = "Wet", "mesic" = "Moist", "xeric" = "Dry"))
   
  gg_daycount<- SoilTempClass_data1%>%
+   #filter(Site== "Wet")%>%
     ggplot(aes(x=as.factor(WaterYear),y=obs.day, fill= Temp_Cat))+
-    geom_bar(stat="identity")+
+    geom_bar(stat = "summary", fun.y = "mean")+
     #facet_wrap(~Site)+
     theme_CKMM()+
     scale_y_continuous(expand = expansion(mult = c(0, 0)))+
