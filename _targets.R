@@ -85,6 +85,16 @@ list(
   tar_target(gg_Res_Enzyme, plot_enzyme_respiration(enzyme_processed,respiration_processed)),
   tar_target(gg_Res_Bio_alpha, plot_resBio_Alpha(respiration_processed,MicrobialBiomass_data,enzyme_processed)),
   
+  #FTICR
+  tar_target(FTICR_Lipid_read,"Data/fticr/xtra_Report_LowerCHCl3_NegESI_Consolidation123.csv", format="file"),
+  tar_target(FTICR_Lipid, read.csv(FTICR_Lipid_read)),
+  tar_target(FTICR_Metabolite_read,"Data/fticr/xtra_Report_UpperMeOH_NegESI_Consolidation123.csv", format="file"),
+  tar_target(FTICR_Metabolite, read.csv(FTICR_Metabolite_read)),
+
+  
+  
+  
+  
   # report  
   tar_render(report, path = "reports/CelluloseAddition_report.Rmd"),
   tar_render(report2, path = "reports/Temperature_threshold_figures.Rmd")
